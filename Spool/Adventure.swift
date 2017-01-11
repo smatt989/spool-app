@@ -37,9 +37,10 @@ extension Adventure {
         return URL(string: Urls.fetchAdventure + String(id))!
     }
     
-    private struct Urls {
+    struct Urls {
         static let fetchAdventure = domain+"/adventures/"
         static let saveAdventure = domain+"/adventures/save"
+        static let fetchAvailableAdventures = domain+"/adventures"
     }
     
     static func fetchAdventure(id: Int, callback: @escaping (Adventure) -> Void) {
