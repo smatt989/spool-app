@@ -24,42 +24,9 @@ class AdventuresTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchAdventures()
-    }
-    
-    private func fetchAdventures() {
-        var request = URLRequest(url: Urls.availableAdventures)
-        request.httpMethod = "GET"
-        let session = URLSession.shared
-        session.dataTask(with: request) { [weak weakself = self] data, response, err in
-            if let d = data {
-                weakself?.adventures = weakself?.parseAdventures(data: d) ?? []
-            } else if err != nil {
-                print("BIG PROBLEMO")
-            }
-        }.resume()
-    }
-    
-    private func parseAdventures(data: Data) -> [AdventureHeadline] {
-        var newAdventures = [AdventureHeadline]()
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
-        if let array = json as? [Any]{
-            newAdventures = array.flatMap {element in
-                parseOneAdventure(adventureJson: element)
-            }
+        AdventureHeadline.fetchAdventures{ [weak weakself = self] advs in
+            weakself?.adventures = advs
         }
-        return newAdventures
-    }
-    
-    private func parseOneAdventure(adventureJson: Any) -> AdventureHeadline? {
-        if let dictionary = adventureJson as? [String: Any] {
-            if let title = dictionary["name"] as? String, let id = dictionary["id"] as? Int {
-                let subtitle = dictionary["description"] as? String ?? ""
-                return AdventureHeadline(title: title, subtitle: subtitle, id: id)
-            }
-        }
-        return nil
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,11 +38,11 @@ class AdventuresTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.adventureHeadlineCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.adventureHeadlineCell, for: indexPath) as! AdventureHeadlineTableViewCell
         let adventure = adventures[indexPath.row]
-        cell.textLabel?.text = adventure.title
-        cell.detailTextLabel?.text = adventure.subtitle
-
+        cell.titleLabel?.text = adventure.title
+        cell.descriptionLabel?.text = adventure.subtitle
+        cell.adventureId = adventure.id
         return cell
     }
  
@@ -85,8 +52,8 @@ class AdventuresTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.showMapSegue {
-            if let viewController = segue.destination as? AdventureEditingViewController {
-                viewController.adventureId = adventures[tableView.indexPathForSelectedRow!.row].id
+            if let viewController = segue.destination as? AdventureEditingViewController, let button = sender as? UIButton {
+                viewController.adventureId = (button.superview!.superview! as! AdventureHeadlineTableViewCell).adventureId
             }
         } else if segue.identifier == Identifiers.newAdventureSegue {
             if let viewController = segue.destination as? AdventureEditingViewController {

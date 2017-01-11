@@ -19,31 +19,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Adventure Headline Cell" textLabel="M5a-Ku-GVK" detailTextLabel="CbM-K8-BwP" style="IBUITableViewCellStyleSubtitle" id="Jtu-uq-5ZN">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Adventure Headline Cell" id="Jtu-uq-5ZN" customClass="AdventureHeadlineTableViewCell" customModule="Spool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jtu-uq-5ZN" id="5dM-rN-qMG">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M5a-Ku-GVK">
-                                            <rect key="frame" x="15" y="4" width="34" height="21"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CbM-K8-BwP">
-                                            <rect key="frame" x="15" y="25" width="44" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fi6-JE-yCU">
+                                            <rect key="frame" x="8" y="-1.5" width="79" height="45"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHP-1g-wF8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="42.5" height="27"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be4-La-XD2">
+                                                    <rect key="frame" x="0.0" y="27" width="79" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meu-H5-B2Z">
+                                            <rect key="frame" x="345" y="13.5" width="22" height="22"/>
+                                            <connections>
+                                                <action selector="editAdventure:" destination="Jtu-uq-5ZN" eventType="touchUpInside" id="eTC-Hz-uzQ"/>
+                                                <segue destination="toT-bl-NAU" kind="show" identifier="Show Map" id="zGb-d6-jEc"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="Fi6-JE-yCU" secondAttribute="leading" id="Iib-FV-Ebw"/>
+                                        <constraint firstItem="Fi6-JE-yCU" firstAttribute="centerY" secondItem="5dM-rN-qMG" secondAttribute="centerY" id="WB9-mg-2Go"/>
+                                        <constraint firstItem="meu-H5-B2Z" firstAttribute="trailing" secondItem="5dM-rN-qMG" secondAttribute="trailingMargin" id="g09-DY-hM9"/>
+                                        <constraint firstItem="meu-H5-B2Z" firstAttribute="bottom" secondItem="5dM-rN-qMG" secondAttribute="bottomMargin" id="k6c-Aw-Oow"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="toT-bl-NAU" kind="show" identifier="Show Map" id="D13-NS-GSv"/>
+                                    <outlet property="descriptionLabel" destination="be4-La-XD2" id="gdl-t6-Olz"/>
+                                    <outlet property="editButton" destination="meu-H5-B2Z" id="nX6-HV-XSn"/>
+                                    <outlet property="titleLabel" destination="BHP-1g-wF8" id="89G-l4-OkZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -191,6 +209,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5Of-q2-Sr1"/>
+        <segue reference="zGb-d6-jEc"/>
     </inferredMetricsTieBreakers>
 </document>
