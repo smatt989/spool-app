@@ -308,6 +308,13 @@
 				DEVELOPMENT_TEAM = 3TPNUJ5HB3;
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/bin",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib/ios7",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib/macosx-universal",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -321,6 +328,13 @@
 				DEVELOPMENT_TEAM = 3TPNUJ5HB3;
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/bin",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib/ios7",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib",
+					"$(PROJECT_DIR)/sdks/ARToolKit5-bin-5.3.2-iOS/lib/macosx-universal",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

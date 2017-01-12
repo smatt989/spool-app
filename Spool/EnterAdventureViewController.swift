@@ -26,16 +26,18 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     var adventure: Adventure? {
         didSet {
-            print("SETTING")
-            adventure?.directionsSetCallback = setOrderedPoints
+            if adventure != nil {
+                startDirections()
+            }
         }
     }
     
     private let locationManager = CLLocationManager()
     
     private func instantiateLocationManager() {
+        locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
     }
     
@@ -47,23 +49,55 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     private struct Constants {
         static let horizontalAccuracy = 10.0
         static let verticalAccuracy = 10.0
-        static let distanceBetweenPointsAccuracy = 10.0
+        static let distanceBetweenPointsAccuracy = 15.0
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if currentDestinationStep != nil {
+        printToScreen(str: "UPDATING LOCATION")
+        if currentDirections != nil && currentDestinationStep != nil {
             let mostRecentLocation = locations.last!
             let targetLocation = CLLocation(coordinate: currentDestinationStep!, altitude: mostRecentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
+            
+            let distanceFromStep = mostRecentLocation.distance(from: targetLocation)
+            printToScreen(str: "distance: \(distanceFromStep)")
 
-            if mostRecentLocation.distance(from: targetLocation) < Constants.distanceBetweenPointsAccuracy {
-                nextStep()
+            if distanceFromStep < Constants.distanceBetweenPointsAccuracy {
+                currentDirections!.nextStep()
+                if currentDirections!.finished {
+                    let targetMarker = CLLocation(coordinate: currentDestination!.coordinate, altitude: mostRecentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
+                    if mostRecentLocation.distance(from: targetMarker) < Constants.distanceBetweenPointsAccuracy {
+                        printToScreen(str: "NEXT MARKER")
+                        nextMarker()
+                    } else {
+                        printToScreen(str: "NOT QUITE THERE")
+                        currentDestinationStep = currentDestination?.coordinate
+                    }
+                } else {
+                    printToScreen(str: "NEXT STEP")
+                    currentDestinationStep = currentDirections!.currentStep
+                }
             }
         }
     }
     
-    private var currentStepIndex = 0
+    private var currentDestinationStep: CLLocationCoordinate2D? {
+        didSet {
+            if currentDestinationStep != nil {
+                let lat = currentDestinationStep!.latitude
+                let lng = currentDestinationStep!.longitude
+                let str = "heading to \(lat), \(lng)"
+                printToScreen(str: str)
+            }
+        }
+    }
     
-    private var currentDestinationStep: CLLocationCoordinate2D?
+    private var currentDirections: Direction? {
+        didSet {
+            if currentDirections != nil {
+                currentDestinationStep = currentDirections?.currentStep
+            }
+        }
+    }
     
     private var currentDestination: Marker? {
         didSet {
@@ -79,46 +113,34 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    private var currentDirections: Direction? {
-        didSet {
-            currentStepIndex = 0
-            if let path = currentDirections {
-                path.orderedPoints
-                
-            }
+    private var finished: Bool {
+        get {
+            return destinationMarkerIndex >= adventure?.markers.count ?? 0
         }
     }
     
-    private func nextDirections(){
-        
+    private func endAdventure() {
+        printToScreen(str: "FINISHED ADVENTURE!")
+        turnOffLocationManager()
     }
     
-    private func nextStep() {
-        
+    private func nextMarker() {
+        destinationMarkerIndex += 1
+    }
+    
+    private var destinationMarkerIndex: Int = -1 {
+        didSet {
+            if !finished {
+                currentDestination = adventure?.markers[destinationMarkerIndex]
+            } else {
+                endAdventure()
+            }
+        }
     }
     
     private func startDirections() {
-        currentDestination = adventure?.markers.first
-    }
-    
-    var orderedPoints: [MKMapPoint]?
-    
-    private func setOrderedPoints() {
-        print("in the function")
-        let polyline = adventure?.directions[0].route?.polyline
-        if polyline != nil {
-            print("Made it")
-            //var coords: [CLLocationCoordinate2D] = []
-            let rootcoordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.allocate(capacity: polyline!.pointCount)
-            //coords.reserveCapacity(polyline!.pointCount)
-            polyline!.getCoordinates(rootcoordinates, range: NSMakeRange(0, polyline!.pointCount))
-            //print("THIS MANY COORDS: %@ and this many points: %@", coords.count, polyline!.pointCount)
-            
-            for i in 0..<polyline!.pointCount {
-                print("%@, %@",rootcoordinates[i].latitude, rootcoordinates[i].longitude)
-            }
-
-        }
+        printToScreen(str: "STARTING DIRECTIONS")
+        destinationMarkerIndex = 0
     }
     
     override func viewDidLoad() {
@@ -136,6 +158,14 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         super.viewDidDisappear(animated)
         turnOffLocationManager()
     }
+    
+    private func printToScreen(str: String) {
+        DispatchQueue.main.async { [weak weakself = self] in
+            weakself?.printlog.text.append("\n"+str)
+        }
+    }
+    
+    @IBOutlet weak var printlog: UITextView!
     
     private func launchCamera() {
         if UIImagePickerController.isCameraDeviceAvailable(.rear) {
