@@ -14,93 +14,56 @@ class Adventure: NSObject {
     var name = ""
     var info: String? = ""
     var id: Int?
-    var markers: [Marker] = [Marker]()
-    
-    func toJsonDictionary() -> [String: Any] {
-        var dict: [String: Any] = [:]
-        if name != "" {
-            dict["name"] = name
-        }
-        if(info != ""){
-            dict["description"] = info
-        }
-        dict["id"] = id ?? 0
-        dict["markers"] = markers.map {element in element.toJsonDictionary()}
-        dict["triggers"] = [Any]()
-        return dict
-    }
-}
-
-extension Adventure {
-    
-    static func fetchAdventureUrl(id: Int) -> URL {
-        return URL(string: Urls.fetchAdventure + String(id))!
-    }
-    
-    struct Urls {
-        static let fetchAdventure = domain+"/adventures/"
-        static let saveAdventure = domain+"/adventures/save"
-        static let fetchAvailableAdventures = domain+"/adventures"
-    }
-    
-    static func fetchAdventure(id: Int, callback: @escaping (Adventure) -> Void) {
-        var request = URLRequest(url: fetchAdventureUrl(id: id))
-        request.httpMethod = "GET"
-        let session = URLSession.shared
-        session.dataTask(with: request) { data, response, err in
-            if let d = data, let adv = self.parseAdventure(data: d) {
-                callback(adv)
-            } else if err != nil {
-                print("BIG PROBLEMO")
+    var markers: [Marker] = [Marker](){
+        didSet {
+            markers.forEach{ marker in
+                marker.markerChangeCallback = updateDirections
             }
-            }.resume()
-    }
-    
-    private static func parseAdventure(data: Data) -> Adventure?{
-        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-            let adventure = Adventure()
-            adventure.name = json?["name"] as? String ?? ""
-            adventure.info = json?["description"] as? String
-            adventure.id = json?["id"] as? Int
-            let markers = (json?["markers"] as? [Any] ?? [Any]()).flatMap { element in
-                parseMarker(json: element)
-            }
-            adventure.markers = markers
-            return adventure
+            updateDirections()
         }
-        return nil
     }
     
-    private static func parseMarker(json: Any) -> Marker? {
-        if let dictionary = json as? [String: Any] {
-            let marker = Marker()
-            marker.id = dictionary["id"] as? Int
-            var location = dictionary["latlng"] as! [String: Double]
-            marker.latitude = location["lat"]!
-            marker.longitude = location["lng"]!
-            marker.title = dictionary["title"] as? String ?? "no name"
-            return marker
-        }
-        return nil
-    }
-    
-    static func postAdventure(adv: Adventure, callback: @escaping (Adventure) -> Void) {
-        var request = URLRequest(url: URL(string: Urls.saveAdventure)!)
-        request.httpMethod = "POST"
-        request.addValue("application/json",forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json",forHTTPHeaderField: "Accept")
-        request.httpBody = try! JSONSerialization.data(withJSONObject: adv.toJsonDictionary(), options: [])
-        let session = URLSession.shared
-        print(adv.toJsonDictionary())
-        session.dataTask(with: request) { data, response, err in
-            if let d = data, let adv = self.parseAdventure(data: d) {
-                callback(adv)
-            } else if err != nil {
-                print("YIKES")
+    var directions = [Direction](){
+        didSet {
+            if directionsSet {
+                print("GOT EM ALL")
+                directionsSetCallback?()
             }
-            }.resume()
+        }
     }
-
+    
+    var directionsSetCallback: (() -> Void)?
+    
+    var directionsSet: Bool {
+        get {
+            return numberOfRequiredDirections() == directions.count
+        }
+    }
+    
+    private func resetDirections() {
+        directions = []
+    }
+    
+    private func numberOfRequiredDirections() -> Int {
+        return markers.count - 1
+    }
+    
+    
+    private func updateDirections() {
+        print("Updating...")
+        resetDirections()
+        makeDirectionsForMarkerIndex(1)
+    }
+    
+    private func makeDirectionsForMarkerIndex(_ index: Int){
+        if markers.count > index && index > 0 {
+            Direction.makeDirections(start: markers[index - 1], end: markers[index]){ [weak weakself = self] directionObject in
+                weakself?.directions.append(directionObject)
+            }
+            //makeDirections(start: markers[index - 1], end: markers[index])
+            makeDirectionsForMarkerIndex(index + 1)
+        }
+    }
 }
 
 class Marker: NSObject {
@@ -109,16 +72,23 @@ class Marker: NSObject {
     var longitude: Double = 0.0
     var id: Int?
     var title: String? = ""
+    
+    var markerChangeCallback: (() -> Void)?
+}
 
-    func toJsonDictionary() -> [String: Any] {
-        var dict: [String: Any] = [:]
-        if let t = title, t != "" {
-            dict["title"] = title
+extension Marker: MKAnnotation {
+    
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
-        dict["latlng"] = ["lat": latitude, "lng": longitude]
-        dict["id"] = id ?? 0
-        return dict
+        set {
+            latitude = newValue.latitude
+            longitude = newValue.longitude
+            markerChangeCallback?()
+        }
     }
+    
 }
 
 class Direction: NSObject {
@@ -132,22 +102,71 @@ class Direction: NSObject {
         self.end = end
         super.init()
     }
-}
-
-extension Marker: MKAnnotation {
     
-    var coordinate: CLLocationCoordinate2D {
+    private var currentStepIndex = 0
+    
+    var finished: Bool {
         get {
-            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        }
-        set {
-            latitude = newValue.latitude
-            longitude = newValue.longitude
+            return currentStepIndex >= orderedPoints.count
         }
     }
-
-}
-
-func ==(a: CLLocationCoordinate2D, b: CLLocationCoordinate2D) -> Bool {
-    return a.latitude == b.latitude && a.longitude == b.longitude
+    
+    var currentStep: CLLocationCoordinate2D? {
+        get {
+            if !finished {
+                return orderedPoints[currentStepIndex]
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    func nextStep() -> CLLocationCoordinate2D? {
+        currentStepIndex += 1
+        return currentStep
+    }
+    
+    func restart() {
+        currentStepIndex = 0
+    }
+    
+    var orderedPoints: [CLLocationCoordinate2D] {
+        get {
+            print("in the function")
+            let polyline = route?.polyline
+            var orderedPoints = [CLLocationCoordinate2D]()
+            if polyline != nil {
+                print("Made it")
+                //var coords: [CLLocationCoordinate2D] = []
+                let rootcoordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.allocate(capacity: polyline!.pointCount)
+                //coords.reserveCapacity(polyline!.pointCount)
+                polyline!.getCoordinates(rootcoordinates, range: NSMakeRange(0, polyline!.pointCount))
+                //print("THIS MANY COORDS: %@ and this many points: %@", coords.count, polyline!.pointCount)
+                
+                for i in 0..<polyline!.pointCount {
+                    orderedPoints.append(rootcoordinates[i])
+                    print("%.2f, %.2f",rootcoordinates[i].latitude, rootcoordinates[i].longitude)
+                }
+                
+            }
+            return orderedPoints
+        }
+    }
+    
+    static func makeDirections(start: Marker, end: Marker, callback: @escaping (Direction) -> Void) {
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: start.coordinate))
+        directionsRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: end.coordinate))
+        directionsRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionsRequest)
+        
+        directions.calculate { (reponse, error) in
+            if let direction = reponse {
+                let directionObject = Direction(start: start, end: end)
+                directionObject.route = direction.routes[0]
+                callback(directionObject)
+            }
+        }
+    }
 }

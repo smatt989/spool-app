@@ -62,6 +62,7 @@
                                     <outlet property="descriptionLabel" destination="be4-La-XD2" id="gdl-t6-Olz"/>
                                     <outlet property="editButton" destination="meu-H5-B2Z" id="nX6-HV-XSn"/>
                                     <outlet property="titleLabel" destination="BHP-1g-wF8" id="89G-l4-OkZ"/>
+                                    <segue destination="NMs-db-Lcf" kind="show" identifier="Enter Adventure" id="Ght-Mj-9gm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -81,6 +82,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3R-81-l14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="582" y="144"/>
+        </scene>
+        <!--Enter Adventure View Controller-->
+        <scene sceneID="UXK-yZ-MFW">
+            <objects>
+                <viewController id="NMs-db-Lcf" customClass="EnterAdventureViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vh2-xd-8jv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bsx-5Z-tP4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xjP-ly-h19">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1857" y="573"/>
         </scene>
         <!--Adventure-->
         <scene sceneID="4r2-mK-Dkh">

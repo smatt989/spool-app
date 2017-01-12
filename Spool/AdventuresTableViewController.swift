@@ -59,6 +59,11 @@ class AdventuresTableViewController: UITableViewController {
             if let viewController = segue.destination as? AdventureEditingViewController {
                 viewController.adventureId = nil
             }
+        } else if segue.identifier == Identifiers.enterAdventure {
+            if let viewController = segue.destination as? EnterAdventureViewController, let cell = sender as? AdventureHeadlineTableViewCell {
+                print("the id is %@", cell.adventureId ?? 0)
+                viewController.adventureId = cell.adventureId
+            }
         }
     }
     
