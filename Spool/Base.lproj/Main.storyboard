@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jtu-uq-5ZN" id="5dM-rN-qMG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fi6-JE-yCU">
@@ -94,12 +94,33 @@
                     <view key="view" contentMode="scaleToFill" id="xjP-ly-h19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="going" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-54-CHU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8lx-54-CHU" firstAttribute="top" secondItem="vh2-xd-8jv" secondAttribute="bottom" id="36x-xP-1tZ"/>
+                            <constraint firstItem="8lx-54-CHU" firstAttribute="bottom" secondItem="Bsx-5Z-tP4" secondAttribute="top" id="BpR-TF-ufu"/>
+                            <constraint firstItem="8lx-54-CHU" firstAttribute="leading" secondItem="xjP-ly-h19" secondAttribute="leading" id="CVN-ah-W2Y"/>
+                            <constraint firstAttribute="trailing" secondItem="8lx-54-CHU" secondAttribute="trailing" id="njU-4u-sO7"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="printlog" destination="8lx-54-CHU" id="Y6t-Eh-QF7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="573"/>
+            <point key="canvasLocation" x="1856.8" y="572.56371814092961"/>
         </scene>
         <!--Adventure-->
         <scene sceneID="4r2-mK-Dkh">

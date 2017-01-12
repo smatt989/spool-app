@@ -121,9 +121,8 @@ class Direction: NSObject {
         }
     }
     
-    func nextStep() -> CLLocationCoordinate2D? {
+    func nextStep() {
         currentStepIndex += 1
-        return currentStep
     }
     
     func restart() {
@@ -160,9 +159,8 @@ class Direction: NSObject {
         directionsRequest.transportType = .walking
         
         let directions = MKDirections(request: directionsRequest)
-        
-        directions.calculate { (reponse, error) in
-            if let direction = reponse {
+        directions.calculate { (response, error) in
+            if let direction = response {
                 let directionObject = Direction(start: start, end: end)
                 directionObject.route = direction.routes[0]
                 callback(directionObject)
