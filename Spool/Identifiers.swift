@@ -15,8 +15,9 @@ struct Identifiers {
     static let newAdventureSegue = "New Adventure"
     static let editMarkerSegue = "Edit Marker"
     static let editAdventureDetails = "Edit Adventure Details"
+    static let enterAdventure = "Enter Adventure"
 }
 
-let domain = "http://localhost:8080"
-//let domain = "https://gentle-bayou-26619.herokuapp.com"
+//let domain = "http://localhost:8080"
+let domain = "https://gentle-bayou-26619.herokuapp.com"
     

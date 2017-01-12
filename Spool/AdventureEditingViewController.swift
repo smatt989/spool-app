@@ -25,14 +25,9 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     var adventure: Adventure? {
         didSet {
+            adventure?.directionsSetCallback = drawDirections
             DispatchQueue.main.async { [weak weakself = self] in
                 weakself?.updateMapUI()            }
-        }
-    }
-    
-    var directions: [Direction] = [] {
-        didSet {
-            drawDirections()
         }
     }
 
@@ -48,7 +43,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         clearWaypoints()
         if adventure != nil {
             addWaypoints(waypoints: adventure!.markers)
-            updateDirections()
         }
     }
     
@@ -87,46 +81,11 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
     }
     
-    private func updateDirections() {
-        if adventure != nil {
-            removeDirections()
-            makeDirectionsForMarkerIndex(1)
-        }
-    }
-    
-    //TODO: LETS DEFINITELY MOVE THE WHOLE AJAX FETCHING TO THE MODEL TO GENERATE THE ROUTE
-    
-    private func makeDirectionsForMarkerIndex(_ index: Int){
-        if adventure?.markers.count ?? 0 > index && index > 0 {
-            makeDirections(start: adventure!.markers[index - 1], end: adventure!.markers[index])
-            makeDirectionsForMarkerIndex(index + 1)
-        }
-    }
-    
     private func drawDirections() {
-        for direction in directions {
-            mapView.add(direction.route!.polyline, level: .aboveRoads)
-        }
-    }
-    
-    private func removeDirections() {
-        mapView?.removeOverlays(directions.map{ element in element.route!.polyline})
-        directions = []
-    }
-    
-    private func makeDirections(start: Marker, end: Marker) {
-        let directionsRequest = MKDirectionsRequest()
-        directionsRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: start.coordinate))
-        directionsRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: end.coordinate))
-        directionsRequest.transportType = .walking
-        
-        let directions = MKDirections(request: directionsRequest)
-        
-        directions.calculate { [weak weakself = self] (reponse, error) in
-            if let direction = reponse {
-                let directionObject = Direction(start: start, end: end)
-                directionObject.route = direction.routes[0]
-                weakself?.directions.append(directionObject)
+        if adventure != nil {
+            mapView?.removeOverlays(mapView.overlays.filter{ overlay in overlay is MKPolyline})
+            for direction in adventure!.directions {
+                mapView.add(direction.route!.polyline, level: .aboveRoads)
             }
         }
     }
@@ -218,7 +177,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         
         var nearestDirection: Direction?
         
-        for direction in directions {
+        for direction in adventure?.directions ?? [] {
             if let polyline = direction.route?.polyline {
                 let distance = distanceOfPoint(MKMapPointForCoordinate(coord), to: polyline)
                 
@@ -237,9 +196,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-        if newState == .ending {
-            updateDirections()
-        }
         view.setSelected(true, animated: true)
     }
     

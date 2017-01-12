@@ -12,6 +12,9 @@
 		C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C963343A1E21B77600583CE1 /* Assets.xcassets */; };
 		C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C963343C1E21B77600583CE1 /* LaunchScreen.storyboard */; };
 		C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */; };
+		C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */; };
+		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
+		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
 		C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
@@ -28,6 +31,9 @@
 		C963343D1E21B77600583CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C963343F1E21B77600583CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineTableViewCell.swift; sourceTree = "<group>"; };
+		C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAdventureViewController.swift; sourceTree = "<group>"; };
+		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
+		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
 		C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresTableViewController.swift; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
@@ -69,13 +75,16 @@
 				C96334451E21B79600583CE1 /* Supporting Files */,
 				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
 				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
+				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
 				C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */,
 				C96334371E21B77600583CE1 /* Main.storyboard */,
 				C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */,
 				C963343A1E21B77600583CE1 /* Assets.xcassets */,
 				C9AE740E1E24A06800DEF45B /* Adventure.swift */,
-				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
+				C996D6D01E27FFE9003E1F36 /* Serialization.swift */,
+				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
 				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
+				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
 			);
 			path = Spool;
 			sourceTree = "<group>";
@@ -167,9 +176,12 @@
 				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
+				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
+				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
+				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
