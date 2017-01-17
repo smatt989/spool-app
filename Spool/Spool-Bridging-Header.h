@@ -10,5 +10,3 @@
 #import "ARViewProtocol.h"
 #import "GEOLocations.h"
 #import "AugmentedRealityController.h"
-#import <WikitudeNativeSDK/WikitudeSDK.h>
-#import <WikitudeNativeSDK/WTArchitectViewDebugDelegate.h>
