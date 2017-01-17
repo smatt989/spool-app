@@ -10,11 +10,7 @@ import UIKit
 import MapKit
 import CoreImage
 
-class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, ARDelegate, ARMarkerDelegate, MarkerViewDelegate, WTArchitectViewDelegate {
-    
-    
-    fileprivate var architectView:WTArchitectView?
-    fileprivate var architectWorldNavigation:WTNavigation?
+class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, ARDelegate, ARMarkerDelegate, MarkerViewDelegate {
     
     internal func didTouchMarkerView(_ markerView: MarkerView) {
         //
@@ -28,8 +24,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        try WTArchitectView.isDeviceSupported(forRequiredFeatures: WTFeatures._2DTracking)
         
         if _arController == nil  {
             _arController = AugmentedRealityController(view: self.view, parentViewController: self, withDelgate: self)
