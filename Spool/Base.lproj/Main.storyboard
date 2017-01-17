@@ -95,32 +95,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="going" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-54-CHU">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmM-89-U4q">
+                                <rect key="frame" x="292" y="64" width="83" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Debug"/>
+                                <connections>
+                                    <segue destination="kIs-fF-tG1" kind="show" identifier="Debug Log" id="Ld3-oI-sxk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mmM-89-U4q" secondAttribute="trailing" id="Ier-wQ-Ky2"/>
+                            <constraint firstItem="mmM-89-U4q" firstAttribute="top" secondItem="vh2-xd-8jv" secondAttribute="bottom" id="Zec-7i-NJh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1856.8" y="572.56371814092961"/>
+        </scene>
+        <!--Debug View Controller-->
+        <scene sceneID="69Z-xU-4cF">
+            <objects>
+                <viewController id="kIs-fF-tG1" customClass="DebugViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gsP-oh-TzH"/>
+                        <viewControllerLayoutGuide type="bottom" id="EgT-Kp-azK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RUy-OY-eKg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="o9o-R0-2TQ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8lx-54-CHU" firstAttribute="top" secondItem="vh2-xd-8jv" secondAttribute="bottom" id="36x-xP-1tZ"/>
-                            <constraint firstItem="8lx-54-CHU" firstAttribute="bottom" secondItem="Bsx-5Z-tP4" secondAttribute="top" id="BpR-TF-ufu"/>
-                            <constraint firstItem="8lx-54-CHU" firstAttribute="leading" secondItem="xjP-ly-h19" secondAttribute="leading" id="CVN-ah-W2Y"/>
-                            <constraint firstAttribute="trailing" secondItem="8lx-54-CHU" secondAttribute="trailing" id="njU-4u-sO7"/>
+                            <constraint firstItem="o9o-R0-2TQ" firstAttribute="top" secondItem="gsP-oh-TzH" secondAttribute="bottom" id="2oD-8t-nS6"/>
+                            <constraint firstItem="o9o-R0-2TQ" firstAttribute="bottom" secondItem="EgT-Kp-azK" secondAttribute="top" id="F9f-ds-hhu"/>
+                            <constraint firstAttribute="trailing" secondItem="o9o-R0-2TQ" secondAttribute="trailing" id="bbR-ha-lcs"/>
+                            <constraint firstItem="o9o-R0-2TQ" firstAttribute="leading" secondItem="RUy-OY-eKg" secondAttribute="leading" id="d8Z-wL-fTG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="printlog" destination="8lx-54-CHU" id="Y6t-Eh-QF7"/>
+                        <outlet property="debugLog" destination="o9o-R0-2TQ" id="FJM-Bh-jEx"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRC-HC-ffm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="572.56371814092961"/>
+            <point key="canvasLocation" x="2970" y="515"/>
         </scene>
         <!--Adventure-->
         <scene sceneID="4r2-mK-Dkh">

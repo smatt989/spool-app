@@ -16,6 +16,7 @@ struct Identifiers {
     static let editMarkerSegue = "Edit Marker"
     static let editAdventureDetails = "Edit Adventure Details"
     static let enterAdventure = "Enter Adventure"
+    static let debugLog = "Debug Log"
 }
 
 //let domain = "http://localhost:8080"
