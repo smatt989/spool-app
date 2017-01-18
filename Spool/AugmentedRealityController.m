@@ -21,7 +21,7 @@
 #define INTERVAL_UPDATE 0.75
 #define SCALE_FACTOR 1.0
 #define HEADING_NOT_SET -1.0
-#define DEGREE_TO_UPDATE 1
+#define DEGREE_TO_UPDATE 0.01
 
 @interface AugmentedRealityController (Private)
 - (void)updateCenterCoordinate;
