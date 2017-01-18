@@ -50,7 +50,7 @@ class MarkerView : UIView {
         self.distanceLabel!.backgroundColor = UIColor(white: 0.3, alpha: 0.7)
         self.distanceLabel!.textColor = UIColor.white
         self.distanceLabel!.textAlignment = NSTextAlignment.center
-        self.distanceLabel!.text = String(format: "%.2f", self.coordinate!.distanceFromOrigin / 1000.0) + "km"
+        updateDistanceLabel()
         self.distanceLabel!.sizeToFit()
         
         self.addSubview(title)
@@ -59,10 +59,14 @@ class MarkerView : UIView {
         self.backgroundColor = UIColor.clear
     }
     
+    func updateDistanceLabel() {
+        distanceLabel!.text = String(format: "%.6f", coordinate!.distanceFromOrigin / 1000.0) + "km"
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        self.distanceLabel!.text = String(format: "%.2f", self.coordinate!.distanceFromOrigin / 1000.0) + "km"
+        updateDistanceLabel()
+        //self.distanceLabel!.text = String(format: "%.2f", self.coordinate!.distanceFromOrigin / 1000.0) + "km"
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with e: UIEvent?) {
