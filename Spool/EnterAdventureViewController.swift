@@ -84,7 +84,11 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         if currentDirections != nil && currentDestinationStep != nil {
             locationUpdates += 1
             if locationUpdates % 10 == 0 {
-                refreshMarker()
+                //refreshMarker()
+            }
+            
+            if let markerView = _arController.displayView.subviews[0] as? MarkerView {
+                markerView.updateDistanceLabel()
             }
             
             let mostRecentLocation = locations.last!
