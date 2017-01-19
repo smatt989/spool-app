@@ -7,17 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C933A87E1E28589C007E24B9 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933A87D1E28589C007E24B9 /* MarkerView.swift */; };
 		C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */; };
 		C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96334331E21B77600583CE1 /* AppDelegate.swift */; };
 		C96334391E21B77600583CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96334371E21B77600583CE1 /* Main.storyboard */; };
 		C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C963343A1E21B77600583CE1 /* Assets.xcassets */; };
 		C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C963343C1E21B77600583CE1 /* LaunchScreen.storyboard */; };
-		C97C21ED1E2854C6001A59EB /* ARCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C21EC1E2854C6001A59EB /* ARCoordinate.m */; };
-		C97C21F81E2854CF001A59EB /* ARGeoCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C21EF1E2854CF001A59EB /* ARGeoCoordinate.m */; };
-		C97C21F91E2854CF001A59EB /* ARKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C21F11E2854CF001A59EB /* ARKit.m */; };
-		C97C21FA1E2854CF001A59EB /* AugmentedRealityController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C21F51E2854CF001A59EB /* AugmentedRealityController.m */; };
-		C97C21FB1E2854CF001A59EB /* GEOLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C21F71E2854CF001A59EB /* GEOLocations.m */; };
 		C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */; };
 		C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */; };
 		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
@@ -28,10 +22,10 @@
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
+		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C933A87D1E28589C007E24B9 /* MarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		C96334301E21B77600583CE1 /* Spool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96334331E21B77600583CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,19 +33,6 @@
 		C963343A1E21B77600583CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C963343D1E21B77600583CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C963343F1E21B77600583CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C97C21EA1E2854C5001A59EB /* Spool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spool-Bridging-Header.h"; sourceTree = "<group>"; };
-		C97C21EB1E2854C6001A59EB /* ARCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCoordinate.h; sourceTree = "<group>"; };
-		C97C21EC1E2854C6001A59EB /* ARCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCoordinate.m; sourceTree = "<group>"; };
-		C97C21EE1E2854CF001A59EB /* ARGeoCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGeoCoordinate.h; sourceTree = "<group>"; };
-		C97C21EF1E2854CF001A59EB /* ARGeoCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGeoCoordinate.m; sourceTree = "<group>"; };
-		C97C21F01E2854CF001A59EB /* ARKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKit.h; sourceTree = "<group>"; };
-		C97C21F11E2854CF001A59EB /* ARKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKit.m; sourceTree = "<group>"; };
-		C97C21F21E2854CF001A59EB /* ARLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLocationDelegate.h; sourceTree = "<group>"; };
-		C97C21F31E2854CF001A59EB /* ARViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARViewProtocol.h; sourceTree = "<group>"; };
-		C97C21F41E2854CF001A59EB /* AugmentedRealityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AugmentedRealityController.h; sourceTree = "<group>"; };
-		C97C21F51E2854CF001A59EB /* AugmentedRealityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AugmentedRealityController.m; sourceTree = "<group>"; };
-		C97C21F61E2854CF001A59EB /* GEOLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEOLocations.h; sourceTree = "<group>"; };
-		C97C21F71E2854CF001A59EB /* GEOLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEOLocations.m; sourceTree = "<group>"; };
 		C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineTableViewCell.swift; sourceTree = "<group>"; };
 		C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAdventureViewController.swift; sourceTree = "<group>"; };
 		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
@@ -62,6 +43,7 @@
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
+		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +76,6 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
-				C97C21E91E2854A1001A59EB /* ARKit */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
 				C96334371E21B77600583CE1 /* Main.storyboard */,
 				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
@@ -109,7 +90,7 @@
 				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
 				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
 				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
-				C933A87D1E28589C007E24B9 /* MarkerView.swift */,
+				C9E59A291E2F089300E22DD4 /* ARMath.swift */,
 			);
 			path = Spool;
 			sourceTree = "<group>";
@@ -122,26 +103,6 @@
 				C963343F1E21B77600583CE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C97C21E91E2854A1001A59EB /* ARKit */ = {
-			isa = PBXGroup;
-			children = (
-				C97C21EE1E2854CF001A59EB /* ARGeoCoordinate.h */,
-				C97C21EF1E2854CF001A59EB /* ARGeoCoordinate.m */,
-				C97C21F01E2854CF001A59EB /* ARKit.h */,
-				C97C21F11E2854CF001A59EB /* ARKit.m */,
-				C97C21F21E2854CF001A59EB /* ARLocationDelegate.h */,
-				C97C21F31E2854CF001A59EB /* ARViewProtocol.h */,
-				C97C21F41E2854CF001A59EB /* AugmentedRealityController.h */,
-				C97C21F51E2854CF001A59EB /* AugmentedRealityController.m */,
-				C97C21F61E2854CF001A59EB /* GEOLocations.h */,
-				C97C21F71E2854CF001A59EB /* GEOLocations.m */,
-				C97C21EB1E2854C6001A59EB /* ARCoordinate.h */,
-				C97C21EC1E2854C6001A59EB /* ARCoordinate.m */,
-				C97C21EA1E2854C5001A59EB /* Spool-Bridging-Header.h */,
-			);
-			name = ARKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,19 +180,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
-				C97C21FB1E2854CF001A59EB /* GEOLocations.m in Sources */,
-				C97C21ED1E2854C6001A59EB /* ARCoordinate.m in Sources */,
-				C97C21FA1E2854CF001A59EB /* AugmentedRealityController.m in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
 				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
-				C97C21F91E2854CF001A59EB /* ARKit.m in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
-				C97C21F81E2854CF001A59EB /* ARGeoCoordinate.m in Sources */,
-				C933A87E1E28589C007E24B9 /* MarkerView.swift in Sources */,
+				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
@@ -368,7 +324,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Spool/Spool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -388,7 +344,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Spool/Spool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
