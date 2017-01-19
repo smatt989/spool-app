@@ -9,30 +9,36 @@
 import UIKit
 import MapKit
 import CoreImage
+import CoreMotion
+import AVKit
+import AVFoundation
 
-class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, ARDelegate, ARMarkerDelegate, MarkerViewDelegate {
+class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate{
+
+    private var captureSession: AVCaptureSession?
     
-    internal func didTouchMarkerView(_ markerView: MarkerView) {
-        //
+    private func startCamera() {
+        let avCaptureSession = AVCaptureSession()
+        let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let videoInput = try! AVCaptureDeviceInput(device: videoCaptureDevice)
+        avCaptureSession.addInput(videoInput)
+        let newCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer.init(session: avCaptureSession)
+        view.layer.masksToBounds = true
+        newCaptureVideoPreviewLayer?.frame = view.bounds
+        newCaptureVideoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+        view.layer.insertSublayer(newCaptureVideoPreviewLayer!, below: view.layer.sublayers?[0])
+        
+        avCaptureSession.sessionPreset = AVCaptureSessionPresetHigh
+        avCaptureSession.startRunning()
+        
+        captureSession = avCaptureSession
     }
-
-    
     
     var userLocation: MKUserLocation?
-    var geoLocationsArray = [ARGeoCoordinate]()
-    var _arController: AugmentedRealityController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if _arController == nil  {
-            _arController = AugmentedRealityController(view: self.view, parentViewController: self, withDelgate: self)
-            
-            _arController.minimumScaleFactor = 0.5
-            _arController.scaleViewsBasedOnDistance = true
-            _arController.rotateViewsBasedOnPerspective = true
-            _arController.debugMode = false
-        }
     }
     
     var adventureId: Int? {
@@ -62,12 +68,14 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
     
     private func turnOffLocationManager() {
         locationManager.stopUpdatingLocation()
-        _arController.locationManager.stopUpdatingLocation()
-        _arController.stopListening()
+        locationManager.stopUpdatingHeading()
+        deviceMotion.stopDeviceMotionUpdates()
+        captureSession?.stopRunning()
     }
     
     
@@ -77,19 +85,77 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         static let distanceBetweenPointsAccuracy = 15.0
     }
     
+    private var deviceMotion = CMMotionManager()
+    
+    private func startDeviceMotion() {
+        deviceMotion.deviceMotionUpdateInterval = 0.25
+        
+        deviceMotion.startDeviceMotionUpdates(to: .main) { [weak weakself = self]
+            (motion, error) in
+            if let gravity = motion?.gravity {
+                weakself?.latestGravity = gravity
+            }
+        }
+    }
+    
+    private var latestGravity: CMAcceleration?
+    private var latestLocation: CLLocation?
+    private var latestHeading: CLLocationDirection? {
+        didSet {
+            executeThing()
+        }
+    }
+    
+    let arrow = #imageLiteral(resourceName: "blue-arrow")
+    var arrowView: UIImageView?
+    var subview: UIView?
+    let transformConstant = 1 / 500.0
+    let pitchAdjust = M_PI / 9
+    
+    private func setupArrow() {
+        arrowView = UIImageView(image: arrow)
+        subview = UIView(frame: view.frame)
+        
+        let imageWidth = subview!.frame.width / 3
+        let imageRatio = imageWidth / arrowView!.frame.width
+        let imageHeight = arrowView!.frame.height * imageRatio
+        
+        arrowView!.frame = CGRect(x: (subview!.frame.width - imageWidth) / 2, y: (subview!.frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
+        
+        
+        
+        subview!.addSubview(arrowView!)
+        view.insertSubview(subview!, at: 5)
+    }
+    
+    private func executeThing() {
+        if latestGravity != nil && latestLocation != nil && latestHeading != nil && currentDestinationStep != nil {
+            let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+            var transform = CATransform3DIdentity
+            transform.m34 = CGFloat(transformConstant)
+            let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll), 0, 0, 1)
+            let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
+            let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
+            let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
+            arrowView?.layer.transform = transformer
+            //print("OK THEN: yaw: \(result.yaw) pitch: \(result.pitch) roll: \(result.roll)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        latestHeading = newHeading.trueHeading
+    }
+    
     private var locationUpdates = 0
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        latestLocation = locations.last
         printToScreen(str: "UPDATING LOCATION")
         if currentDirections != nil && currentDestinationStep != nil {
             locationUpdates += 1
-            if locationUpdates % 10 == 0 {
-                //refreshMarker()
-            }
-            
-            if let markerView = _arController.displayView.subviews[0] as? MarkerView {
-                markerView.updateDistanceLabel()
-            }
+//            if locationUpdates % 10 == 0 {
+//                //refreshMarker()
+//            }
             
             let mostRecentLocation = locations.last!
             let targetLocation = CLLocation(coordinate: currentDestinationStep!, altitude: mostRecentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
@@ -123,33 +189,8 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 let lng = currentDestinationStep!.longitude
                 let str = "heading to \(lat), \(lng)"
                 printToScreen(str: str)
-                
-                removeGeoCoordinates()
-                
-                if let currentLocation = locationManager.location {
-                    let newARCoord = makeArGeoCoordinate(step: currentDestinationStep!, currentLocation: currentLocation)
-                    _arController.addCoordinate(newARCoord)
-                }
             }
         }
-    }
-    
-    private func removeGeoCoordinates() {
-        for coord in _arController.coordinates {
-            (coord as! ARGeoCoordinate).displayView.removeFromSuperview()
-            _arController.removeCoordinate(coord as! ARGeoCoordinate)
-        }
-    }
-    
-    private func makeArGeoCoordinate(step: CLLocationCoordinate2D, currentLocation: CLLocation) -> ARGeoCoordinate{
-        let stepLocation = CLLocation(coordinate: step, altitude: currentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
-        let coord = ARGeoCoordinate(location: stepLocation, locationTitle: "EEEK")!
-        coord.calibrate(usingOrigin: currentLocation)
-        
-        let markerView = MarkerView(_coordinate: coord, _delegate: self)
-        coord.displayView = markerView
-        
-        return coord
     }
     
     private var currentDirections: Direction? {
@@ -215,8 +256,10 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setupArrow()
         instantiateLocationManager()
-        //launchCamera()
+        startDeviceMotion()
+        startCamera()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -232,37 +275,10 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
 //            weakself?.printlog.text.append("\n"+str)
 //        }
     }
-    
-    //@IBOutlet weak var printlog: UITextView!
-    
-    private func launchCamera() {
-        if UIImagePickerController.isCameraDeviceAvailable(.rear) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .camera
-            imagePicker.allowsEditing = false
-            imagePicker.showsCameraControls = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
-    func didTapMarker(_ coordinate:ARGeoCoordinate) {
-        //do nothing
-    }
-    func didUpdate(_ newHeading:CLHeading){
-        //do nothing
-    }
-    func didUpdate(_ newLocation:CLLocation){
-        //do nothing
-    }
-    func didUpdate(_ orientation:UIDeviceOrientation) {
-        //do nothing
     }
 
     
@@ -270,15 +286,13 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("IN THE MIX")
         if segue.identifier == Identifiers.debugLog {
-            print("IN THE CONTROLLER")
             if let controller = segue.destination as? DebugViewController {
-                print("IN THE VIEW")
                 controller.text = toPrint
             }
         }
     }
- 
-
 }
+
+
+
