@@ -131,20 +131,16 @@ class Direction: NSObject {
     
     var orderedPoints: [CLLocationCoordinate2D] {
         get {
-            print("in the function")
             let polyline = route?.polyline
             var orderedPoints = [CLLocationCoordinate2D]()
             if polyline != nil {
-                print("Made it")
-                //var coords: [CLLocationCoordinate2D] = []
                 let rootcoordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.allocate(capacity: polyline!.pointCount)
-                //coords.reserveCapacity(polyline!.pointCount)
+                
                 polyline!.getCoordinates(rootcoordinates, range: NSMakeRange(0, polyline!.pointCount))
-                //print("THIS MANY COORDS: %@ and this many points: %@", coords.count, polyline!.pointCount)
                 
                 for i in 0..<polyline!.pointCount {
                     orderedPoints.append(rootcoordinates[i])
-                    print("%.2f, %.2f",rootcoordinates[i].latitude, rootcoordinates[i].longitude)
+                    print("\(rootcoordinates[i].latitude), \(rootcoordinates[i].longitude)")
                 }
                 
             }

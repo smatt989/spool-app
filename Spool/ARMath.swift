@@ -12,43 +12,55 @@ import CoreLocation
 
 class ARMath {
     
-    
-    // can do 2 approaches:
-    //  1) inputs gravity, heading, current location and destination, outputs an orientation of the device relative to that destiantion
-    //  2) given an intial gravity and initial heading, inputs attitude (relative to that initial orientation), current location and destionation, outputs an orientation of the device relative to that desetination (may be more smooth than the first approach)
-    
+    static private let fieldOfViewToDegreesConstant = 10.0
     
     //need to deal with altitude eventually
     static func relativeOrientationOf(deviceOrientation: DeviceOrientation, at currentLocation: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> CustomAttitude {
         let absoluteRadialDistanceBetweenLocations = preciseRadialDistanceBetween(currentLocation, and: destination)
-        //print("absolute radial distance \(absoluteRadialDistanceBetweenLocations)")
-        let relativeRadialDistanceGivenHeading = radialDifferenceBetween(heading: deviceOrientation.heading, and: absoluteRadialDistanceBetweenLocations)
-        //print("relative radial distance \(relativeRadialDistanceGivenHeading)")
         
         let gravityZAngle = asin(deviceOrientation.gravity.z)
         let gravityXAngle = asin(deviceOrientation.gravity.x)
         
+        let truePhoneHeading = backOfPhoneHeading(heading: deviceOrientation.heading, gravity: deviceOrientation.gravity)
+        
+        let relativeRadialDistanceGivenHeading = radialDifferenceBetween(heading: truePhoneHeading, and: absoluteRadialDistanceBetweenLocations)
+        
+        //print("yaw: \(gravityXAngle) roll: \(relativeRadialDistanceGivenHeading) pitch: \(gravityZAngle)")
+        
         return CustomAttitude(pitch: gravityZAngle, yaw: gravityXAngle, roll: relativeRadialDistanceGivenHeading)
-        
-        
-//        let gravityPoint = Point3D(x: deviceOrientation.gravity.x, y: deviceOrientation.gravity.y, z: deviceOrientation.gravity.z)
-//        let gravityPointRotatedOnXAxis = gravityPoint.rotate(radians: 1.5 * M_PI, axis: .x)
-//        
-//        let gravityXAngle = asin(deviceOrientation.gravity.x)
-//        let gravityYAngle = asin(deviceOrientation.gravity.y)
-//        let gravityZAngle = asin(deviceOrientation.gravity.z)
-//        
-//        let xGravityDiff = gravityXAngle
     }
     
-//    static func relativeOrientationOf(initialOrientation: DeviceOrientation, absoluteOrientation: CMAttitude, heading: CLLocationDirection, absoluteLocation: CLLocation, to: CLLocation) {
-//        let absoluteRadialDistanceBetweenLocations = preciseRadialDistanceBetween(absoluteLocation.coordinate, and: to.coordinate)
-//        let relativeRadialDistanceGivenHeading = radialDifferenceBetween(heading: heading, and: absoluteRadialDistanceBetweenLocations)
-//        
-//        let gravityXAngle = asin(initialOrientation.initialGravity.x)
-//        let gravityYAngle = asin(initialOrientation.initialGravity.y)
-//        let gravityZAngle = asin(initialOrientation.initialGravity.z)
-//    }
+    static func screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation, at currentLocation: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> Translation2D {
+        
+        let attitude = relativeOrientationOf(deviceOrientation: deviceOrientation, at: currentLocation, to: destination)
+        
+        return object2DCenterPositionOnScreenGivenAttitude(attitude: attitude)
+    }
+    
+    private static func backOfPhoneHeading(heading: CLLocationDirection, gravity: CMAcceleration) -> CLLocationDirection {
+        let gravityXAngle = degreesFromRadians(asin(gravity.x))
+        return heading - gravityXAngle
+    }
+    
+    static func object2DCenterPositionOnScreenGivenAttitude(attitude: Attitude) -> Translation2D {
+        
+        let point = Point3D(x: 0, y: 0, z: 1)
+                
+        let pitchRotated = point.rotate(radians: -attitude.pitch, axis: .x)
+        let yawRotated = pitchRotated.rotate(radians: -attitude.yaw, axis: .z)
+        let rollRotated = yawRotated.rotate(radians: -attitude.roll, axis: .y)
+        
+        
+        //print("ATTITUDE: pitch:\(attitude.pitch) roll:\(attitude.roll) yaw:\(attitude.yaw)")
+        
+        let xRadianAdjustment = asin(rollRotated.x)
+        let yRadianAdjustment = asin(rollRotated.y)
+        
+        let xAdjustment = degreesFromRadians(xRadianAdjustment) * fieldOfViewToDegreesConstant
+        let yAdjustment = degreesFromRadians(yRadianAdjustment) * fieldOfViewToDegreesConstant
+
+        return Translation2D(x: xAdjustment, y: yAdjustment, zPosition: rollRotated.z, rotation: -attitude.yaw)
+    }
     
     static func preciseRadialDistanceBetween(_ source: CLLocationCoordinate2D, and: CLLocationCoordinate2D) -> Double {
         let lat1 = radiansFromDegrees(source.latitude)
@@ -58,12 +70,11 @@ class ARMath {
         
         let y = sin(lng2 - lng1) * cos(lat2)
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(lng2 - lng1)
-        let result = atan2(y, x)//).truncatingRemainder(dividingBy: 2 * M_PI)
+        let result = atan2(y, x)
         return result
     }
     
-    static func radialDifferenceBetween(heading: CLLocationDirection, and radialOffset: Double) -> Double {
-        //print("heading: degrees: \(heading) radians: \(radiansFromDegrees(heading))")
+    private static func radialDifferenceBetween(heading: CLLocationDirection, and radialOffset: Double) -> Double {
         return radiansAdjustmentToNegPiToPiSpace(radians: radiansFromDegrees(heading) - radialOffset)
     }
     
@@ -142,15 +153,15 @@ struct Point3D {
         return Point3D(x: newX, y: newY, z: newZ)
     }
     
-    static func generateRotationMatrixOnXAxis(radians: Double) -> CMRotationMatrix {
+    private static func generateRotationMatrixOnXAxis(radians: Double) -> CMRotationMatrix {
         return CMRotationMatrix(m11: 1, m12: 0, m13: 0, m21: 0, m22: cos(radians), m23: -sin(radians), m31: 0, m32: sin(radians), m33: cos(radians))
     }
     
-    static func generateRotationMatrixOnYAxis(radians: Double) -> CMRotationMatrix {
+    private static func generateRotationMatrixOnYAxis(radians: Double) -> CMRotationMatrix {
         return CMRotationMatrix(m11: cos(radians), m12: 0, m13: sin(radians), m21: 0, m22: 1, m23: 0, m31: -sin(radians), m32: 0, m33: cos(radians))
     }
     
-    static func generateRotationMatrixOnZAxis(radians: Double) -> CMRotationMatrix {
+    private static func generateRotationMatrixOnZAxis(radians: Double) -> CMRotationMatrix {
         return CMRotationMatrix(m11: cos(radians), m12: -sin(radians), m13: 0, m21: sin(radians), m22: cos(radians), m23: 0, m31: 0, m32: 0, m33: 1)
     }
 }
@@ -158,4 +169,11 @@ struct Point3D {
 struct DeviceOrientation {
     var gravity: CMAcceleration
     var heading: CLLocationDirection
+}
+
+struct Translation2D {
+    var x: Double
+    var y: Double
+    var zPosition: Double
+    var rotation: Double
 }
