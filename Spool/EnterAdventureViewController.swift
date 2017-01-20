@@ -88,7 +88,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     private var deviceMotion = CMMotionManager()
     
     private func startDeviceMotion() {
-        deviceMotion.deviceMotionUpdateInterval = 0.25
+        deviceMotion.deviceMotionUpdateInterval = 0.05
         
         deviceMotion.startDeviceMotionUpdates(to: .main) { [weak weakself = self]
             (motion, error) in
@@ -98,19 +98,27 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    private var latestGravity: CMAcceleration?
-    private var latestLocation: CLLocation?
-    private var latestHeading: CLLocationDirection? {
+    private var latestGravity: CMAcceleration? {
         didSet {
             executeThing()
+            //rotateLabels()
         }
     }
+    private var latestLocation: CLLocation?
+    private var latestHeading: CLLocationDirection?
     
     let arrow = #imageLiteral(resourceName: "blue-arrow")
     var arrowView: UIImageView?
     var subview: UIView?
     let transformConstant = 1 / 500.0
     let pitchAdjust = M_PI / 9
+    
+    var label: UILabel?
+    
+    var star = #imageLiteral(resourceName: "star")
+    var starView: UIImageView?
+    var starSubview: UIView?
+    
     
     private func setupArrow() {
         arrowView = UIImageView(image: arrow)
@@ -128,17 +136,67 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         view.insertSubview(subview!, at: 5)
     }
     
+    private func setupLabel() {
+        starView = UIImageView(image: star)
+        starSubview = UIView(frame: view.frame)
+        
+        let imageWidth = subview!.frame.width / 3
+        let imageRatio = imageWidth / starView!.frame.width
+        let imageHeight = starView!.frame.height * imageRatio
+        
+        starView!.frame = CGRect(x: (starSubview!.frame.width - imageWidth) / 2, y: (starSubview!.frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
+        
+        
+        starView?.layer.shouldRasterize = true
+        
+        starSubview!.addSubview(starView!)
+        view.insertSubview(starSubview!, at: 2)
+//        
+//        
+//        
+//        let width = 100.0
+//        let height = 30.0
+//        
+//        label = UILabel(frame: CGRect(x: (Double(view.frame.maxX) - width) / 2, y: 200, width: width, height: height))
+//        label?.backgroundColor = UIColor.black
+//        label?.textColor = UIColor.white
+//        label?.text = "OVER HERE!"
+//        view.insertSubview(label!, at: 2)
+    }
+    
+    private var motionIsReady: Bool {
+        get {
+            return latestGravity != nil && latestLocation != nil && latestHeading != nil && currentDestinationStep != nil
+        }
+    }
+    
     private func executeThing() {
-        if latestGravity != nil && latestLocation != nil && latestHeading != nil && currentDestinationStep != nil {
-            let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+        if motionIsReady {
             var transform = CATransform3DIdentity
             transform.m34 = CGFloat(transformConstant)
-            let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll), 0, 0, 1)
+            let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+            let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
             let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
             let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
             let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
             arrowView?.layer.transform = transformer
             //print("OK THEN: yaw: \(result.yaw) pitch: \(result.pitch) roll: \(result.roll)")
+        }
+    }
+    
+    private func rotateLabels() {
+        if motionIsReady {
+            var transform = CATransform3DIdentity
+            transform.m34 = CGFloat(transformConstant)
+            let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: currentDestinationStep!)
+            if result.zPosition > 0 {
+                starView?.layer.isHidden = false
+                let translation3d = CATransform3DMakeTranslation(CGFloat(result.x), CGFloat(result.y), 0)
+                let rotation3d = CATransform3DRotate(transform, CGFloat(result.rotation), 0, 0, 1)
+                starView?.layer.transform = CATransform3DConcat(translation3d, rotation3d)
+            } else {
+                starView?.layer.isHidden = true
+            }
         }
     }
     
@@ -257,6 +315,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupArrow()
+        //setupLabel()
         instantiateLocationManager()
         startDeviceMotion()
         startCamera()
@@ -274,11 +333,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
 //        DispatchQueue.main.async { [weak weakself = self] in
 //            weakself?.printlog.text.append("\n"+str)
 //        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
