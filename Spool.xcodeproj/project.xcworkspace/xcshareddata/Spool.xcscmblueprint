@@ -4,12 +4,14 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F7B2B788166E20A0AFD39B4D0A0860209AB1BEA7" : 9223372036854775807,
     "CDA85265E296EDE6E8C92E8D4589911A6EBCC16E" : 9223372036854775807,
     "566192CAB0D2F1B7714B133EC838F3C7EC06DA83" : 9223372036854775807,
     "AA1EF955FE87531522D1F4320EA8D3B28C9204F8" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C39BFEBA-B69C-4181-BDF5-7AE4A84637ED",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F7B2B788166E20A0AFD39B4D0A0860209AB1BEA7" : "..\/SimpleARUtilities",
     "CDA85265E296EDE6E8C92E8D4589911A6EBCC16E" : "Spool\/",
     "566192CAB0D2F1B7714B133EC838F3C7EC06DA83" : "..\/AR-training\/Around%20Me%20Starter%20Project",
     "AA1EF955FE87531522D1F4320EA8D3B28C9204F8" : "..\/AR-training\/Around%20Me%20Starter%20Project\/iPhone-AR-Toolkit"
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:smatt989\/spool-app.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CDA85265E296EDE6E8C92E8D4589911A6EBCC16E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:smatt989\/ARUtilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F7B2B788166E20A0AFD39B4D0A0860209AB1BEA7"
     }
   ]
 }
