@@ -119,6 +119,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     var starView: UIImageView?
     var starSubview: UIView?
     
+    var adventureEndedLabel: UILabel?
     
     private func setupArrow() {
         arrowView = UIImageView(image: arrow)
@@ -133,7 +134,13 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         
         
         subview!.addSubview(arrowView!)
+        subview!.layer.isHidden = true
         view.insertSubview(subview!, at: 5)
+    }
+    
+    private func removeArrow() {
+        subview?.removeFromSuperview()
+        subview = nil
     }
     
     private func setupLabel() {
@@ -150,6 +157,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         starView?.layer.shouldRasterize = true
         
         starSubview!.addSubview(starView!)
+        starSubview?.layer.isHidden = true
         view.insertSubview(starSubview!, at: 2)
 //        
 //        
@@ -164,6 +172,19 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
 //        view.insertSubview(label!, at: 2)
     }
     
+    private func setupAdventureEndedLabel() {
+        let frame = view.frame
+        adventureEndedLabel = UILabel(frame: CGRect(x: 0, y: 50, width: frame.maxX, height: 200))
+        adventureEndedLabel!.backgroundColor = UIColor.clear
+        adventureEndedLabel!.textAlignment = .center
+        adventureEndedLabel!.text = "Adventure Complete!"
+        adventureEndedLabel!.font = UIFont(name: adventureEndedLabel!.font.fontName, size: 30)
+        adventureEndedLabel!.textColor = UIColor.init(red: 0.44, green: 0.96, blue: 0.31, alpha: 1.0)
+        DispatchQueue.main.async { [weak weakself = self] in
+            weakself?.view.addSubview(weakself!.adventureEndedLabel!)
+        }
+    }
+    
     private var motionIsReady: Bool {
         get {
             return latestGravity != nil && latestLocation != nil && latestHeading != nil && currentDestinationStep != nil
@@ -172,6 +193,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private func executeThing() {
         if motionIsReady {
+            subview?.layer.isHidden = false
             var transform = CATransform3DIdentity
             transform.m34 = CGFloat(transformConstant)
             let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
@@ -282,6 +304,8 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     private func endAdventure() {
         printToScreen(str: "FINISHED ADVENTURE!")
         turnOffLocationManager()
+        removeArrow()
+        setupAdventureEndedLabel()
     }
     
     private func nextMarker() {
