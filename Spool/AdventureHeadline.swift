@@ -11,5 +11,6 @@ import Foundation
 struct AdventureHeadline {
     var title = ""
     var subtitle = ""
+    var creator: User
     var id = 0
 }

@@ -77,6 +77,11 @@
                                 <segue destination="toT-bl-NAU" kind="show" identifier="New Adventure" id="5Of-q2-Sr1"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="2a2-Cf-hkT">
+                            <connections>
+                                <action selector="logout:" destination="vLQ-d8-uJS" id="gu7-qS-y9p"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3R-81-l14" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="572.56371814092961"/>
+            <point key="canvasLocation" x="2796" y="572.56371814092961"/>
         </scene>
         <!--Debug View Controller-->
         <scene sceneID="69Z-xU-4cF">
@@ -148,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRC-HC-ffm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2970" y="515"/>
+            <point key="canvasLocation" x="3908" y="514.99250374812596"/>
         </scene>
         <!--Adventure-->
         <scene sceneID="4r2-mK-Dkh">
@@ -198,7 +203,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ScF-ge-WZv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kzu-uL-gyJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Kzu-uL-gyJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1rA-7E-i5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
