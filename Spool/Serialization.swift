@@ -8,6 +8,32 @@
 
 import Foundation
 
+extension User {
+    
+    static func parseUser(data: Data) -> User?{
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] {
+            return parseUserDict(dict: json)
+        }
+        return nil
+    }
+    
+    static func parseUserDict(dict: [String: Any]) -> User {
+        let username = dict["username"] as? String ?? ""
+        return User(username: username)
+    }
+}
+
+extension UserCreate {
+    
+    func toJsonDictionary() -> [String: Any] {
+        var dict: [String: Any] = [:]
+        dict["username"] = username
+        dict["email"] = email
+        dict["password"] = password
+        return dict
+    }
+}
+
 extension Adventure {
     
     func toJsonDictionary() -> [String: Any] {
@@ -59,7 +85,8 @@ extension AdventureHeadline {
         if let dictionary = adventureJson as? [String: Any] {
             if let title = dictionary["name"] as? String, let id = dictionary["id"] as? Int {
                 let subtitle = dictionary["description"] as? String ?? ""
-                return AdventureHeadline(title: title, subtitle: subtitle, id: id)
+                let creator = User.parseUserDict(dict: dictionary["creator"] as! [String: Any])
+                return AdventureHeadline(title: title, subtitle: subtitle, creator: creator, id: id)
             }
         }
         return nil

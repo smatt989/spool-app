@@ -17,8 +17,15 @@ struct Identifiers {
     static let editAdventureDetails = "Edit Adventure Details"
     static let enterAdventure = "Enter Adventure"
     static let debugLog = "Debug Log"
+    static let signUp = "Sign Up"
+    static let navigationController = "NavigationController"
+    static let logInController = "Log In Navigation Controller"
+    struct StoryBoards {
+        static let mainStoryboard = "Main"
+        static let loginStoryboard = "Login"
+    }
 }
 
 //let domain = "http://localhost:8080"
-let domain = "https://gentle-bayou-26619.herokuapp.com"
+let domain = "http://localhost:8080" //"https://gentle-bayou-26619.herokuapp.com"
     

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */; };
+		C92C9EC61E35D204003047DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EC51E35D204003047DC /* User.swift */; };
+		C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */; };
+		C92C9ED61E35DBD2003047DC /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9ED41E35DBD2003047DC /* Session+CoreDataProperties.swift */; };
+		C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9ED81E367599003047DC /* LoginViewController.swift */; };
+		C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */; };
+		C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EDC1E3676D5003047DC /* Authentication.swift */; };
 		C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */; };
 		C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96334331E21B77600583CE1 /* AppDelegate.swift */; };
 		C96334391E21B77600583CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96334371E21B77600583CE1 /* Main.storyboard */; };
@@ -16,6 +23,7 @@
 		C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */; };
 		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
 		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
+		C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99A4FD51E369A6D0022AA5E /* Login.storyboard */; };
 		C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
@@ -26,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		C92C9EC51E35D204003047DC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C92C9ED41E35DBD2003047DC /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C92C9ED81E367599003047DC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C92C9EDC1E3676D5003047DC /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		C96334301E21B77600583CE1 /* Spool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96334331E21B77600583CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +52,7 @@
 		C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAdventureViewController.swift; sourceTree = "<group>"; };
 		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
+		C99A4FD51E369A6D0022AA5E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresTableViewController.swift; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +73,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C92C9ED71E35FDAA003047DC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */,
+				C92C9ED41E35DBD2003047DC /* Session+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		C92C9EDE1E367B6A003047DC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
+				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
+				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
+				C92C9ED81E367599003047DC /* LoginViewController.swift */,
+				C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */,
+				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
+				C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C92C9EDF1E367B79003047DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */,
+				C9AE740E1E24A06800DEF45B /* Adventure.swift */,
+				C92C9EC51E35D204003047DC /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C92C9EE01E367B8D003047DC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C92C9EDC1E3676D5003047DC /* Authentication.swift */,
+				C996D6D01E27FFE9003E1F36 /* Serialization.swift */,
+				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
+				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		C96334271E21B77600583CE1 = {
 			isa = PBXGroup;
 			children = (
@@ -76,20 +136,16 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
+				C92C9ED71E35FDAA003047DC /* CoreData */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
 				C96334371E21B77600583CE1 /* Main.storyboard */,
-				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
-				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
-				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
-				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
-				C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */,
-				C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */,
+				C99A4FD51E369A6D0022AA5E /* Login.storyboard */,
+				C92C9EDE1E367B6A003047DC /* Controllers */,
+				C92C9EDF1E367B79003047DC /* Models */,
+				C92C9EE01E367B8D003047DC /* Utilities */,
 				C963343A1E21B77600583CE1 /* Assets.xcassets */,
-				C9AE740E1E24A06800DEF45B /* Adventure.swift */,
-				C996D6D01E27FFE9003E1F36 /* Serialization.swift */,
-				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
+				C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */,
 				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
-				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
 				C9E59A291E2F089300E22DD4 /* ARMath.swift */,
 			);
 			path = Spool;
@@ -166,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */,
 				C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */,
 				C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */,
 				C96334391E21B77600583CE1 /* Main.storyboard in Resources */,
@@ -179,18 +236,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */,
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
+				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
 				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
+				C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */,
+				C92C9ED61E35DBD2003047DC /* Session+CoreDataProperties.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
+				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
+				C92C9EC61E35D204003047DC /* User.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
+				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +435,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */,
+			);
+			currentVersion = C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C96334281E21B77600583CE1 /* Project object */;
 }
