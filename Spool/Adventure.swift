@@ -72,6 +72,11 @@ class Marker: NSObject {
     var longitude: Double = 0.0
     var id: Int?
     var title: String? = ""
+    var descriptionText: String?
+    var showDirections: Bool = true
+    var showBeaconWithinMeterRange: Int?
+    var showNameWithinMeterRange: Int?
+    var showDescriptionWithinMeterRange: Int?
     
     var markerChangeCallback: (() -> Void)?
 }

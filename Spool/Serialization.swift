@@ -18,8 +18,9 @@ extension User {
     }
     
     static func parseUserDict(dict: [String: Any]) -> User {
-        let username = dict["username"] as? String ?? ""
-        return User(username: username)
+        let username = dict["username"] as! String
+        let id = dict["id"] as! Int
+        return User(username: username, id: id)
     }
 }
 
@@ -100,6 +101,19 @@ extension Marker {
         if let t = title, t != "" {
             dict["title"] = title
         }
+        if let desc = descriptionText {
+            dict["description"] = desc
+        }
+        dict["showDirections"] = showDirections
+        if let showBeacon = showBeaconWithinMeterRange {
+            dict["showBeaconWithinMeterRange"] = showBeacon
+        }
+        if let showTitle = showNameWithinMeterRange {
+            dict["showNameWithinMeterRange"] = showTitle
+        }
+        if let showDescription = showDescriptionWithinMeterRange {
+            dict["showDescriptionWithinMeterRange"] = showDescription
+        }
         dict["latlng"] = ["lat": latitude, "lng": longitude]
         dict["id"] = id ?? 0
         return dict
@@ -113,6 +127,11 @@ extension Marker {
             marker.latitude = location["lat"]!
             marker.longitude = location["lng"]!
             marker.title = dictionary["title"] as? String ?? "no name"
+            marker.descriptionText = dictionary["description"] as? String
+            marker.showDirections = dictionary["showDirections"] as? Bool ?? true
+            marker.showBeaconWithinMeterRange = dictionary["showBeaconWithinMeterRange"] as? Int
+            marker.showNameWithinMeterRange = dictionary["showNameWithinMeterRange"] as? Int
+            marker.showDescriptionWithinMeterRange = dictionary["showDescriptionWithinMeterRange"] as? Int
             return marker
         }
         return nil

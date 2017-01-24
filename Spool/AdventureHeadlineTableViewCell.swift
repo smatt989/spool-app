@@ -10,12 +10,18 @@ import UIKit
 
 class AdventureHeadlineTableViewCell: UITableViewCell {
 
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
     var adventureId: Int?
+    var creator: User?{
+        didSet{
+            showEditButton()
+        }
+    }
     
     @IBAction func editAdventure(_ sender: UIButton) {
         
@@ -24,6 +30,14 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    private func showEditButton() {
+        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = creator {
+            editButton.isHidden = currentUser.id != adventureCreator.id
+        } else {
+            editButton.isHidden = true
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

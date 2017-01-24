@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spool/AdventuresTableViewController.swift"
-            timestampString = "506899881.192881"
+            timestampString = "506937859.715537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spool/HttpRequests.swift"
-            timestampString = "506909837.184147"
+            timestampString = "506910339.81878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "login(username:password:managedObjectContext:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spool/HttpRequests.swift"
-            timestampString = "506909837.184147"
+            timestampString = "506910339.81878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "login(username:password:managedObjectContext:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
