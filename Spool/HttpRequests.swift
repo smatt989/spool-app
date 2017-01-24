@@ -12,7 +12,7 @@ import CoreData
 extension User {
     
     struct Headers {
-        static let sessionHeader = "SPOOL-SESSION-KEY"
+        static let sessionHeader = "Spool-Session-Key"
         static let usernameHeader = "username"
         static let passwordHeader = "password"
     }
