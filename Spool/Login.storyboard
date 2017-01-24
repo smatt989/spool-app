@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdY-64-6cg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="721" y="519"/>
+            <point key="canvasLocation" x="720.79999999999995" y="518.59070464767615"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="qq9-ch-kIb">
@@ -204,14 +204,40 @@
             </objects>
             <point key="canvasLocation" x="1632.8" y="527.58620689655174"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--TransparentUI Navigation Controller-->
         <scene sceneID="fd0-xJ-B95">
             <objects>
-                <navigationController storyboardIdentifier="Log In Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Ma1-hS-O0c" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Log In Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Ma1-hS-O0c" customClass="TransparentUINavigationController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ldl-gg-xFg">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="Ldl-gg-xFg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintingColor">
+                                <color key="value" red="0.84331959489999997" green="0.48938728009999999" blue="0.14795200489999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="disableShadow" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowOpacity">
+                                <color key="value" red="0.84331959489999997" green="0.52510156590000001" blue="0.155094862" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="opacity">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.84331959489999997" green="0.132244423" blue="0.155094862" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="3" height="7"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="noShadow" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

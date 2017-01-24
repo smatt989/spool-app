@@ -35,6 +35,7 @@
 		F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */; };
 		F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */; };
 		F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */; };
+		F303DCF01E37C9280077F1B4 /* TransparentUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentUINavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,17 +146,18 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
-				F303DCE51E379C550077F1B4 /* Fonts */,
-				F303DCE41E375EE00077F1B4 /* Classes */,
+				F303DCE41E375EE00077F1B4 /* Custom Controllers */,
 				C92C9ED71E35FDAA003047DC /* CoreData */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
 				C96334371E21B77600583CE1 /* Main.storyboard */,
 				C99A4FD51E369A6D0022AA5E /* Login.storyboard */,
 				C92C9EDE1E367B6A003047DC /* Controllers */,
+				F303DCEC1E37A8E50077F1B4 /* UI Components */,
 				C92C9EDF1E367B79003047DC /* Models */,
 				C92C9EE01E367B8D003047DC /* Utilities */,
 				C963343A1E21B77600583CE1 /* Assets.xcassets */,
 				C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */,
+				F303DCE51E379C550077F1B4 /* Fonts */,
 				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
 				C9E59A291E2F089300E22DD4 /* ARMath.swift */,
 			);
@@ -171,12 +174,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F303DCE41E375EE00077F1B4 /* Classes */ = {
+		F303DCE41E375EE00077F1B4 /* Custom Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */,
+				F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */,
 			);
-			name = Classes;
+			name = "Custom Controllers";
 			sourceTree = "<group>";
 		};
 		F303DCE51E379C550077F1B4 /* Fonts */ = {
@@ -187,6 +191,13 @@
 				F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		F303DCEC1E37A8E50077F1B4 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "UI Components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 			files = (
 				C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */,
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
+				F303DCF01E37C9280077F1B4 /* TransparentUINavigationController.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
 				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
 				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
