@@ -32,6 +32,9 @@
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
 		F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */; };
+		F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */; };
+		F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */; };
+		F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
 		F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFormViewController.swift; sourceTree = "<group>"; };
+		F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
+				F303DCE51E379C550077F1B4 /* Fonts */,
 				F303DCE41E375EE00077F1B4 /* Classes */,
 				C92C9ED71E35FDAA003047DC /* CoreData */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
@@ -170,6 +177,16 @@
 				F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		F303DCE51E379C550077F1B4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */,
+				F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */,
+				F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +250,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */,
+				F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */,
 				C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */,
+				F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */,
 				C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */,
 				C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */,
 				C96334391E21B77600583CE1 /* Main.storyboard in Resources */,
