@@ -15,6 +15,8 @@
 		C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */; };
 		C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EDC1E3676D5003047DC /* Authentication.swift */; };
 		C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */; };
+		C94BEBB71E37F5AC00381B8C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94BEBB51E37F5AC00381B8C /* Fabric.framework */; };
+		C94BEBB81E37F5AC00381B8C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94BEBB61E37F5AC00381B8C /* Crashlytics.framework */; };
 		C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96334331E21B77600583CE1 /* AppDelegate.swift */; };
 		C96334391E21B77600583CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96334371E21B77600583CE1 /* Main.storyboard */; };
 		C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C963343A1E21B77600583CE1 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C92C9EDC1E3676D5003047DC /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		C94BEBB51E37F5AC00381B8C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		C94BEBB61E37F5AC00381B8C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C96334301E21B77600583CE1 /* Spool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96334331E21B77600583CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96334381E21B77600583CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C94BEBB81E37F5AC00381B8C /* Crashlytics.framework in Frameworks */,
+				C94BEBB71E37F5AC00381B8C /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,8 @@
 			children = (
 				C96334321E21B77600583CE1 /* Spool */,
 				C96334311E21B77600583CE1 /* Products */,
+				C94BEBB51E37F5AC00381B8C /* Fabric.framework */,
+				C94BEBB61E37F5AC00381B8C /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,6 +218,7 @@
 				C963342C1E21B77600583CE1 /* Sources */,
 				C963342D1E21B77600583CE1 /* Frameworks */,
 				C963342E1E21B77600583CE1 /* Resources */,
+				C94BEBB41E37F54A00381B8C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -277,6 +286,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C94BEBB41E37F54A00381B8C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 96d202f1fb7a3a9f9e2679926182ae135ad4fd27 c7b04ab3ba3069a501112a2e642f50c5d4e105b8b9f8fe821569592a3ec3a51a";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C963342C1E21B77600583CE1 /* Sources */ = {
@@ -353,7 +378,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
