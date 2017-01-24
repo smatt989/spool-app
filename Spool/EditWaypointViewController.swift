@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditWaypointViewController: UIViewController, UITextFieldDelegate {
+class EditWaypointViewController: UIFormViewController, UITextFieldDelegate {
 
     var waypointToEdit: Marker? { didSet { updateUI() } }
     

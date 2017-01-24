@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIFormViewController {
     
     var managedObjectContext =
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
