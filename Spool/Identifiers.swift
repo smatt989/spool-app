@@ -27,5 +27,5 @@ struct Identifiers {
 }
 
 //let domain = "http://localhost:8080"
-let domain = "http://localhost:8080" //"https://gentle-bayou-26619.herokuapp.com"
+let domain = "https://gentle-bayou-26619.herokuapp.com"
     
