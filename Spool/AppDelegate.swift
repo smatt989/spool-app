@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    let authentication = Authentication()
+    
     var storyBoard: UIStoryboard?
     var startViewController: UIViewController? {
         didSet {
@@ -38,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func routeGivenAuthentication() {
-         Authentication().authenticateSession(context: persistentContainer.viewContext, success: loginSuccess, failure: loginFailure)
+         authentication.authenticateSession(context: persistentContainer.viewContext, success: loginSuccess, failure: loginFailure)
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

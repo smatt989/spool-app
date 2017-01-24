@@ -12,23 +12,19 @@ import CoreData
 
 class Authentication {
     
-    var authenticatedOnce = false
+    var currentUser: User?
     
     func authenticateSession(context: NSManagedObjectContext, success: @escaping () -> Void, failure: @escaping () -> Void) {
         if Session.getCurrentSession(managedObjectContext: context) != nil {
-            if authenticatedOnce {
+            User.checkSession(managedObjectContext: context, success: { [weak weakself = self] user in
+                weakself?.currentUser = user
                 success()
-            } else {
-                User.checkSession(managedObjectContext: context, success: { [weak weakself = self] user in
-                    weakself?.authenticatedOnce = true
-                    success()
-                }, failure: { [weak weakself = self] error in
-                    weakself?.authenticatedOnce = false
-                    failure()
-                })
-            }
+            }, failure: { [weak weakself = self] error in
+                weakself?.currentUser = nil
+                failure()
+            })
         } else {
-            authenticatedOnce = false
+            currentUser = nil
             failure()
         }
     }

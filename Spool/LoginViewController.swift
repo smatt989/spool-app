@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     }
     
     private func loginSuccess(user: User) {
-        appDelegate.loginSuccess()
+        appDelegate.routeGivenAuthentication()
     }
     
     private func loginFailure(error: Error) {

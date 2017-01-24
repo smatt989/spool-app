@@ -52,6 +52,7 @@ class AdventuresTableViewController: UITableViewController {
         cell.titleLabel?.text = adventure.title
         cell.descriptionLabel?.text = descriptionText
         cell.adventureId = adventure.id
+        cell.creator = adventure.creator
         return cell
     }
  
@@ -70,7 +71,6 @@ class AdventuresTableViewController: UITableViewController {
             }
         } else if segue.identifier == Identifiers.enterAdventure {
             if let viewController = segue.destination as? EnterAdventureViewController, let cell = sender as? AdventureHeadlineTableViewCell {
-                print("the id is %@", cell.adventureId ?? 0)
                 viewController.adventureId = cell.adventureId
             }
         }
