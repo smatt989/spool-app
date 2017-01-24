@@ -31,6 +31,7 @@
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
+		F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
+		F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
+				F303DCE41E375EE00077F1B4 /* Classes */,
 				C92C9ED71E35FDAA003047DC /* CoreData */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
 				C96334371E21B77600583CE1 /* Main.storyboard */,
@@ -159,6 +162,14 @@
 				C963343F1E21B77600583CE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F303DCE41E375EE00077F1B4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +204,7 @@
 				TargetAttributes = {
 					C963342F1E21B77600583CE1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3TPNUJ5HB3;
+						DevelopmentTeam = VGX88LS237;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -247,6 +258,7 @@
 				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
+				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C92C9EC61E35D204003047DC /* User.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
@@ -379,14 +391,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3TPNUJ5HB3;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -399,14 +411,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3TPNUJ5HB3;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.slotkin.matthew.hugo.Spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
