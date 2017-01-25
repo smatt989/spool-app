@@ -50,6 +50,7 @@ extension User {
                     success(User.parseUser(data: userData)!)
                 }
             } else if err != nil{
+                Session.removeSessionKey(managedObjectContext: managedObjectContext)
                 DispatchQueue.main.async {
                     failure(err!)
                 }

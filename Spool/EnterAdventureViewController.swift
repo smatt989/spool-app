@@ -148,7 +148,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             }
             if looking {
                 markerNoteView.isHidden = true
-                print("ARG HIT THIS")
             }
         }
     }
@@ -237,8 +236,8 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func moveArrow() {
-        if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
-            if motionIsReady {
+        if motionIsReady {
+            if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
                 arrow.layer.isHidden = false
                 var transform = CATransform3DIdentity
                 transform.m34 = CGFloat(transformConstant)
@@ -248,10 +247,9 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
                 let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
                 arrow.arrowView.layer.transform = transformer
-                //print("OK THEN: yaw: \(result.yaw) pitch: \(result.pitch) roll: \(result.roll)")
+            }  else {
+                arrow.layer.isHidden = true
             }
-        } else {
-            arrow.layer.isHidden = true
         }
     }
     
