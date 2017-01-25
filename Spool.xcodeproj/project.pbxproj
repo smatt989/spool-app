@@ -17,6 +17,12 @@
 		C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */; };
 		C94BEBB71E37F5AC00381B8C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94BEBB51E37F5AC00381B8C /* Fabric.framework */; };
 		C94BEBB81E37F5AC00381B8C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94BEBB61E37F5AC00381B8C /* Crashlytics.framework */; };
+		C94BEBBA1E3877E200381B8C /* MaxLengthUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBB91E3877E200381B8C /* MaxLengthUITextField.swift */; };
+		C94BEBBC1E38783200381B8C /* AllowableCharactersUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBBB1E38783200381B8C /* AllowableCharactersUITextField.swift */; };
+		C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBBE1E38909F00381B8C /* Arrow.swift */; };
+		C94BEBC11E38951900381B8C /* MarkerNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBC01E38951900381B8C /* MarkerNameLabel.swift */; };
+		C94BEBC31E3895CF00381B8C /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBC21E3895CF00381B8C /* Beacon.swift */; };
+		C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94BEBC41E3897E500381B8C /* MarkerUIElement.swift */; };
 		C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96334331E21B77600583CE1 /* AppDelegate.swift */; };
 		C96334391E21B77600583CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96334371E21B77600583CE1 /* Main.storyboard */; };
 		C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C963343A1E21B77600583CE1 /* Assets.xcassets */; };
@@ -33,6 +39,7 @@
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
+		C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */; };
 		F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */; };
 		F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */; };
 		F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */; };
@@ -51,6 +58,12 @@
 		C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		C94BEBB51E37F5AC00381B8C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		C94BEBB61E37F5AC00381B8C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		C94BEBB91E3877E200381B8C /* MaxLengthUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxLengthUITextField.swift; sourceTree = "<group>"; };
+		C94BEBBB1E38783200381B8C /* AllowableCharactersUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllowableCharactersUITextField.swift; sourceTree = "<group>"; };
+		C94BEBBE1E38909F00381B8C /* Arrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
+		C94BEBC01E38951900381B8C /* MarkerNameLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerNameLabel.swift; sourceTree = "<group>"; };
+		C94BEBC21E3895CF00381B8C /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
+		C94BEBC41E3897E500381B8C /* MarkerUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerUIElement.swift; sourceTree = "<group>"; };
 		C96334301E21B77600583CE1 /* Spool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96334331E21B77600583CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96334381E21B77600583CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,6 +82,7 @@
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
+		C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 		F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFormViewController.swift; sourceTree = "<group>"; };
 		F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
@@ -133,6 +147,21 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		C94BEBBD1E38904B00381B8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C94BEBBB1E38783200381B8C /* AllowableCharactersUITextField.swift */,
+				C94BEBB91E3877E200381B8C /* MaxLengthUITextField.swift */,
+				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
+				C94BEBC41E3897E500381B8C /* MarkerUIElement.swift */,
+				C94BEBC01E38951900381B8C /* MarkerNameLabel.swift */,
+				C94BEBC21E3895CF00381B8C /* Beacon.swift */,
+				C94BEBBE1E38909F00381B8C /* Arrow.swift */,
+				C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C96334271E21B77600583CE1 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +183,7 @@
 		C96334321E21B77600583CE1 /* Spool */ = {
 			isa = PBXGroup;
 			children = (
+				C94BEBBD1E38904B00381B8C /* Views */,
 				F303DCE41E375EE00077F1B4 /* Custom Controllers */,
 				C92C9ED71E35FDAA003047DC /* CoreData */,
 				C96334451E21B79600583CE1 /* Supporting Files */,
@@ -166,7 +196,6 @@
 				C963343A1E21B77600583CE1 /* Assets.xcassets */,
 				C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */,
 				F303DCE51E379C550077F1B4 /* Fonts */,
-				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
 				C9E59A291E2F089300E22DD4 /* ARMath.swift */,
 			);
 			path = Spool;
@@ -309,24 +338,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */,
+				C94BEBBC1E38783200381B8C /* AllowableCharactersUITextField.swift in Sources */,
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
+				C94BEBC11E38951900381B8C /* MarkerNameLabel.swift in Sources */,
 				F303DCF01E37C9280077F1B4 /* TransparentUINavigationController.swift in Sources */,
+				C94BEBC31E3895CF00381B8C /* Beacon.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
 				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
 				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
 				C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */,
 				C92C9ED61E35DBD2003047DC /* Session+CoreDataProperties.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
+				C94BEBBA1E3877E200381B8C /* MaxLengthUITextField.swift in Sources */,
 				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
+				C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */,
 				C92C9EC61E35D204003047DC /* User.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
+				C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
+				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
 				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,
