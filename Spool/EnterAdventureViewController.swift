@@ -56,7 +56,12 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     var adventure: Adventure? {
         didSet {
             if adventure != nil {
-                startDirections()
+                DispatchQueue.main.async { [weak weakself = self] in
+                    weakself?.setupBeacons()
+                    weakself?.setupNameLabels()
+                    weakself?.setupNoteView()
+                    weakself?.startDirections()
+                }
             }
         }
     }
@@ -100,76 +105,116 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private var latestGravity: CMAcceleration? {
         didSet {
-            executeThing()
-            //rotateLabels()
+            moveArrow()
+            moveMarkerElements()
+            showNoteView()
+            //rotateLabel()
         }
     }
     private var latestLocation: CLLocation?
     private var latestHeading: CLLocationDirection?
+
+    let arrow = Arrow()
     
-    let arrow = #imageLiteral(resourceName: "blue-arrow")
-    var arrowView: UIImageView?
-    var subview: UIView?
+    var beacons = [Beacon]()
+    var nameLabels = [MarkerNameLabel]()
+    
+    var markerNoteView = NoteTextView()
+
+    
+    private func setupNoteView() {
+        markerNoteView.setup(note: "", outerFrame: view.frame)
+        markerNoteView.isHidden = true
+        DispatchQueue.main.async { [weak weakself = self] in
+            weakself?.view.insertSubview(weakself!.markerNoteView, at: 7)
+            print("INSERTED")
+        }
+    }
+    
+    private func showNoteView() {
+        if let loc = latestLocation, let adv = adventure, !finished {
+            var looking = true
+            var lookingAt = destinationMarkerIndex
+            while looking && lookingAt >= 0 {
+                let lookingAtMarker = adv.markers[lookingAt]
+                if let range = lookingAtMarker.showDescriptionWithinMeterRange {
+                    if loc.distance(from: CLLocation(latitude: lookingAtMarker.latitude, longitude: lookingAtMarker.longitude)) <= Double(range) {
+                        markerNoteView.setup(note: lookingAtMarker.descriptionText ?? "", outerFrame: view.frame)
+                        markerNoteView.isHidden = false
+                        looking = false
+                    }
+                }
+                lookingAt -= 1
+            }
+            if looking {
+                markerNoteView.isHidden = true
+                print("ARG HIT THIS")
+            }
+        }
+    }
+    
+    private func setupBeacons() {
+        beacons = (adventure?.markers
+            .filter({ $0.showBeaconWithinMeterRange != nil}) ?? [])
+            .map({marker in
+                let beacon = Beacon()
+                beacon.waypoint = marker
+                beacon.setupBeacon(frame: view.frame)
+                beacon.isHidden = true
+                view.insertSubview(beacon, at: 2)
+                return beacon
+            })
+    }
+    
+    private func setupNameLabels() {
+        nameLabels = (adventure?.markers
+            .filter({ $0.showNameWithinMeterRange != nil}) ?? [])
+            .map({marker in
+                let nameLabel = MarkerNameLabel()
+                nameLabel.waypoint = marker
+                nameLabel.setupLabel(outerFrame: view.frame)
+                nameLabel.isHidden = true
+                view.insertSubview(nameLabel, at: 3)
+                return nameLabel
+            })
+    }
+    
+    private func moveMarkerElements() {
+        if let loc = latestLocation {
+            beacons.forEach{ beacon in
+                if let waypoint = beacon.waypoint, let range = beacon.waypoint?.showBeaconWithinMeterRange {
+                    if loc.distance(from: CLLocation(latitude: waypoint.latitude, longitude: waypoint.longitude)) <= Double(range) {
+                    rotateLabel(element: beacon)
+                    } else {
+                        beacon.layer.isHidden = true
+                    }
+                }
+            }
+            nameLabels.forEach{ nameLabel in
+                if let waypoint = nameLabel.waypoint, let range = nameLabel.waypoint?.showNameWithinMeterRange {
+                    if loc.distance(from: CLLocation(latitude: waypoint.coordinate.latitude, longitude: waypoint.coordinate.longitude)) <= Double(range) {
+                        rotateLabel(element: nameLabel)
+                    } else {
+                        nameLabel.isHidden = true
+                    }
+                }
+            }
+        }
+    }
+
     let transformConstant = 1 / 500.0
     let pitchAdjust = M_PI / 9
-    
-    var label: UILabel?
-    
-    var star = #imageLiteral(resourceName: "star")
-    var starView: UIImageView?
-    var starSubview: UIView?
     
     var adventureEndedLabel: UILabel?
     
     private func setupArrow() {
-        arrowView = UIImageView(image: arrow)
-        subview = UIView(frame: view.frame)
-        
-        let imageWidth = subview!.frame.width / 3
-        let imageRatio = imageWidth / arrowView!.frame.width
-        let imageHeight = arrowView!.frame.height * imageRatio
-        
-        arrowView!.frame = CGRect(x: (subview!.frame.width - imageWidth) / 2, y: (subview!.frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
-        
-        
-        
-        subview!.addSubview(arrowView!)
-        subview!.layer.isHidden = true
-        view.insertSubview(subview!, at: 5)
+        arrow.setupArrow(frame: view.frame)
+        arrow.layer.isHidden = true
+        view.insertSubview(arrow, at: 5)
     }
     
     private func removeArrow() {
-        subview?.removeFromSuperview()
-        subview = nil
-    }
-    
-    private func setupLabel() {
-        starView = UIImageView(image: star)
-        starSubview = UIView(frame: view.frame)
-        
-        let imageWidth = subview!.frame.width / 3
-        let imageRatio = imageWidth / starView!.frame.width
-        let imageHeight = starView!.frame.height * imageRatio
-        
-        starView!.frame = CGRect(x: (starSubview!.frame.width - imageWidth) / 2, y: (starSubview!.frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
-        
-        
-        starView?.layer.shouldRasterize = true
-        
-        starSubview!.addSubview(starView!)
-        starSubview?.layer.isHidden = true
-        view.insertSubview(starSubview!, at: 2)
-//        
-//        
-//        
-//        let width = 100.0
-//        let height = 30.0
-//        
-//        label = UILabel(frame: CGRect(x: (Double(view.frame.maxX) - width) / 2, y: 200, width: width, height: height))
-//        label?.backgroundColor = UIColor.black
-//        label?.textColor = UIColor.white
-//        label?.text = "OVER HERE!"
-//        view.insertSubview(label!, at: 2)
+        arrow.removeFromSuperview()
     }
     
     private func setupAdventureEndedLabel() {
@@ -191,33 +236,37 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    private func executeThing() {
-        if motionIsReady {
-            subview?.layer.isHidden = false
-            var transform = CATransform3DIdentity
-            transform.m34 = CGFloat(transformConstant)
-            let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
-            let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
-            let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
-            let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
-            let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
-            arrowView?.layer.transform = transformer
-            //print("OK THEN: yaw: \(result.yaw) pitch: \(result.pitch) roll: \(result.roll)")
+    private func moveArrow() {
+        if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
+            if motionIsReady {
+                arrow.layer.isHidden = false
+                var transform = CATransform3DIdentity
+                transform.m34 = CGFloat(transformConstant)
+                let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+                let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
+                let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
+                let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
+                let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
+                arrow.arrowView.layer.transform = transformer
+                //print("OK THEN: yaw: \(result.yaw) pitch: \(result.pitch) roll: \(result.roll)")
+            }
+        } else {
+            arrow.layer.isHidden = true
         }
     }
     
-    private func rotateLabels() {
-        if motionIsReady {
+    private func rotateLabel(element: MarkerUIElement) {
+        if let waypoint = element.waypoint, motionIsReady {
             var transform = CATransform3DIdentity
             transform.m34 = CGFloat(transformConstant)
-            let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: currentDestinationStep!)
+            let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: waypoint.coordinate)
             if result.zPosition > 0 {
-                starView?.layer.isHidden = false
+                element.layer.isHidden = false
                 let translation3d = CATransform3DMakeTranslation(CGFloat(result.x), CGFloat(result.y), 0)
                 let rotation3d = CATransform3DRotate(transform, CGFloat(result.rotation), 0, 0, 1)
-                starView?.layer.transform = CATransform3DConcat(translation3d, rotation3d)
+                element.layer.transform = CATransform3DConcat(translation3d, rotation3d)
             } else {
-                starView?.layer.isHidden = true
+                element.layer.isHidden = true
             }
         }
     }
@@ -303,7 +352,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private func endAdventure() {
         printToScreen(str: "FINISHED ADVENTURE!")
-        turnOffLocationManager()
+        //turnOffLocationManager()
         removeArrow()
         setupAdventureEndedLabel()
     }
@@ -339,7 +388,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupArrow()
-        //setupLabel()
         instantiateLocationManager()
         startDeviceMotion()
         startCamera()
