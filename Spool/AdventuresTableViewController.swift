@@ -10,6 +10,7 @@ import UIKit
 
 class AdventuresTableViewController: UITableViewController {
     
+    @IBOutlet var adventuresTable: UITableView!
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var adventures: [AdventureHeadline] = [AdventureHeadline]()
@@ -23,6 +24,16 @@ class AdventuresTableViewController: UITableViewController {
     }
     
     var selectedAdventureId: Int?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Style Navbar
+        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
+        
+        // Style table
+        self.adventuresTable.separatorInset = UIEdgeInsets.zero
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

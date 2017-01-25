@@ -44,7 +44,9 @@
 		F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */; };
 		F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */; };
 		F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */; };
-		F303DCF01E37C9280077F1B4 /* TransparentUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */; };
+		F303DCF01E37C9280077F1B4 /* NavigationBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */; };
+		F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C31E3928950022F28C /* RoundedUIButton.swift */; };
+		F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C51E393C080022F28C /* AdventuresNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +89,9 @@
 		F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentUINavigationController.swift; sourceTree = "<group>"; };
+		F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarTransparent.swift; sourceTree = "<group>"; };
+		F33174C31E3928950022F28C /* RoundedUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedUIButton.swift; sourceTree = "<group>"; };
+		F33174C51E393C080022F28C /* AdventuresNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */,
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
 				C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */,
+				F33174C51E393C080022F28C /* AdventuresNavigationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -215,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */,
-				F303DCEF1E37C9280077F1B4 /* TransparentUINavigationController.swift */,
+				F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */,
 			);
 			name = "Custom Controllers";
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 		F303DCEC1E37A8E50077F1B4 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				F33174C31E3928950022F28C /* RoundedUIButton.swift */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -341,7 +347,7 @@
 				C94BEBBC1E38783200381B8C /* AllowableCharactersUITextField.swift in Sources */,
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
 				C94BEBC11E38951900381B8C /* MarkerNameLabel.swift in Sources */,
-				F303DCF01E37C9280077F1B4 /* TransparentUINavigationController.swift in Sources */,
+				F303DCF01E37C9280077F1B4 /* NavigationBarTransparent.swift in Sources */,
 				C94BEBC31E3895CF00381B8C /* Beacon.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
 				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
@@ -354,11 +360,13 @@
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
+				F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */,
 				C92C9EC61E35D204003047DC /* User.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
 				C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */,
+				F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
@@ -496,7 +504,7 @@
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -516,7 +524,7 @@
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
