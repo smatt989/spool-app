@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kzu-uL-gyJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kzu-uL-gyJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,53 +9,61 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Nunito-Regular.ttf">
+            <string>Nunito-Regular</string>
+        </array>
+        <array key="Nunito-SemiBold.ttf">
+            <string>Nunito-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Available Adventures-->
         <scene sceneID="eOX-2i-hW7">
             <objects>
                 <tableViewController id="vLQ-d8-uJS" customClass="AdventuresTableViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nfZ-X0-wCa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="nfZ-X0-wCa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Adventure Headline Cell" id="Jtu-uq-5ZN" customClass="AdventureHeadlineTableViewCell" customModule="Spool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Adventure Headline Cell" rowHeight="90" id="Jtu-uq-5ZN" customClass="AdventureHeadlineTableViewCell" customModule="Spool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jtu-uq-5ZN" id="5dM-rN-qMG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fi6-JE-yCU">
-                                            <rect key="frame" x="8" y="-1.5" width="79" height="45"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHP-1g-wF8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42.5" height="27"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be4-La-XD2">
-                                                    <rect key="frame" x="0.0" y="27" width="79" height="18"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meu-H5-B2Z">
-                                            <rect key="frame" x="345" y="13.5" width="22" height="22"/>
+                                            <rect key="frame" x="345" y="60" width="22" height="22"/>
                                             <connections>
                                                 <action selector="editAdventure:" destination="Jtu-uq-5ZN" eventType="touchUpInside" id="eTC-Hz-uzQ"/>
                                                 <segue destination="toT-bl-NAU" kind="show" identifier="Show Map" id="zGb-d6-jEc"/>
                                             </connections>
                                         </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Fi6-JE-yCU">
+                                            <rect key="frame" x="18" y="21.5" width="76.5" height="47"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHP-1g-wF8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="43.5" height="30.5"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="22"/>
+                                                    <color key="textColor" red="0.40392156862745099" green="0.44705882352941173" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be4-La-XD2">
+                                                    <rect key="frame" x="0.0" y="26.5" width="76.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="15"/>
+                                                    <color key="textColor" red="0.60784313725490191" green="0.66274509803921566" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="Fi6-JE-yCU" secondAttribute="leading" id="Iib-FV-Ebw"/>
                                         <constraint firstItem="Fi6-JE-yCU" firstAttribute="centerY" secondItem="5dM-rN-qMG" secondAttribute="centerY" id="WB9-mg-2Go"/>
                                         <constraint firstItem="meu-H5-B2Z" firstAttribute="trailing" secondItem="5dM-rN-qMG" secondAttribute="trailingMargin" id="g09-DY-hM9"/>
                                         <constraint firstItem="meu-H5-B2Z" firstAttribute="bottom" secondItem="5dM-rN-qMG" secondAttribute="bottomMargin" id="k6c-Aw-Oow"/>
+                                        <constraint firstItem="Fi6-JE-yCU" firstAttribute="leading" secondItem="5dM-rN-qMG" secondAttribute="leadingMargin" constant="10" id="liR-hp-KM6"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -72,6 +80,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Available Adventures" id="vIR-BQ-LPr">
+                        <barButtonItem key="backBarButtonItem" title=" " id="D7M-nW-4Jd"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="NGg-9O-nSJ">
                             <connections>
                                 <segue destination="toT-bl-NAU" kind="show" identifier="New Adventure" id="5Of-q2-Sr1"/>
@@ -83,10 +92,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="adventuresTable" destination="nfZ-X0-wCa" id="iJ0-eT-p40"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3R-81-l14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="582" y="144"/>
+            <point key="canvasLocation" x="581.60000000000002" y="143.47826086956522"/>
         </scene>
         <!--Enter Adventure View Controller-->
         <scene sceneID="UXK-yZ-MFW">
@@ -155,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="3908" y="514.99250374812596"/>
         </scene>
-        <!--Adventure-->
+        <!--Create adventure-->
         <scene sceneID="4r2-mK-Dkh">
             <objects>
-                <viewController title="Adventure" id="toT-bl-NAU" customClass="AdventureEditingViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Create adventure" id="toT-bl-NAU" customClass="AdventureEditingViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fhl-oQ-vsp"/>
                         <viewControllerLayoutGuide type="bottom" id="gAb-st-pHU"/>
@@ -168,25 +180,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-is-VfA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sku-kg-fq7">
-                                <rect key="frame" x="315" y="72" width="44" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Save"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sku-kg-fq7" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
+                                <rect key="frame" x="255" y="597" width="100" height="50"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.24705882352941178" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bMl-Ky-xJX"/>
+                                    <constraint firstAttribute="width" constant="100" id="fKf-RU-91y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="19"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="saveAdventure:" destination="toT-bl-NAU" eventType="touchUpInside" id="VoS-L7-dmM"/>
                                 </connections>
                             </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xK7-cU-LKH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lSn-Ye-70O">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="sUB-Hz-A05"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bfO-is-VfA" firstAttribute="leading" secondItem="H9u-z7-29P" secondAttribute="leading" id="ClN-kY-ADY"/>
-                            <constraint firstItem="bfO-is-VfA" firstAttribute="bottom" secondItem="gAb-st-pHU" secondAttribute="top" id="EmH-qO-e9D"/>
-                            <constraint firstAttribute="trailing" secondItem="bfO-is-VfA" secondAttribute="trailing" id="U3Z-oE-7G6"/>
-                            <constraint firstItem="sku-kg-fq7" firstAttribute="trailing" secondItem="H9u-z7-29P" secondAttribute="trailingMargin" id="gy6-Q3-xIQ"/>
-                            <constraint firstItem="sku-kg-fq7" firstAttribute="top" secondItem="Fhl-oQ-vsp" secondAttribute="bottom" constant="8" symbolic="YES" id="hWv-Mc-qjt"/>
-                            <constraint firstItem="bfO-is-VfA" firstAttribute="top" secondItem="Fhl-oQ-vsp" secondAttribute="bottom" id="ySa-Rs-ttP"/>
+                            <constraint firstItem="bfO-is-VfA" firstAttribute="top" secondItem="H9u-z7-29P" secondAttribute="top" id="FLj-pY-dgn"/>
+                            <constraint firstAttribute="trailing" secondItem="sku-kg-fq7" secondAttribute="trailing" constant="20" id="QDE-bq-z5Z"/>
+                            <constraint firstItem="xK7-cU-LKH" firstAttribute="leading" secondItem="H9u-z7-29P" secondAttribute="leading" id="Ssw-Zw-awU"/>
+                            <constraint firstItem="xK7-cU-LKH" firstAttribute="top" secondItem="H9u-z7-29P" secondAttribute="top" id="T8E-4G-Hdj"/>
+                            <constraint firstAttribute="trailing" secondItem="xK7-cU-LKH" secondAttribute="trailing" id="X2y-p3-SzE"/>
+                            <constraint firstAttribute="trailing" secondItem="bfO-is-VfA" secondAttribute="trailing" id="ZRF-xu-Umj"/>
+                            <constraint firstItem="gAb-st-pHU" firstAttribute="top" secondItem="bfO-is-VfA" secondAttribute="bottom" id="ZaH-Q3-OTv"/>
+                            <constraint firstItem="bfO-is-VfA" firstAttribute="leading" secondItem="H9u-z7-29P" secondAttribute="leading" id="rVY-SG-gT4"/>
+                            <constraint firstItem="gAb-st-pHU" firstAttribute="top" secondItem="sku-kg-fq7" secondAttribute="bottom" constant="20" id="rxq-K8-opx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -200,12 +239,12 @@
             </objects>
             <point key="canvasLocation" x="1856.8" y="-212.74362818590706"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Adventures Navigation Controller-->
         <scene sceneID="ScF-ge-WZv">
             <objects>
-                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Kzu-uL-gyJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Kzu-uL-gyJ" customClass="AdventuresNavigationController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1rA-7E-i5B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1rA-7E-i5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
