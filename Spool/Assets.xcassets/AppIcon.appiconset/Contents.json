@@ -51,7 +51,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "icon-small_360.png",
+      "filename" : "Icon-Small-1.png",
       "scale" : "1x"
     },
     {
@@ -63,13 +63,13 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-Small.png",
+      "filename" : "Icon-29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-Small@2x-1.png",
+      "filename" : "Icon-29@2x.png",
       "scale" : "2x"
     },
     {
@@ -99,7 +99,7 @@
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "icon-small_3x_360.png",
+      "filename" : "Icon-Small@3x-1.png",
       "scale" : "2x"
     }
   ],

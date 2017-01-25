@@ -14,15 +14,14 @@ class TransparentUINavigationController: UINavigationController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.isTranslucent = true
-        self.view.backgroundColor = UIColor.clear
+        navBarTransparent(controller: self)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    public func navBarTransparent (controller: UINavigationController) {
+        controller.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        controller.navigationBar.shadowImage = UIImage()
+        controller.navigationBar.isTranslucent = true
+        controller.view.backgroundColor = UIColor.clear
     }
-
+    
 }

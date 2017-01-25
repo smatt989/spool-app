@@ -57,6 +57,10 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         let press = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(_:)))
         press.delegate = self
         mapView.addGestureRecognizer(press)
+        
+        // Style Navbar
+        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
+        self.navigationController?.navigationBar.backItem?.title = "Back"
     }
     
     @objc private func addAnnotation(_ sender: UILongPressGestureRecognizer){
@@ -201,6 +205,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) { view.isSelected = true }
     
+    // Renders the map route
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.blue
