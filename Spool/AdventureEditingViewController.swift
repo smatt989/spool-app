@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     var adventureId: Int? {
         didSet {
@@ -30,13 +30,61 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
                 weakself?.updateMapUI()            }
         }
     }
+    
+    private var isNewAdventure: Bool {
+        get {
+            return adventureId == nil
+        }
+    }
+    
+    private var locationManager = CLLocationManager()
+    
+    private var currentLocation: CLLocation? {
+        didSet {
+            if let center = currentLocation?.coordinate {
+                panToUserLocation(center: center)
+            }
+        }
+    }
+    
+    private func moveToCurrentLocation() {
+        startLocationManager()
+    }
+    
+    private func startLocationManager() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func stopLocationManager() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            if lastLocation.verticalAccuracy <= 100 && lastLocation.horizontalAccuracy <= 100 {
+                currentLocation = lastLocation
+                stopLocationManager()
+            }
+        }
+    }
 
     
     @IBOutlet weak var mapView: MKMapView!{
         didSet {
             mapView.mapType = .standard
             mapView.delegate = self
+            if adventureId == nil {
+                moveToCurrentLocation()
+            }
         }
+    }
+    
+    private func panToUserLocation(center: CLLocationCoordinate2D) {
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpanMake(0.05, 0.05) )
+            mapView.setRegion(region, animated: true)
     }
     
     private func updateMapUI() {
@@ -104,6 +152,10 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
                 print("HAVEN'T MADE ANYTHING YET")
             }
         }
+    }
+    
+    @IBAction func tapCurrentLocation(_ sender: UIButton) {
+        moveToCurrentLocation()
     }
     
     private func clearWaypoints() {
