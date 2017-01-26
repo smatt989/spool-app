@@ -145,7 +145,6 @@ class Direction: NSObject {
                 
                 for i in 0..<polyline!.pointCount {
                     orderedPoints.append(rootcoordinates[i])
-                    print("\(rootcoordinates[i].latitude), \(rootcoordinates[i].longitude)")
                 }
                 
             }
