@@ -10,6 +10,18 @@ import Foundation
 
 extension User {
     
+    static func parseMany(data: Data) -> [User] {
+        var newUsers = [User]()
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let array = json as? [[String: Any]] {
+            newUsers = array.flatMap{ element in
+                parseUserDict(dict: element)
+            }
+        }
+        return newUsers
+    }
+    
     static func parseUser(data: Data) -> User?{
         if let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] {
             return parseUserDict(dict: json)
@@ -31,6 +43,23 @@ extension UserCreate {
         dict["username"] = username
         dict["email"] = email
         dict["password"] = password
+        return dict
+    }
+}
+
+extension UserConnectionAddRequest {
+    
+    func toJsonDictionary() -> [String: Any] {
+        var dict: [String: Any] = [:]
+        dict["addUserId"] = addUserId
+        return dict
+    }
+}
+
+extension UserConnectionRemoveRequest {
+    func toJsonDictionary() -> [String: Any] {
+        var dict: [String: Any] = [:]
+        dict["removeUserId"] = removeUserId
         return dict
     }
 }
@@ -68,6 +97,56 @@ extension Adventure {
     
 }
 
+extension AdventureShareRequest {
+    
+    func toJsonDictionary() -> [String: Any] {
+        var dict: [String: Any] = [:]
+        dict["receiverUserId"] = self.shareWithUserId
+        dict["adventureId"] = self.adventureId
+        if let n = self.note {
+            dict["note"] = n
+        }
+        return dict
+    }
+}
+
+extension SharedAdventure {
+    
+    static func parse(json: Any) -> SharedAdventure? {
+        if let dictionary = json as? [String: Any] {
+            var adventure: AdventureHeadline?
+            var sender: User?
+            var receiver: User?
+            let note: String? = dictionary["note"] as? String
+            if let adventureJson = dictionary["adventure"] {
+                adventure = AdventureHeadline.parseOneAdventure(adventureJson: adventureJson)
+            }
+            if let senderJson = dictionary["sender"] as? [String: Any] {
+                sender = User.parseUserDict(dict: senderJson)
+            }
+            if let receiverJson = dictionary["receiver"] as? [String: Any] {
+                receiver = User.parseUserDict(dict: receiverJson)
+            }
+            if let adv = adventure, let send = sender, let rec = receiver {
+                return SharedAdventure(adventure: adv, sender: send, receiver: rec, note: note)
+            }
+        }
+        return nil
+    }
+    
+    static func parseMany(data: Data) -> [SharedAdventure] {
+        var newSharedAdventures = [SharedAdventure]()
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let array = json as? [Any] {
+            newSharedAdventures = array.flatMap{ element in
+                parse(json: element)
+            }
+        }
+        return newSharedAdventures
+    }
+}
+
 extension AdventureHeadline {
     
     static func parseAdventures(data: Data) -> [AdventureHeadline] {
@@ -82,7 +161,7 @@ extension AdventureHeadline {
         return newAdventures
     }
     
-    private static func parseOneAdventure(adventureJson: Any) -> AdventureHeadline? {
+    static func parseOneAdventure(adventureJson: Any) -> AdventureHeadline? {
         if let dictionary = adventureJson as? [String: Any] {
             if let title = dictionary["name"] as? String, let id = dictionary["id"] as? Int {
                 let subtitle = dictionary["description"] as? String ?? ""
