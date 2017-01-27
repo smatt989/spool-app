@@ -99,6 +99,92 @@ extension User {
             }
         }.resume()
     }
+    
+    static func search(query: String, success: @escaping ([User]) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.usersSearch+"?query="+query)!)
+        request.httpMethod = "POST"
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                let users = User.parseMany(data: d)
+                success(users)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("WHOOPS")
+            }
+        }
+    }
+    
+    static func addedUsers(success: @escaping ([User]) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.addedUsers)!)
+        request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, err in
+            if let d = data {
+                let users = User.parseMany(data: d)
+                success(users)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("BRARRR")
+            }
+        }
+    }
+    
+    static func awaitingUsers(success: @escaping ([User]) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.awaitingConnections)!)
+        request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                let users = User.parseMany(data: d)
+                success(users)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("MEEEEEEERRRRK")
+            }
+        }
+    }
+    
+    static func addUser(addUserRequest: UserConnectionAddRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.addUserConnection)!)
+        request.httpMethod = "POST"
+        request.authenticate()
+        request.jsonRequest()
+        request.httpBody = try! JSONSerialization.data(withJSONObject: addUserRequest.toJsonDictionary(), options: [])
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if data != nil {
+                success()
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("MOOSH")
+            }
+        }
+    }
+    
+    static func removeUser(removeUserRequest: UserConnectionRemoveRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.removeUserConnection)!)
+        request.httpMethod = "POST"
+        request.authenticate()
+        request.jsonRequest()
+        request.httpBody = try! JSONSerialization.data(withJSONObject: removeUserRequest.toJsonDictionary(), options: [])
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if data != nil {
+                success()
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("MOOSH")
+            }
+        }
+    }
 }
 
 extension Adventure {
@@ -114,6 +200,14 @@ extension Adventure {
         static let fetchAdventure = domain+"/adventures/"
         static let saveAdventure = domain+"/adventures/save"
         static let fetchAvailableAdventures = domain+"/adventures"
+        static let usersSearch = domain+"/users/search"
+        static let addUserConnection = domain+"/users/connections/create"
+        static let removeUserConnection = domain+"/users/connections/delete"
+        static let addedUsers = domain+"/users/connections/added"
+        static let awaitingConnections = domain+"/users/connectoins/awaiting"
+        static let shareAdventure = domain+"/adventures/share"
+        static let sharedAdventures = domain+"/adventures/shared"
+        static let receivedAdventures = domain+"/adventures/received"
     }
     
     static func fetchAdventure(id: Int, callback: @escaping (Adventure) -> Void) {
@@ -132,8 +226,7 @@ extension Adventure {
     static func postAdventure(adv: Adventure, callback: @escaping (Adventure) -> Void) {
         var request = URLRequest(url: URL(string: Urls.saveAdventure)!)
         request.httpMethod = "POST"
-        request.addValue("application/json",forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json",forHTTPHeaderField: "Accept")
+        request.jsonRequest()
         request.authenticate()
         request.httpBody = try! JSONSerialization.data(withJSONObject: adv.toJsonDictionary(), options: [])
         let session = URLSession.shared
@@ -143,7 +236,63 @@ extension Adventure {
             } else if err != nil {
                 print("YIKES")
             }
-            }.resume()
+        }.resume()
+    }
+}
+
+extension AdventureShareRequest {
+    static func share(_ shareRequest: AdventureShareRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.shareAdventure)!)
+        request.httpMethod = "POST"
+        request.authenticate()
+        request.jsonRequest()
+        request.httpBody = try! JSONSerialization.data(withJSONObject: shareRequest.toJsonDictionary(), options: [])
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, err in
+            if data != nil {
+                success()
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("bad")
+            }
+        }.resume()        
+    }
+}
+
+extension SharedAdventure {
+    static func adventuresShared(success: @escaping ([SharedAdventure]) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.sharedAdventures)!)
+        request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                let shared = self.parseMany(data: d)
+                success(shared)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("huh")
+            }
+        }
+    }
+    
+    static func adventuresReceived(success: @escaping ([SharedAdventure]) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.receivedAdventures)!)
+        request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                let shared = self.parseMany(data: d)
+                success(shared)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("huh")
+            }
+        }
     }
 }
 
@@ -161,6 +310,13 @@ extension AdventureHeadline {
                 print("BIG PROBLEMO")
             }
             }.resume()
+    }
+}
+
+extension URLRequest {
+    mutating func jsonRequest() {
+        self.addValue("application/json",forHTTPHeaderField: "Content-Type")
+        self.addValue("application/json",forHTTPHeaderField: "Accept")
     }
 }
 
