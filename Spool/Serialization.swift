@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension User {
     
@@ -149,18 +150,6 @@ extension SharedAdventure {
 
 extension AdventureHeadline {
     
-    static func parseAdventures(data: Data) -> [AdventureHeadline] {
-        var newAdventures = [AdventureHeadline]()
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
-        if let array = json as? [Any]{
-            newAdventures = array.flatMap {element in
-                parseOneAdventure(adventureJson: element)
-            }
-        }
-        return newAdventures
-    }
-    
     static func parseOneAdventure(adventureJson: Any) -> AdventureHeadline? {
         if let dictionary = adventureJson as? [String: Any] {
             if let title = dictionary["name"] as? String, let id = dictionary["id"] as? Int {
@@ -170,6 +159,77 @@ extension AdventureHeadline {
             }
         }
         return nil
+    }
+}
+
+extension AdventureHeadlineDetail {
+    
+    static func parseAdventures(data: Data, location: CLLocationCoordinate2D) -> [AdventureHeadlineDetail] {
+        var newAdventures = [AdventureHeadlineDetail]()
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let array = json as? [[String: Any]] {
+            newAdventures = array.map { element in
+                parseOneAdventure(json: element, location: location)
+            }
+        }
+        return newAdventures
+    }
+    
+    static func parseOneAdventure(json: [String: Any], location: CLLocationCoordinate2D) -> AdventureHeadlineDetail {
+        let title = json["name"] as! String
+        let id = json["id"] as! Int
+        let subtitle = json["description"] as? String
+        let creator = User.parseUserDict(dict: json["creator"] as! [String: Any])
+        let started = json["started"] as! Bool
+        let finished = json["finished"] as! Bool
+        var lastUpdate: NSDate?
+        if let millis = json["lastUpdate"] as? Int {
+            lastUpdate = NSDate(timeIntervalSince1970: TimeInterval(millis) / 1000)
+        }
+        let startCoordinate = Marker.parseCoordinate(json: json["startCoordinate"] as! [String: Any])
+        let sharers = (json["sharers"] as! [[String: Any]]).map{element in User.parseUserDict(dict: element)}
+        return AdventureHeadlineDetail(
+            title: title,
+            subtitle: subtitle,
+            creator: creator,
+            id: id,
+            sharers: sharers,
+            started: started,
+            finished: finished,
+            lastUpdate: lastUpdate,
+            distance: CLLocation(latitude: startCoordinate.latitude, longitude: startCoordinate.longitude).distance(from: CLLocation(latitude: location.latitude, longitude: location.longitude))
+        )
+    }
+}
+
+extension AdventureProgress {
+    
+    func toJsonDictionary() -> [String: Any] {
+        var dict: [String: Any] = [:]
+        dict["finished"] = finished
+        dict["step"] = step
+        return dict
+    }
+    
+    static func parse(data: Data) -> AdventureProgress? {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] {
+            return AdventureProgress.parseJsonDictionary(dict: json)
+        }
+        return nil
+    }
+    
+    static func parseJsonDictionary(dict: [String: Any]) -> AdventureProgress {
+        let finished = dict["finished"] as! Bool
+        let step = dict["step"] as! Int
+        let adventureId = dict["adventureId"] as! Int
+        let updated = dict["updatedAt"] as! Int
+        return AdventureProgress(
+            adventureId: adventureId,
+            step: step,
+            finished: finished,
+            updated: NSDate(timeIntervalSince1970: TimeInterval(updated) / 1000)
+        )
     }
 }
 
@@ -202,9 +262,9 @@ extension Marker {
         if let dictionary = json as? [String: Any] {
             let marker = Marker()
             marker.id = dictionary["id"] as? Int
-            var location = dictionary["latlng"] as! [String: Double]
-            marker.latitude = location["lat"]!
-            marker.longitude = location["lng"]!
+            let location = parseCoordinate(json: dictionary["latlng"] as! [String: Double])
+            marker.latitude = location.latitude
+            marker.longitude = location.longitude
             marker.title = dictionary["title"] as? String ?? "no name"
             marker.descriptionText = dictionary["description"] as? String
             marker.showDirections = dictionary["showDirections"] as? Bool ?? true
@@ -214,5 +274,11 @@ extension Marker {
             return marker
         }
         return nil
+    }
+    
+    static func parseCoordinate(json: [String: Any]) -> CLLocationCoordinate2D {
+        let latitude = json["lat"] as! Double
+        let longitude = json["lng"] as! Double
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }

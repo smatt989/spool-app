@@ -385,6 +385,10 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        beginAdventure()
+    }
+    
+    private func beginAdventure() {
         setupArrow()
         instantiateLocationManager()
         startDeviceMotion()

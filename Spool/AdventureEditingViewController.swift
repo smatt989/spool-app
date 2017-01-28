@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
+class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     var adventureId: Int? {
         didSet {
@@ -37,40 +37,12 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
     }
     
-    private var locationManager = CLLocationManager()
-    
-    private var currentLocation: CLLocation? {
-        didSet {
-            if let center = currentLocation?.coordinate {
-                panToUserLocation(center: center)
-            }
-        }
-    }
+    private var locationFinder: LocationFinder?
     
     private func moveToCurrentLocation() {
-        startLocationManager()
+        locationFinder = LocationFinder(callback: panToUserLocation)
+        locationFinder!.findLocation()
     }
-    
-    private func startLocationManager() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
-    private func stopLocationManager() {
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let lastLocation = locations.last {
-            if lastLocation.verticalAccuracy <= 100 && lastLocation.horizontalAccuracy <= 100 {
-                currentLocation = lastLocation
-                stopLocationManager()
-            }
-        }
-    }
-
     
     @IBOutlet weak var mapView: MKMapView!{
         didSet {
@@ -82,8 +54,8 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
     }
     
-    private func panToUserLocation(center: CLLocationCoordinate2D) {
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpanMake(0.05, 0.05) )
+    private func panToUserLocation(center: CLLocation) {
+            let region = MKCoordinateRegion(center: center.coordinate, span: MKCoordinateSpanMake(0.05, 0.05) )
             mapView.setRegion(region, animated: true)
     }
     

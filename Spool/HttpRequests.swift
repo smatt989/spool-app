@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 extension User {
     
@@ -199,15 +200,17 @@ extension Adventure {
         static let logout = domain+"/sessions/logout"
         static let fetchAdventure = domain+"/adventures/"
         static let saveAdventure = domain+"/adventures/save"
-        static let fetchAvailableAdventures = domain+"/adventures"
+        static let fetchDetailedAvailableAdventures = domain+"/users/adventures"
         static let usersSearch = domain+"/users/search"
         static let addUserConnection = domain+"/users/connections/create"
         static let removeUserConnection = domain+"/users/connections/delete"
         static let addedUsers = domain+"/users/connections/added"
         static let awaitingConnections = domain+"/users/connectoins/awaiting"
-        static let shareAdventure = domain+"/adventures/share"
+        static let shareAdventures = domain+"/adventures/share"
         static let sharedAdventures = domain+"/adventures/shared"
         static let receivedAdventures = domain+"/adventures/received"
+        static let createAdventureProgress = domain+"/adventures/"
+        static let getCurrentProgress = domain+"/adventures/"
     }
     
     static func fetchAdventure(id: Int, callback: @escaping (Adventure) -> Void) {
@@ -241,12 +244,12 @@ extension Adventure {
 }
 
 extension AdventureShareRequest {
-    static func share(_ shareRequest: AdventureShareRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
-        var request = URLRequest(url: URL(string: Adventure.Urls.shareAdventure)!)
+    static func shareMany(_ shareRequests: [AdventureShareRequest], success: @escaping() -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.shareAdventures)!)
         request.httpMethod = "POST"
         request.authenticate()
         request.jsonRequest()
-        request.httpBody = try! JSONSerialization.data(withJSONObject: shareRequest.toJsonDictionary(), options: [])
+        request.httpBody = try! JSONSerialization.data(withJSONObject: shareRequests.map{$0.toJsonDictionary()}, options: [])
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, err in
             if data != nil {
@@ -256,7 +259,7 @@ extension AdventureShareRequest {
             } else {
                 print("bad")
             }
-        }.resume()        
+            }.resume()
     }
 }
 
@@ -296,20 +299,59 @@ extension SharedAdventure {
     }
 }
 
-extension AdventureHeadline {
+extension AdventureProgress {
     
-    static func fetchAdventures(callback: @escaping ([AdventureHeadline]) -> Void){
-        var request = URLRequest(url: URL(string: Adventure.Urls.fetchAvailableAdventures)!)
+    static func create(_ update: AdventureProgress, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.createAdventureProgress+String(update.adventureId)+"/progress/create")!)
+        request.httpMethod = "POST"
+        request.authenticate()
+        request.jsonRequest()
+        request.httpBody = try! JSONSerialization.data(withJSONObject: update.toJsonDictionary(), options: [])
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, err in
+            if data != nil {
+                success()
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("BLOOOOP")
+            }
+        }
+    }
+    
+    static func get(adventureId: Int, success: @escaping (AdventureProgress) -> Void, failure: @escaping (Error) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.getCurrentProgress+String(adventureId)+"/progress/current")!)
         request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, err in
+            if let d = data, let progress = AdventureProgress.parse(data: d) {
+                success(progress)
+            } else if err != nil {
+                failure(err!)
+            } else {
+                print("ALL EFFED")
+            }
+        }
+    }
+}
+
+extension AdventureHeadlineDetail {
+    
+    static func fetchAdventures(location: CLLocationCoordinate2D, callback: @escaping ([AdventureHeadlineDetail]) -> Void) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.fetchDetailedAvailableAdventures)!)
+        request.httpMethod = "GET"
+        request.authenticate()
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, err in
             if let d = data {
-                let advs = self.parseAdventures(data: d)
+                let advs = self.parseAdventures(data: d, location: location)
+                print("THISMANY OF THEM \(advs.count)")
                 callback(advs)
             } else if err != nil {
                 print("BIG PROBLEMO")
             }
-            }.resume()
+        }.resume()
     }
 }
 

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AdventuresTableViewController: UITableViewController {
     
     @IBOutlet var adventuresTable: UITableView!
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    var adventures: [AdventureHeadline] = [AdventureHeadline]()
+    var adventures: [AdventureHeadlineDetail] = [AdventureHeadlineDetail]()
         {
         didSet {
             DispatchQueue.main.async { [weak weakself = self] in
@@ -35,9 +36,20 @@ class AdventuresTableViewController: UITableViewController {
         self.adventuresTable.separatorInset = UIEdgeInsets.zero
     }
     
+    private var locationFinder: LocationFinder?
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AdventureHeadline.fetchAdventures{ [weak weakself = self] advs in
+        loadTable()
+    }
+    
+    private func loadTable() {
+        locationFinder = LocationFinder(callback: fetchAdventuresPlease)
+        locationFinder!.findLocation()
+    }
+    
+    private func fetchAdventuresPlease(location: CLLocation) -> Void {
+        AdventureHeadlineDetail.fetchAdventures(location: location.coordinate){ [weak weakself = self] advs in
             weakself?.adventures = advs
         }
     }
@@ -54,7 +66,7 @@ class AdventuresTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.adventureHeadlineCell, for: indexPath) as! AdventureHeadlineTableViewCell
         let adventure = adventures[indexPath.row]
         var descriptionText = ""
-        if adventure.subtitle != "" {
+        if adventure.subtitle != nil && adventure.subtitle != "" {
             descriptionText = "\(adventure.subtitle)\nPosted by: \(adventure.creator.username)"
         } else {
             descriptionText = "Posted by: \(adventure.creator.username)"
