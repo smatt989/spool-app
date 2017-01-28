@@ -38,6 +38,9 @@
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
 		C9B961831E3AE624009DFE7E /* AdventureShareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961821E3AE624009DFE7E /* AdventureShareRequest.swift */; };
 		C9B961851E3AF2AF009DFE7E /* UserConnectionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961841E3AF2AF009DFE7E /* UserConnectionRequest.swift */; };
+		C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961861E3C1834009DFE7E /* AdventureProgress.swift */; };
+		C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */; };
+		C9B9618B1E3C3858009DFE7E /* LocationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
@@ -85,6 +88,9 @@
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
 		C9B961821E3AE624009DFE7E /* AdventureShareRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureShareRequest.swift; sourceTree = "<group>"; };
 		C9B961841E3AF2AF009DFE7E /* UserConnectionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserConnectionRequest.swift; sourceTree = "<group>"; };
+		C9B961861E3C1834009DFE7E /* AdventureProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureProgress.swift; sourceTree = "<group>"; };
+		C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineDetail.swift; sourceTree = "<group>"; };
+		C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFinder.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 				C92C9EC51E35D204003047DC /* User.swift */,
 				C9B961821E3AE624009DFE7E /* AdventureShareRequest.swift */,
 				C9B961841E3AF2AF009DFE7E /* UserConnectionRequest.swift */,
+				C9B961861E3C1834009DFE7E /* AdventureProgress.swift */,
+				C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -154,6 +162,7 @@
 				C996D6D01E27FFE9003E1F36 /* Serialization.swift */,
 				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
 				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
+				C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -368,12 +377,15 @@
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
+				C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */,
 				F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */,
 				C92C9EC61E35D204003047DC /* User.swift in Sources */,
+				C9B9618B1E3C3858009DFE7E /* LocationFinder.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
 				C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */,
+				C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */,
 				F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
