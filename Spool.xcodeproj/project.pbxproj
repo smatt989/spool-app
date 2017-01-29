@@ -41,6 +41,7 @@
 		C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961861E3C1834009DFE7E /* AdventureProgress.swift */; };
 		C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */; };
 		C9B9618B1E3C3858009DFE7E /* LocationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */; };
+		C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
@@ -91,6 +92,7 @@
 		C9B961861E3C1834009DFE7E /* AdventureProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureProgress.swift; sourceTree = "<group>"; };
 		C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineDetail.swift; sourceTree = "<group>"; };
 		C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFinder.swift; sourceTree = "<group>"; };
+		C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureDetailControllerViewController.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
 				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
 				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
+				C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */,
 				C92C9ED81E367599003047DC /* LoginViewController.swift */,
 				C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */,
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
@@ -375,6 +378,7 @@
 				C94BEBBA1E3877E200381B8C /* MaxLengthUITextField.swift in Sources */,
 				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
 				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
+				C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
 				C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */,

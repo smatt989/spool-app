@@ -15,7 +15,12 @@ struct Identifiers {
     static let newAdventureSegue = "New Adventure"
     static let editMarkerSegue = "Edit Marker"
     static let editAdventureDetails = "Edit Adventure Details"
-    static let enterAdventure = "Enter Adventure"
+    //static let enterAdventure = "Enter Adventure"
+    
+    static let adventureDetailSegue = "Adventure Detail Segue"
+    static let startAdventureSegue = "Start Adventure Segue"
+    static let continueAdventureSeguge = "Continue Adventure Segue"
+    
     static let debugLog = "Debug Log"
     static let signUp = "Sign Up"
     static let navigationController = "NavigationController"

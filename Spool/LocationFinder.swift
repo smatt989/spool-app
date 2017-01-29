@@ -26,23 +26,21 @@ class LocationFinder: NSObject, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
     
-    private var currentLocation: CLLocation? {
-        didSet {
-            if currentLocation != nil {
-                callback(currentLocation!)
-            }
-        }
-    }
-    
     private func stopLocationManager() {
         locationManager.stopUpdatingLocation()
     }
     
+    private var calledBack = false
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lastLocation = locations.last {
             if lastLocation.verticalAccuracy <= 100 && lastLocation.horizontalAccuracy <= 100 {
-                currentLocation = lastLocation
                 stopLocationManager()
+                print("hitting this")
+                if !calledBack {
+                    callback(lastLocation)
+                    calledBack = true
+                }
             }
         }
     }

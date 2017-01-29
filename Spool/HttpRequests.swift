@@ -36,7 +36,7 @@ extension User {
                     failure(err!)
                 }
             }
-            }.resume()
+        }.resume()
     }
     
     static func checkSession(managedObjectContext: NSManagedObjectContext, success: @escaping (User) -> Void, failure: @escaping (Error) -> Void) {
@@ -114,7 +114,7 @@ extension User {
             } else {
                 print("WHOOPS")
             }
-        }
+        }.resume()
     }
     
     static func addedUsers(success: @escaping ([User]) -> Void, failure: @escaping (Error) -> Void) {
@@ -131,7 +131,7 @@ extension User {
             } else {
                 print("BRARRR")
             }
-        }
+        }.resume()
     }
     
     static func awaitingUsers(success: @escaping ([User]) -> Void, failure: @escaping (Error) -> Void) {
@@ -148,7 +148,7 @@ extension User {
             } else {
                 print("MEEEEEEERRRRK")
             }
-        }
+        }.resume()
     }
     
     static func addUser(addUserRequest: UserConnectionAddRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
@@ -166,7 +166,7 @@ extension User {
             } else {
                 print("MOOSH")
             }
-        }
+        }.resume()
     }
     
     static func removeUser(removeUserRequest: UserConnectionRemoveRequest, success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
@@ -184,7 +184,7 @@ extension User {
             } else {
                 print("MOOSH")
             }
-        }
+        }.resume()
     }
 }
 
@@ -201,11 +201,12 @@ extension Adventure {
         static let fetchAdventure = domain+"/adventures/"
         static let saveAdventure = domain+"/adventures/save"
         static let fetchDetailedAvailableAdventures = domain+"/users/adventures"
+        static let fetchOneDetailedAdventure = domain+"/users/adventures/"
         static let usersSearch = domain+"/users/search"
         static let addUserConnection = domain+"/users/connections/create"
         static let removeUserConnection = domain+"/users/connections/delete"
         static let addedUsers = domain+"/users/connections/added"
-        static let awaitingConnections = domain+"/users/connectoins/awaiting"
+        static let awaitingConnections = domain+"/users/connections/awaiting"
         static let shareAdventures = domain+"/adventures/share"
         static let sharedAdventures = domain+"/adventures/shared"
         static let receivedAdventures = domain+"/adventures/received"
@@ -223,7 +224,7 @@ extension Adventure {
             } else if err != nil {
                 print("BIG PROBLEMO")
             }
-            }.resume()
+        }.resume()
     }
     
     static func postAdventure(adv: Adventure, callback: @escaping (Adventure) -> Void) {
@@ -259,7 +260,7 @@ extension AdventureShareRequest {
             } else {
                 print("bad")
             }
-            }.resume()
+        }.resume()
     }
 }
 
@@ -278,7 +279,7 @@ extension SharedAdventure {
             } else {
                 print("huh")
             }
-        }
+        }.resume()
     }
     
     static func adventuresReceived(success: @escaping ([SharedAdventure]) -> Void, failure: @escaping (Error) -> Void) {
@@ -295,7 +296,7 @@ extension SharedAdventure {
             } else {
                 print("huh")
             }
-        }
+        }.resume()
     }
 }
 
@@ -316,7 +317,7 @@ extension AdventureProgress {
             } else {
                 print("BLOOOOP")
             }
-        }
+        }.resume()
     }
     
     static func get(adventureId: Int, success: @escaping (AdventureProgress) -> Void, failure: @escaping (Error) -> Void) {
@@ -332,7 +333,7 @@ extension AdventureProgress {
             } else {
                 print("ALL EFFED")
             }
-        }
+        }.resume()
     }
 }
 
@@ -350,6 +351,23 @@ extension AdventureHeadlineDetail {
                 callback(advs)
             } else if err != nil {
                 print("BIG PROBLEMO")
+            }
+        }.resume()
+    }
+    
+    static func fetchOneAdventure(adventureId: Int, location: CLLocationCoordinate2D, callback: @escaping (AdventureHeadlineDetail) -> Void ) {
+        var request = URLRequest(url: URL(string: Adventure.Urls.fetchOneDetailedAdventure+String(adventureId))!)
+        request.httpMethod = "GET"
+        request.authenticate()
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                let adv = self.parseOneAdventureData(data: d, location: location)
+                callback(adv)
+            } else if err != nil {
+                print("ERROR")
+            } else {
+                print("WAWAWA")
             }
         }.resume()
     }
