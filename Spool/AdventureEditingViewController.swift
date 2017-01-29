@@ -77,10 +77,13 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         let press = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(_:)))
         press.delegate = self
         mapView.addGestureRecognizer(press)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // Style Navbar
         TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
-        self.navigationController?.navigationBar.backItem?.title = "Back"
     }
     
     @objc private func addAnnotation(_ sender: UILongPressGestureRecognizer){

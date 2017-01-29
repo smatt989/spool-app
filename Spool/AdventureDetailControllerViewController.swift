@@ -21,6 +21,9 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         if adventureId != nil {
             setupLocationFinder()
         }
+        
+        // Transparent Navigation
+        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
     }
     
     private func setupLocationFinder() {
@@ -63,6 +66,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         createdByLabelPrepend.isHidden = true
         sharedByLabel.isHidden = true
         sharedByLabelPrepend.isHidden = true
+        sharedByStack.isHidden = true
         distanceAwayLabel.isHidden = true
         progressLabel.isHidden = true
         startAdventureButton.isHidden = true
@@ -90,16 +94,18 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         if adventure.sharers.count > 0 {
             sharedByLabel.text = (adventure.sharers.map{$0.username}).joined(separator: ", ")
             
+            sharedByStack.isHidden = false
             sharedByLabel.isHidden = false
             sharedByLabelPrepend.isHidden = false
         } else {
+            sharedByStack.isHidden = true
             sharedByLabel.isHidden = true
             sharedByLabelPrepend.isHidden = true
         }
     }
     
     private func updateDistanceAway(adventure: AdventureHeadlineDetail) {
-        distanceAwayLabel.text = String(Int(round(adventure.distance / 10) * 10)) + " meters away"
+        distanceAwayLabel.text = String(Int(round(adventure.distance / 10) * 10)) + "m away from you"
         
         distanceAwayLabel.isHidden = false
     }
@@ -135,6 +141,8 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     @IBOutlet weak var sharedByLabel: UILabel!
     @IBOutlet weak var distanceAwayLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    
+    @IBOutlet weak var sharedByStack: UIStackView!
     
     @IBOutlet weak var createdByLabelPrepend: UILabel!
     @IBOutlet weak var sharedByLabelPrepend: UILabel!

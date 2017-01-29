@@ -14,11 +14,12 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
-    
-    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet var creatorLabel: UILabel!
+    @IBOutlet var toLabel: UILabel!
     @IBOutlet weak var sharedByLabelPrepend: UILabel!
     @IBOutlet weak var sharedByLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     
     var adventureHeadlineDetail: AdventureHeadlineDetail? {
@@ -32,6 +33,7 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
             titleLabel.text = adv.title
             descriptionLabel.text = adv.subtitle
             distanceLabel.text = String(Int(round(adv.distance / 10) * 10)) + "m away"
+            creatorLabel.text = adv.creator.username
             setupProgress()
             setupSharedBy()
             showEditButton()
@@ -54,6 +56,7 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
         } else {
             sharedByLabel.isHidden = true
             sharedByLabelPrepend.isHidden = true
+            toLabel.isHidden = true
         }
     }
     
