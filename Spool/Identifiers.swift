@@ -21,6 +21,9 @@ struct Identifiers {
     static let startAdventureSegue = "Start Adventure Segue"
     static let continueAdventureSeguge = "Continue Adventure Segue"
     
+    static let adventureScreenShareAdventure = "Adventure Screen Share"
+    static let shareAdventureCell = "Share Adventure Cell"
+    
     static let debugLog = "Debug Log"
     static let signUp = "Sign Up"
     static let navigationController = "NavigationController"

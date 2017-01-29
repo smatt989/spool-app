@@ -24,8 +24,6 @@ class AdventuresTableViewController: UITableViewController {
         }
     }
     
-    var selectedAdventureId: Int?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,28 +63,15 @@ class AdventuresTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.adventureHeadlineCell, for: indexPath) as! AdventureHeadlineTableViewCell
         let adventure = adventures[indexPath.row]
-        var descriptionText = ""
-        if adventure.subtitle != nil && adventure.subtitle != "" {
-            descriptionText = "\(adventure.subtitle)\nPosted by: \(adventure.creator.username)"
-        } else {
-            descriptionText = "Posted by: \(adventure.creator.username)"
-        }
         
-        cell.titleLabel?.text = adventure.title
-        cell.descriptionLabel?.text = descriptionText
-        cell.adventureId = adventure.id
-        cell.creator = adventure.creator
+        cell.adventureHeadlineDetail = adventure
         return cell
-    }
- 
-    private struct Urls {
-        static let availableAdventures = URL(string: domain+"/adventures")!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.showMapSegue {
             if let viewController = segue.destination as? AdventureEditingViewController, let button = sender as? UIButton {
-                viewController.adventureId = (button.superview!.superview! as! AdventureHeadlineTableViewCell).adventureId
+                viewController.adventureId = (button.superview!.superview! as! AdventureHeadlineTableViewCell).adventureHeadlineDetail?.id
             }
         } else if segue.identifier == Identifiers.newAdventureSegue {
             if let viewController = segue.destination as? AdventureEditingViewController {
@@ -94,7 +79,9 @@ class AdventuresTableViewController: UITableViewController {
             }
         } else if segue.identifier == Identifiers.adventureDetailSegue {
             if let viewController = segue.destination as? AdventureDetailControllerViewController, let cell = sender as? AdventureHeadlineTableViewCell {
-                viewController.adventureId = cell.adventureId
+                viewController.adventureId = cell.adventureHeadlineDetail?.id
+                viewController.adventureHeadline = cell.adventureHeadlineDetail
+                //viewController.adventureHeadline = cell.adv
             }
         }
     }
