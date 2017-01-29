@@ -15,6 +15,10 @@ import AVFoundation
 
 class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate{
 
+    var initialStepIndex = 0
+    
+    var continueAdventure = false
+    
     private var captureSession: AVCaptureSession?
     
     private func startCamera() {
@@ -39,28 +43,32 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    var adventureId: Int? {
-        didSet {
-            if let id = adventureId {
-                Adventure.fetchAdventure(id: id) { adv in
-                    self.adventure = adv
-                }
-            } else {
-                adventure = nil
+        if let id = adventureId {
+            Adventure.fetchAdventure(id: id) { [weak weakself = self] adv in
+                weakself?.adventure = adv
             }
         }
     }
+    
+    var adventureId: Int?
     
     var adventure: Adventure? {
         didSet {
             if adventure != nil {
                 DispatchQueue.main.async { [weak weakself = self] in
-                    weakself?.setupBeacons()
-                    weakself?.setupNameLabels()
-                    weakself?.setupNoteView()
-                    weakself?.startDirections()
+                    weakself!.setupBeacons()
+                    weakself!.setupNameLabels()
+                    weakself!.setupNoteView()
+                    if weakself!.continueAdventure {
+                        AdventureProgress.get(adventureId: weakself!.adventureId!, success: { [weak weakweakself = self] in
+                            weakweakself!.initialStepIndex = $0.step
+                            weakweakself!.startDirections()
+                            }, failure: {_ in 
+                                print("SOMETHING BAD HAPPENED")
+                        })
+                    } else {
+                        weakself?.startDirections()
+                    }
                 }
             }
         }
@@ -127,7 +135,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         markerNoteView.isHidden = true
         DispatchQueue.main.async { [weak weakself = self] in
             weakself?.view.insertSubview(weakself!.markerNoteView, at: 7)
-            print("INSERTED")
         }
     }
     
@@ -359,6 +366,11 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         destinationMarkerIndex += 1
     }
     
+    private func updateProgress(isFinished: Bool) {
+        let progress = AdventureProgress(adventureId: adventureId!, step: destinationMarkerIndex, finished: isFinished, updated: NSDate())
+        AdventureProgress.create(progress, success: {}, failure: {_ in print("Did not update")})
+    }
+    
     private func refreshMarker() {
         printToScreen(str: "REFRESHING")
         updateCurrentDestination()
@@ -376,11 +388,12 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         } else {
             endAdventure()
         }
+        updateProgress(isFinished: finished)
     }
     
     private func startDirections() {
         printToScreen(str: "STARTING DIRECTIONS")
-        destinationMarkerIndex = 0
+        destinationMarkerIndex = initialStepIndex
     }
     
     override func viewDidAppear(_ animated: Bool) {

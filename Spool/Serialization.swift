@@ -176,6 +176,11 @@ extension AdventureHeadlineDetail {
         return newAdventures
     }
     
+    static func parseOneAdventureData(data: Data, location: CLLocationCoordinate2D) -> AdventureHeadlineDetail {
+        let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+        return parseOneAdventure(json: json, location: location)
+    }
+    
     static func parseOneAdventure(json: [String: Any], location: CLLocationCoordinate2D) -> AdventureHeadlineDetail {
         let title = json["name"] as! String
         let id = json["id"] as! Int

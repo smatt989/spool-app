@@ -70,7 +70,7 @@
                                     <outlet property="descriptionLabel" destination="be4-La-XD2" id="gdl-t6-Olz"/>
                                     <outlet property="editButton" destination="meu-H5-B2Z" id="nX6-HV-XSn"/>
                                     <outlet property="titleLabel" destination="BHP-1g-wF8" id="89G-l4-OkZ"/>
-                                    <segue destination="NMs-db-Lcf" kind="show" identifier="Enter Adventure" id="Ght-Mj-9gm"/>
+                                    <segue destination="sTy-Cf-2P3" kind="show" identifier="Adventure Detail Segue" id="FWf-U5-1yd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -99,6 +99,118 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3R-81-l14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="581.60000000000002" y="143.47826086956522"/>
+        </scene>
+        <!--Adventure Detail Controller View Controller-->
+        <scene sceneID="Z2r-Mr-GT5">
+            <objects>
+                <viewController id="sTy-Cf-2P3" customClass="AdventureDetailControllerViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5qf-cD-nkj"/>
+                        <viewControllerLayoutGuide type="bottom" id="XbI-xa-sM5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NQd-l0-zR0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elo-uL-SlX">
+                                <rect key="frame" x="125" y="484" width="124" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <segue destination="NMs-db-Lcf" kind="show" identifier="Continue Adventure Segue" id="f1Z-JA-53F"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mg-ZV-DgR">
+                                <rect key="frame" x="125" y="559" width="124" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <segue destination="NMs-db-Lcf" kind="show" identifier="Start Adventure Segue" id="wUH-Br-Cw8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xl-zA-f3m">
+                                <rect key="frame" x="235" y="47" width="124" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Share"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFp-fw-3q7">
+                                <rect key="frame" x="28" y="114" width="80" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXw-N6-Kee">
+                                <rect key="frame" x="28" y="167" width="134" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzF-lL-IUt">
+                                <rect key="frame" x="28" y="323" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Created by " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuR-nj-woL">
+                                <rect key="frame" x="28" y="218" width="89" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shared by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-d7-nEn">
+                                <rect key="frame" x="29" y="272" width="78" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5U-wu-L15">
+                                <rect key="frame" x="28" y="373" width="114" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Created By Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbf-ad-LXL">
+                                <rect key="frame" x="125" y="218" width="131" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shared By Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4T-bL-JgX">
+                                <rect key="frame" x="125" y="272" width="125" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueAdventureButton" destination="Elo-uL-SlX" id="Pnh-8N-2B1"/>
+                        <outlet property="createdByLabel" destination="Vbf-ad-LXL" id="M1r-3U-bWO"/>
+                        <outlet property="createdByLabelPrepend" destination="nuR-nj-woL" id="Hga-l8-WXc"/>
+                        <outlet property="descriptionLabel" destination="iXw-N6-Kee" id="l5q-1w-kNd"/>
+                        <outlet property="distanceAwayLabel" destination="XzF-lL-IUt" id="sfX-eN-iS8"/>
+                        <outlet property="progressLabel" destination="T5U-wu-L15" id="aka-gl-XaK"/>
+                        <outlet property="sharedByLabel" destination="k4T-bL-JgX" id="c4E-Wk-lrh"/>
+                        <outlet property="sharedByLabelPrepend" destination="7PR-d7-nEn" id="gXA-5w-zsj"/>
+                        <outlet property="startAdventureButton" destination="0mg-ZV-DgR" id="io5-bN-KZ0"/>
+                        <outlet property="titleLabel" destination="hFp-fw-3q7" id="5yF-d3-umK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8q-FL-Tot" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="460" y="1246"/>
         </scene>
         <!--Enter Adventure View Controller-->
         <scene sceneID="UXK-yZ-MFW">
@@ -130,7 +242,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-LK-vfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="572.56371814092961"/>
+            <point key="canvasLocation" x="1455" y="1373"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eTp-uC-lco">
+            <objects>
+                <viewController id="bx7-Sc-cIi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w3q-tb-8gP"/>
+                        <viewControllerLayoutGuide type="bottom" id="CE6-qL-5Jk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3xE-IZ-h1k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OIF-vu-eMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2150" y="583"/>
         </scene>
         <!--Debug View Controller-->
         <scene sceneID="69Z-xU-4cF">
@@ -165,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRC-HC-ffm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3908" y="514.99250374812596"/>
+            <point key="canvasLocation" x="2305" y="1372"/>
         </scene>
         <!--Create adventure-->
         <scene sceneID="4r2-mK-Dkh">
@@ -497,5 +627,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="zGb-d6-jEc"/>
+        <segue reference="wUH-Br-Cw8"/>
     </inferredMetricsTieBreakers>
 </document>
