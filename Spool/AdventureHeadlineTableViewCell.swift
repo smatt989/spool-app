@@ -16,15 +16,45 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
-    var adventureId: Int?
-    var creator: User?{
-        didSet{
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var sharedByLabelPrepend: UILabel!
+    @IBOutlet weak var sharedByLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
+    
+    var adventureHeadlineDetail: AdventureHeadlineDetail? {
+        didSet {
+            setup()
+        }
+    }
+    
+    private func setup() {
+        if let adv = adventureHeadlineDetail {
+            titleLabel.text = adv.title
+            descriptionLabel.text = adv.subtitle
+            distanceLabel.text = String(Int(round(adv.distance / 10) * 10)) + "m away"
+            setupProgress()
+            setupSharedBy()
             showEditButton()
         }
     }
     
-    @IBAction func editAdventure(_ sender: UIButton) {
-        
+    private func setupProgress() {
+        if adventureHeadlineDetail?.finished == true {
+            progressLabel.text = "finished"
+        } else if adventureHeadlineDetail?.started == true {
+            progressLabel.text = "started"
+        } else {
+            progressLabel.isHidden = true
+        }
+    }
+    
+    private func setupSharedBy() {
+        if let users = adventureHeadlineDetail?.sharers, users.count > 0 {
+            sharedByLabel.text = (users.map{$0.username}).joined(separator: ", ")
+        } else {
+            sharedByLabel.isHidden = true
+            sharedByLabelPrepend.isHidden = true
+        }
     }
     
     override func awakeFromNib() {
@@ -33,7 +63,7 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     }
     
     private func showEditButton() {
-        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = creator {
+        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = adventureHeadlineDetail?.creator {
             editButton.isHidden = currentUser.id != adventureCreator.id
         } else {
             editButton.isHidden = true

@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class AdventureDetailControllerViewController: UIViewController {
+class AdventureDetailControllerViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
     
     var adventureId: Int?
     
@@ -109,14 +109,15 @@ class AdventureDetailControllerViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         if adventure.finished {
             progressLabel.text = "You finished this adventure on \(dateFormatter.string(from: adventure.lastUpdate! as Date))"
-            startAdventureButton.titleLabel?.text = "Restart"
+                startAdventureButton.setTitle("Restart", for: .normal)
             
             startAdventureButton.isHidden = false
             continueAdventureButton.isHidden = true
             progressLabel.isHidden = false
         } else if adventure.started {
+            print("STARTED")
             progressLabel.text = "You already started this adventure"
-            startAdventureButton.titleLabel?.text = "Restart"
+            startAdventureButton.setTitle("Restart", for: .normal)
             
             startAdventureButton.isHidden = false
             continueAdventureButton.isHidden = false
@@ -150,6 +151,10 @@ class AdventureDetailControllerViewController: UIViewController {
             if let viewController = segue.destination as? EnterAdventureViewController {
                 viewController.adventureId = adventureId!
                 viewController.continueAdventure = true
+            }
+        } else if segue.identifier == Identifiers.adventureScreenShareAdventure {
+            if let viewController = segue.destination as? ShareAdventureTableViewController {
+                viewController.adventureId = adventureId
             }
         }
     }
