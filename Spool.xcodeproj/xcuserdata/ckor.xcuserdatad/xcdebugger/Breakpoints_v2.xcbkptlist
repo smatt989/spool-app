@@ -275,11 +275,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spool/AdventuresTableViewController.swift"
-            timestampString = "507076695.447267"
+            timestampString = "507397065.13038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -296,8 +296,183 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
             endingLineNumber = "60"
-            landmarkName = "viewDidLoad()"
+            landmarkName = "panToUserLocation(center:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/UIBarButtonItemUppercase.swift"
+            timestampString = "507387098.611969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "UIBarButtonItemUppercase"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/UIBarButtonItemUppercase.swift"
+            timestampString = "507387469.675209"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "UIBarButtonItemUppercase"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/AdventuresNavigationController.swift"
+            timestampString = "507387448.146604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/AdventureDetailControllerViewController.swift"
+            timestampString = "507396267.808654"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "updateCreatedByLabel(adventure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/AdventureDetailControllerViewController.swift"
+            timestampString = "507389752.113386"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "AdventureDetailControllerViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spool.AdventureDetailControllerViewController.(updateUI in _8E56195459D53BEA4B9EDD30AEF53B28) (adventure : Spool.AdventureHeadlineDetail) -&gt; ()"
+                  moduleName = "Spool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ckor/Dropbox%20(Personal)/Public/ios-apps/spool-app/Spool/AdventureDetailControllerViewController.swift"
+                  timestampString = "507389761.2011"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "181">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spool.AdventureDetailControllerViewController.(updateUI in _8E56195459D53BEA4B9EDD30AEF53B28) (adventure : Spool.AdventureHeadlineDetail) -&gt; ()"
+                  moduleName = "Spool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ckor/Dropbox%20(Personal)/Public/ios-apps/spool-app/Spool/AdventureDetailControllerViewController.swift"
+                  timestampString = "507389761.20324"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "338">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spool.AdventureDetailControllerViewController.((updateUI in _8E56195459D53BEA4B9EDD30AEF53B28) (adventure : Spool.AdventureHeadlineDetail) -&gt; ()).(closure #1)"
+                  moduleName = "Spool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ckor/Dropbox%20(Personal)/Public/ios-apps/spool-app/Spool/AdventureDetailControllerViewController.swift"
+                  timestampString = "507389761.205966"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "83">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spool/AdventureHeadlineTableViewCell.swift"
+            timestampString = "507391264.290165"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "setupSharedBy()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spool.AdventureHeadlineTableViewCell.(setupSharedBy in _E4147FF449C365DDA0178C2EFDDDF4DF) () -&gt; ()"
+                  moduleName = "Spool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ckor/Dropbox%20(Personal)/Public/ios-apps/spool-app/Spool/AdventureHeadlineTableViewCell.swift"
+                  timestampString = "507390542.349913"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "49">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spool.AdventureHeadlineTableViewCell.(setupSharedBy in _E4147FF449C365DDA0178C2EFDDDF4DF) () -&gt; ()"
+                  moduleName = "Spool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ckor/Dropbox%20(Personal)/Public/ios-apps/spool-app/Spool/AdventureHeadlineTableViewCell.swift"
+                  timestampString = "507390542.353088"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "586">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

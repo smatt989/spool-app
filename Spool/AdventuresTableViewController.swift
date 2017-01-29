@@ -27,14 +27,19 @@ class AdventuresTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Style Navbar
-        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
-        
         // Style table
         self.adventuresTable.separatorInset = UIEdgeInsets.zero
+        self.adventuresTable.separatorStyle = UITableViewCellSeparatorStyle.none
     }
     
     private var locationFinder: LocationFinder?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Style Navbar
+        TransparentUINavigationController().navBarDefault(controller: self.navigationController!)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

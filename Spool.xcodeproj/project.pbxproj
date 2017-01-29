@@ -55,6 +55,7 @@
 		F303DCF01E37C9280077F1B4 /* NavigationBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */; };
 		F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C31E3928950022F28C /* RoundedUIButton.swift */; };
 		F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C51E393C080022F28C /* AdventuresNavigationController.swift */; };
+		F3A56C961E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A56C951E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarTransparent.swift; sourceTree = "<group>"; };
 		F33174C31E3928950022F28C /* RoundedUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedUIButton.swift; sourceTree = "<group>"; };
 		F33174C51E393C080022F28C /* AdventuresNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresNavigationController.swift; sourceTree = "<group>"; };
+		F3A56C951E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemUppercase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 			children = (
 				F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */,
 				F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */,
+				F3A56C951E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift */,
 			);
 			name = "Custom Controllers";
 			sourceTree = "<group>";
@@ -300,7 +303,7 @@
 				TargetAttributes = {
 					C963342F1E21B77600583CE1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = YA9PU25M2S;
+						DevelopmentTeam = VGX88LS237;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -398,6 +401,7 @@
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
 				C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */,
 				C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */,
+				F3A56C961E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift in Sources */,
 				F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
@@ -529,14 +533,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = YA9PU25M2S;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -549,14 +553,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = YA9PU25M2S;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;

@@ -24,4 +24,11 @@ class TransparentUINavigationController: UINavigationController {
         controller.view.backgroundColor = UIColor.clear
     }
     
+    public func navBarDefault (controller: UINavigationController) {
+        controller.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        controller.navigationBar.shadowImage = nil
+        controller.navigationBar.isTranslucent = false
+        controller.view.backgroundColor = nil
+    }
+    
 }

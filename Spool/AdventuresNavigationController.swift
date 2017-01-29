@@ -24,6 +24,9 @@ class AdventuresNavigationController: UINavigationController {
         self.navigationBar.titleTextAttributes = [
             NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
             NSForegroundColorAttributeName : UIColor(red:0.20, green:0.20, blue:0.36, alpha:1.0) ] //#32325d
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
+            NSForegroundColorAttributeName : UIColor(red:0.20, green:0.20, blue:0.36, alpha:1.0) ], for: UIControlState.normal)
     }
 
 }
