@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
     var adventureId: Int? {
         didSet {
@@ -242,47 +242,54 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     @IBAction func updatedMarker(segue: UIStoryboardSegue) {
-        selectMarker(marker: (segue.source.contentViewController as? EditWaypointViewController)?.waypointToEdit)
+        print(">>>>>>>>>ACTUALLY CALLED")
+        selectMarker(marker: (segue.source.contentViewController as? WaypointPopoverViewController)?.waypointToEdit)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let annotationView = sender as? MKAnnotationView
+        mapView.deselectAnnotation(annotationView?.annotation!, animated: true)
         let marker = annotationView?.annotation as? Marker
         let destination = segue.destination.contentViewController
         
-        if segue.identifier == Identifiers.editMarkerSegue {
-            if let editableWaypoint = marker, let ewvc = destination as? EditWaypointViewController {
-                if let ppc = ewvc.popoverPresentationController {
-                    ppc.sourceRect = annotationView!.frame
-                    ppc.delegate = self
-                }
+        if segue.identifier == Identifiers.editMarkerPopoverSegue {
+            if let editableWaypoint = marker, let ewvc = destination as? WaypointPopoverViewController {
                 ewvc.waypointToEdit = editableWaypoint
             }
         }
     }
     
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        selectMarker(marker: (popoverPresentationController.presentedViewController as? EditWaypointViewController)?.waypointToEdit)
-    }
+//    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+//        selectMarker(marker: (popoverPresentationController.presentedViewController as? WaypointPopoverViewController)?.waypointToEdit)
+//    }
     
-    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
-        if style == .fullScreen || style == .overFullScreen {
-            let navcon = UINavigationController(rootViewController: controller.presentedViewController)
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-            visualEffectView.frame = navcon.view.bounds
-            visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            navcon.view.insertSubview(visualEffectView, at: 0)
-            return navcon
-        } else {
-            return nil
-        }
-    }
+//    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+//        if style == .fullScreen || style == .overFullScreen {
+//            let navcon = UINavigationController(rootViewController: controller.presentedViewController)
+//            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+//            visualEffectView.frame = navcon.view.bounds
+//            visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            navcon.view.insertSubview(visualEffectView, at: 0)
+//            return navcon
+//        } else {
+//            return nil
+//        }
+//    }
+    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        performSegue(withIdentifier: Identifiers.editMarkerPopoverSegue, sender: view)
+//        mapView.deselectAnnotation(view.annotation, animated: true)
+//    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             mapView.deselectAnnotation(view.annotation, animated: true)
-            performSegue(withIdentifier: Identifiers.editMarkerSegue, sender: view)
+            performSegue(withIdentifier: Identifiers.editMarkerPopoverSegue, sender: view)
         }
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        print("are we here<<<<<<<<<<<<")
     }
 
 }

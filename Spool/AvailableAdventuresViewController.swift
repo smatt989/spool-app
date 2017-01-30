@@ -1,19 +1,21 @@
 //
-//  AdventuresTableViewController.swift
+//  AvailableAdventuresViewController.swift
 //  Spool
 //
-//  Created by Matthew Slotkin on 1/9/17.
+//  Created by Matthew Slotkin on 1/29/17.
 //  Copyright © 2017 Matthew Slotkin. All rights reserved.
 //
 
 import UIKit
 import CoreLocation
 
-class AdventuresTableViewController: UITableViewController {
+class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     
-    @IBOutlet var adventuresTable: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+   
     var adventures: [AdventureHeadlineDetail] = [AdventureHeadlineDetail]()
         {
         didSet {
@@ -27,11 +29,16 @@ class AdventuresTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        //SEEMS LIKE A BAD WAY TO SIZE THESE...
+        tableView.rowHeight = 100.0
+        tableView.estimatedRowHeight = 100.0
         // Style table
-        self.adventuresTable.separatorInset = UIEdgeInsets.zero
-        self.adventuresTable.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     }
-    
+
     private var locationFinder: LocationFinder?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,16 +63,16 @@ class AdventuresTableViewController: UITableViewController {
             weakself?.adventures = advs
         }
     }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return adventures.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.adventureHeadlineCell, for: indexPath) as! AdventureHeadlineTableViewCell
         let adventure = adventures[indexPath.row]
         
@@ -91,11 +98,9 @@ class AdventuresTableViewController: UITableViewController {
         }
     }
     
-    
     @IBAction func logout(_ sender: UIBarButtonItem) {
         User.logout{ [weak weakself = self] in
             weakself?.appDelegate.routeGivenAuthentication()
         }
     }
-
 }

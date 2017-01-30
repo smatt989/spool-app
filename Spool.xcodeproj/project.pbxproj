@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */; };
+		C91D3C6B1E3EDBD700351853 /* WaypointPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */; };
 		C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */; };
 		C92C9EC61E35D204003047DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EC51E35D204003047DC /* User.swift */; };
 		C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */; };
@@ -33,7 +35,6 @@
 		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
 		C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99A4FD51E369A6D0022AA5E /* Login.storyboard */; };
 		C9A50ABF1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A50ABE1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift */; };
-		C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
@@ -45,7 +46,6 @@
 		C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */; };
 		C9B9618F1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618E1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
-		C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
 		C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */; };
 		F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */; };
@@ -59,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableAdventuresViewController.swift; sourceTree = "<group>"; };
+		C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointPopoverViewController.swift; sourceTree = "<group>"; };
 		C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92C9EC51E35D204003047DC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -87,7 +89,6 @@
 		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
 		C99A4FD51E369A6D0022AA5E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C9A50ABE1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAdventureTableViewCell.swift; sourceTree = "<group>"; };
-		C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresTableViewController.swift; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureDetailControllerViewController.swift; sourceTree = "<group>"; };
 		C9B9618E1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAdventureTableViewController.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
-		C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWaypointViewController.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
 		C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 		F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFormViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,8 @@
 		C92C9EDE1E367B6A003047DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C9AE74081E2446DC00DEF45B /* AdventuresTableViewController.swift */,
+				C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */,
+				C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */,
 				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
 				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
 				C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */,
@@ -145,7 +146,6 @@
 				C92C9ED81E367599003047DC /* LoginViewController.swift */,
 				C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */,
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
-				C9C35C631E2600F900C57A57 /* EditWaypointViewController.swift */,
 				F33174C51E393C080022F28C /* AdventuresNavigationController.swift */,
 			);
 			name = Controllers;
@@ -303,7 +303,7 @@
 				TargetAttributes = {
 					C963342F1E21B77600583CE1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VGX88LS237;
+						DevelopmentTeam = YA9PU25M2S;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -371,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B961831E3AE624009DFE7E /* AdventureShareRequest.swift in Sources */,
+				C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */,
 				C9A50ABF1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift in Sources */,
 				C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */,
 				C9B9618F1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift in Sources */,
@@ -381,14 +382,13 @@
 				C94BEBC31E3895CF00381B8C /* Beacon.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
 				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
-				C9AE74091E2446DC00DEF45B /* AdventuresTableViewController.swift in Sources */,
 				C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */,
 				C9B961851E3AF2AF009DFE7E /* UserConnectionRequest.swift in Sources */,
 				C92C9ED61E35DBD2003047DC /* Session+CoreDataProperties.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
+				C91D3C6B1E3EDBD700351853 /* WaypointPopoverViewController.swift in Sources */,
 				C94BEBBA1E3877E200381B8C /* MaxLengthUITextField.swift in Sources */,
 				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
-				C9C35C641E2600F900C57A57 /* EditWaypointViewController.swift in Sources */,
 				C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */,
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
@@ -533,14 +533,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = VGX88LS237;
+				DEVELOPMENT_TEAM = YA9PU25M2S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -553,14 +553,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = VGX88LS237;
+				DEVELOPMENT_TEAM = YA9PU25M2S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
