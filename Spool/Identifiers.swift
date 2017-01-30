@@ -14,6 +14,7 @@ struct Identifiers {
     static let showMapSegue = "Show Map"
     static let newAdventureSegue = "New Adventure"
     static let editMarkerSegue = "Edit Marker"
+    static let editMarkerPopoverSegue = "Waypoint Modal"
     static let editAdventureDetails = "Edit Adventure Details"
     //static let enterAdventure = "Enter Adventure"
     
