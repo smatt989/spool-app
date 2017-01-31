@@ -435,7 +435,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sva-0V-rSB">
-                                                    <rect key="frame" x="344.5" y="102" width="20" height="20"/>
+                                                    <rect key="frame" x="344" y="102" width="20.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz4-eV-SgA">
@@ -874,6 +874,14 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="guideUserToggle:" destination="cAr-OP-LMk" eventType="touchUpInside" id="cFP-X1-dQB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTt-sB-5ki">
+                                        <rect key="frame" x="17" y="429" width="113" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Delete Waypoint"/>
+                                        <connections>
+                                            <action selector="deleteWaypoint:" destination="cAr-OP-LMk" eventType="touchUpInside" id="Xpv-fd-jmy"/>
                                         </connections>
                                     </button>
                                 </subviews>
