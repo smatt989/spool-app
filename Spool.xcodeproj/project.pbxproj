@@ -49,6 +49,7 @@
 		C9BB52AF1E4009D5006849F3 /* AdventureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB52AE1E4009D5006849F3 /* AdventureUtilities.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
+		C9EBF55C1E4073CE0099CEC5 /* WaypointToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EBF55B1E4073CE0099CEC5 /* WaypointToolbar.swift */; };
 		C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */; };
 		F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */; };
 		F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */; };
@@ -105,6 +106,7 @@
 		C9BB52AE1E4009D5006849F3 /* AdventureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureUtilities.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
+		C9EBF55B1E4073CE0099CEC5 /* WaypointToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointToolbar.swift; sourceTree = "<group>"; };
 		C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 		F303DCE21E375ED20077F1B4 /* UIFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFormViewController.swift; sourceTree = "<group>"; };
 		F303DCE61E379CB60077F1B4 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				C94BEBBE1E38909F00381B8C /* Arrow.swift */,
 				C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */,
 				C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */,
+				C9EBF55B1E4073CE0099CEC5 /* WaypointToolbar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
+				C9EBF55C1E4073CE0099CEC5 /* WaypointToolbar.swift in Sources */,
 				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,
 			);

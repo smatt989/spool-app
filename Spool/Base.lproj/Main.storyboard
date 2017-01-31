@@ -648,6 +648,66 @@
                                     <action selector="tapCurrentLocation:" destination="toT-bl-NAU" eventType="touchUpInside" id="NXL-4w-A4W"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wx7-Sg-V7h" customClass="WaypointToolbar" customModule="Spool" customModuleProvider="target">
+                                <rect key="frame" x="305" y="205" width="70" height="319"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOv-1P-ZKb">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="navigation-icon"/>
+                                        <connections>
+                                            <action selector="showDirectionsButtonTap:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="vzr-EY-eVG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2R-c5-2R5">
+                                        <rect key="frame" x="0.0" y="62" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="star"/>
+                                        <connections>
+                                            <action selector="showBeaconButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="89D-sR-WVU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myK-UV-n3u">
+                                        <rect key="frame" x="0.0" y="123" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="callout"/>
+                                        <connections>
+                                            <action selector="showNameButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="5Xy-ow-8yj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5D-7G-PWW">
+                                        <rect key="frame" x="0.0" y="187" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="45"/>
+                                        <state key="normal" title="T">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showNoteButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="Ch9-Sy-3vZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYV-Jf-h2W">
+                                        <rect key="frame" x="0.0" y="249" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" red="0.8904663706" green="0.010458516649999999" blue="0.095270975209999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteWaypointButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="RBi-Am-Fc8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="deleteWaypointButton" destination="fYV-Jf-h2W" id="1gC-G3-csp"/>
+                                    <outlet property="showBeaconButton" destination="x2R-c5-2R5" id="tit-PI-29I"/>
+                                    <outlet property="showDirectionsButton" destination="gOv-1P-ZKb" id="2Sb-h0-D5f"/>
+                                    <outlet property="showNameButton" destination="myK-UV-n3u" id="mGO-hN-W2s"/>
+                                    <outlet property="showNoteButton" destination="Y5D-7G-PWW" id="dhM-5t-ceE"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -666,12 +726,13 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="bfO-is-VfA" id="Vh5-yS-msr"/>
+                        <outlet property="waypointToolbar" destination="wx7-Sg-V7h" id="4wV-37-9GR"/>
                         <segue destination="cAr-OP-LMk" kind="presentation" identifier="Waypoint Modal" id="Rsk-mc-HQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89R-9m-dgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2545" y="-770"/>
+            <point key="canvasLocation" x="2544.8000000000002" y="-770.46476761619192"/>
         </scene>
         <!--Waypoint Popover View Controller-->
         <scene sceneID="Hum-eX-hLX">
@@ -935,8 +996,10 @@
     </scenes>
     <resources>
         <image name="Current location button" width="46" height="46"/>
+        <image name="callout" width="200" height="200"/>
         <image name="empty_check" width="54" height="54"/>
         <image name="navigation-icon" width="512" height="512"/>
+        <image name="star" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SVd-Kz-b3H"/>
