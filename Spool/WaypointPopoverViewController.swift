@@ -10,7 +10,9 @@ import UIKit
 
 class WaypointPopoverViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
-    var waypointToEdit: Marker? 
+    var waypointToEdit: Marker?
+    
+    var deleteWaypointHook: ((Marker) -> Void)?
     
     private var defaultRangeValue = 0
     
@@ -224,5 +226,11 @@ class WaypointPopoverViewController: UIViewController, UITextFieldDelegate, UITe
         updateWaypoint()
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func deleteWaypoint(_ sender: UIButton) {
+        deleteWaypointHook?(waypointToEdit!)
+        dismiss(animated: true, completion: nil)
+    }
+    
 
 }

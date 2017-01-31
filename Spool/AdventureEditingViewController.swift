@@ -62,6 +62,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     private func updateMapUI() {
+        print("UPDATING")
         clearWaypoints()
         if adventure != nil {
             addWaypoints(waypoints: adventure!.markers)
@@ -108,6 +109,14 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         } else {
             adventure?.markers.append(annotation)
         }
+    }
+    
+    private func removeAnnotation(_ annotation: Marker) {
+        if let adv = adventure, let index = adv.markers.index(of: annotation) {
+            adv.markers.remove(at: index)
+            mapView.removeAnnotation(mapView.annotations[index])
+        }
+        
     }
     
     private func drawDirections() {
@@ -257,6 +266,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         if segue.identifier == Identifiers.editMarkerPopoverSegue {
             if let editableWaypoint = marker, let ewvc = destination as? WaypointPopoverViewController {
                 ewvc.waypointToEdit = editableWaypoint
+                ewvc.deleteWaypointHook = removeAnnotation
             }
         } else if segue.identifier == Identifiers.editAdventureScreenShareAdventure {
             if let viewController = segue.destination as? AdventureShareViewController {
