@@ -34,7 +34,6 @@
 		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
 		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
 		C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99A4FD51E369A6D0022AA5E /* Login.storyboard */; };
-		C9A50ABF1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A50ABE1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
@@ -44,7 +43,10 @@
 		C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */; };
 		C9B9618B1E3C3858009DFE7E /* LocationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */; };
 		C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */; };
-		C9B9618F1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B9618E1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift */; };
+		C9BB52A91E3FE5AF006849F3 /* UserShareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */; };
+		C9BB52AB1E3FE5EA006849F3 /* AdventureShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB52AA1E3FE5EA006849F3 /* AdventureShareViewController.swift */; };
+		C9BB52AD1E40064E006849F3 /* AdventureNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB52AC1E40064E006849F3 /* AdventureNameGenerator.swift */; };
+		C9BB52AF1E4009D5006849F3 /* AdventureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB52AE1E4009D5006849F3 /* AdventureUtilities.swift */; };
 		C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C35C611E2584D600C57A57 /* Identifiers.swift */; };
 		C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E59A291E2F089300E22DD4 /* ARMath.swift */; };
 		C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */; };
@@ -88,7 +90,6 @@
 		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
 		C99A4FD51E369A6D0022AA5E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		C9A50ABE1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAdventureTableViewCell.swift; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
@@ -98,7 +99,10 @@
 		C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineDetail.swift; sourceTree = "<group>"; };
 		C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFinder.swift; sourceTree = "<group>"; };
 		C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureDetailControllerViewController.swift; sourceTree = "<group>"; };
-		C9B9618E1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAdventureTableViewController.swift; sourceTree = "<group>"; };
+		C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserShareTableViewCell.swift; sourceTree = "<group>"; };
+		C9BB52AA1E3FE5EA006849F3 /* AdventureShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureShareViewController.swift; sourceTree = "<group>"; };
+		C9BB52AC1E40064E006849F3 /* AdventureNameGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureNameGenerator.swift; sourceTree = "<group>"; };
+		C9BB52AE1E4009D5006849F3 /* AdventureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureUtilities.swift; sourceTree = "<group>"; };
 		C9C35C611E2584D600C57A57 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		C9E59A291E2F089300E22DD4 /* ARMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMath.swift; sourceTree = "<group>"; };
 		C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
@@ -142,11 +146,11 @@
 				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
 				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
 				C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */,
-				C9B9618E1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift */,
 				C92C9ED81E367599003047DC /* LoginViewController.swift */,
 				C92C9EDA1E3675BB003047DC /* SignUpViewController.swift */,
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
 				F33174C51E393C080022F28C /* AdventuresNavigationController.swift */,
+				C9BB52AA1E3FE5EA006849F3 /* AdventureShareViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +177,8 @@
 				C996D6D21E28009B003E1F36 /* HttpRequests.swift */,
 				C9C35C611E2584D600C57A57 /* Identifiers.swift */,
 				C9B9618A1E3C3858009DFE7E /* LocationFinder.swift */,
+				C9BB52AC1E40064E006849F3 /* AdventureNameGenerator.swift */,
+				C9BB52AE1E4009D5006849F3 /* AdventureUtilities.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -188,7 +194,7 @@
 				C94BEBC21E3895CF00381B8C /* Beacon.swift */,
 				C94BEBBE1E38909F00381B8C /* Arrow.swift */,
 				C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */,
-				C9A50ABE1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift */,
+				C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -372,15 +378,15 @@
 			files = (
 				C9B961831E3AE624009DFE7E /* AdventureShareRequest.swift in Sources */,
 				C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */,
-				C9A50ABF1E3D8EE200ECA69F /* ShareAdventureTableViewCell.swift in Sources */,
 				C92C9ED91E367599003047DC /* LoginViewController.swift in Sources */,
-				C9B9618F1E3D8C1F009DFE7E /* ShareAdventureTableViewController.swift in Sources */,
 				C94BEBBC1E38783200381B8C /* AllowableCharactersUITextField.swift in Sources */,
 				C933A8801E2D92D1007E24B9 /* DebugViewController.swift in Sources */,
 				C94BEBC11E38951900381B8C /* MarkerNameLabel.swift in Sources */,
 				F303DCF01E37C9280077F1B4 /* NavigationBarTransparent.swift in Sources */,
 				C94BEBC31E3895CF00381B8C /* Beacon.swift in Sources */,
+				C9BB52AD1E40064E006849F3 /* AdventureNameGenerator.swift in Sources */,
 				C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */,
+				C9BB52AB1E3FE5EA006849F3 /* AdventureShareViewController.swift in Sources */,
 				C92C9EDD1E3676D5003047DC /* Authentication.swift in Sources */,
 				C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */,
 				C9B961851E3AF2AF009DFE7E /* UserConnectionRequest.swift in Sources */,
@@ -393,6 +399,7 @@
 				C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */,
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
 				C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */,
+				C9BB52AF1E4009D5006849F3 /* AdventureUtilities.swift in Sources */,
 				F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */,
@@ -405,6 +412,7 @@
 				F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */,
 				C9E59A2A1E2F089300E22DD4 /* ARMath.swift in Sources */,
 				C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */,
+				C9BB52A91E3FE5AF006849F3 /* UserShareTableViewCell.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
