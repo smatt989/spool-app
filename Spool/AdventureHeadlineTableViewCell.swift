@@ -16,7 +16,6 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
-    @IBOutlet weak var sharedByLabelPrepend: UILabel!
     @IBOutlet weak var sharedByLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -55,7 +54,6 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
             sharedByLabel.text = (users.map{$0.username}).joined(separator: ", ")
         } else {
             sharedByLabel.isHidden = true
-            sharedByLabelPrepend.isHidden = true
             toLabel.isHidden = true
         }
     }
