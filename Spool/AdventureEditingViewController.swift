@@ -11,6 +11,8 @@ import MapKit
 
 class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var adventureId: Int? {
         didSet {
             if let id = adventureId {
@@ -256,7 +258,17 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
             if let editableWaypoint = marker, let ewvc = destination as? WaypointPopoverViewController {
                 ewvc.waypointToEdit = editableWaypoint
             }
+        } else if segue.identifier == Identifiers.editAdventureScreenShareAdventure {
+            if let viewController = segue.destination as? AdventureShareViewController {
+                viewController.adventure = adventure
+                viewController.creator = appDelegate.authentication.currentUser
+                viewController.additionalDismissalActions = dismissSelf
+            }
         }
+    }
+    
+    private func dismissSelf() {
+        dismiss(animated: true, completion: nil)
     }
     
 //    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

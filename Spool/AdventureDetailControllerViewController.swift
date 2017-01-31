@@ -105,7 +105,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     }
     
     private func updateDistanceAway(adventure: AdventureHeadlineDetail) {
-        distanceAwayLabel.text = String(Int(round(adventure.distance / 10) * 10)) + "m away from you"
+        distanceAwayLabel.text = AdventureUtilities.distanceToString(distance: adventure.distance)
         
         distanceAwayLabel.isHidden = false
     }
@@ -161,8 +161,9 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
                 viewController.continueAdventure = true
             }
         } else if segue.identifier == Identifiers.adventureScreenShareAdventure {
-            if let viewController = segue.destination as? ShareAdventureTableViewController {
+            if let viewController = segue.destination as? AdventureShareViewController {
                 viewController.adventureId = adventureId
+                viewController.creator = adventureHeadline?.creator
             }
         }
     }

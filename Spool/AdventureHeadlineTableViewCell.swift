@@ -32,7 +32,7 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
         if let adv = adventureHeadlineDetail {
             titleLabel.text = adv.title
             descriptionLabel.text = adv.subtitle
-            distanceLabel.text = String(Int(round(adv.distance / 10) * 10)) + "m away"
+            distanceLabel.text = AdventureUtilities.distanceToString(distance: adv.distance)
             creatorLabel.text = adv.creator.username
             setupProgress()
             setupSharedBy()
