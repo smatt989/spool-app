@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdventureShareViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
+class AdventureShareViewController: UIFormViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -220,7 +220,14 @@ class AdventureShareViewController: UIViewController, UITableViewDelegate, UITab
         setupAdventureTitle()
         setupAdventureDecription()
         setupSearchBox()
-        // Do any additional setup after loading the view.
+        
+        // Style table
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+    }
+    
+    private func styleSearchbox() {
+        self.searchBoxInput.layer.cornerRadius = 0
     }
     
     private func setupAdventureTitle() {

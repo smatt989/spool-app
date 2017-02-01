@@ -15,8 +15,8 @@ class UserShareTableViewCell: UITableViewCell {
     var toBeShared = false
     
     
-    private let checked = #imageLiteral(resourceName: "full_check")
-    private let unchecked = #imageLiteral(resourceName: "empty_check")
+    private let checked = #imageLiteral(resourceName: "Checkbox full")
+    private let unchecked = #imageLiteral(resourceName: "Checkbox empty")
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var actionImage: UIImageView!
