@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C907726A1E42AAA00045B38C /* WaypointToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90772691E42AAA00045B38C /* WaypointToolbarViewController.swift */; };
 		C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */; };
 		C91D3C6B1E3EDBD700351853 /* WaypointPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */; };
 		C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */; };
@@ -62,6 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C90772691E42AAA00045B38C /* WaypointToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointToolbarViewController.swift; sourceTree = "<group>"; };
 		C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableAdventuresViewController.swift; sourceTree = "<group>"; };
 		C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointPopoverViewController.swift; sourceTree = "<group>"; };
 		C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
 				F33174C51E393C080022F28C /* AdventuresNavigationController.swift */,
 				C9BB52AA1E3FE5EA006849F3 /* AdventureShareViewController.swift */,
+				C90772691E42AAA00045B38C /* WaypointToolbarViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				C9BB52A91E3FE5AF006849F3 /* UserShareTableViewCell.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
+				C907726A1E42AAA00045B38C /* WaypointToolbarViewController.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
 				C9EBF55C1E4073CE0099CEC5 /* WaypointToolbar.swift in Sources */,
 				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,

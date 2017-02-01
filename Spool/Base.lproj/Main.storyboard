@@ -585,7 +585,7 @@
         <!--Create adventure-->
         <scene sceneID="4r2-mK-Dkh">
             <objects>
-                <viewController title="Create adventure" id="toT-bl-NAU" customClass="AdventureEditingViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Create adventure" id="toT-bl-NAU" customClass="WaypointToolbarViewController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fhl-oQ-vsp"/>
                         <viewControllerLayoutGuide type="bottom" id="gAb-st-pHU"/>
@@ -973,7 +973,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qWo-IP-Txi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EHy-wb-UdS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EHy-wb-UdS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
