@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate {
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -80,6 +80,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         let press = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(_:)))
         press.delegate = self
         mapView.addGestureRecognizer(press)
+        editingWaypoint = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +97,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
                 let waypoint = Marker()
                 waypoint.latitude = coordinate.latitude
                 waypoint.longitude = coordinate.longitude
-                waypoint.title = "Dropped"
+                waypoint.title = defaultNameText
                 appendOrInsertAnnotation(waypoint, gesture: sender)
                 updateMapUI()
             }
@@ -113,8 +114,8 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     private func removeAnnotation(_ annotation: Marker) {
         if let adv = adventure, let index = adv.markers.index(of: annotation) {
+            mapView.removeAnnotation(annotation)
             adv.markers.remove(at: index)
-            mapView.removeAnnotation(mapView.annotations[index])
         }
         
     }
@@ -157,7 +158,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         var view: MKAnnotationView! = mapView.dequeueReusableAnnotationView(withIdentifier: Identifiers.waypoint)
         if view == nil {
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Identifiers.waypoint)
-            view.canShowCallout = true
+            view.canShowCallout = false
         } else {
             view.annotation = annotation
         }
@@ -165,8 +166,8 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         view.isDraggable = true
         view.setSelected(true, animated: true)
         
-        view.leftCalloutAccessoryView = nil
-        view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        //view.leftCalloutAccessoryView = nil
+        //view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
         return view
     }
@@ -241,10 +242,37 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         view.setSelected(true, animated: true)
     }
     
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) { view.isSelected = true }
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        editingWaypoint = nil
+        view.isSelected = true
+        unhighlightPin(view as! MKPinAnnotationView)
+        //view.tintColor = UIColor.red
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        editingWaypoint = view.annotation as? Marker
+        highlightPin(view as! MKPinAnnotationView)
+    }
+    
+    private func highlightPin(_ view: MKPinAnnotationView){
+        view.pinTintColor = UIColor.green
+    }
+    
+    private func unhighlightPin(_ view: MKPinAnnotationView) {
+        view.pinTintColor = UIColor.red
+    }
     
     // Renders the map route
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let overlay = overlay as? BeaconRangeElement {
+            return overlay.renderer()
+        }
+        if let overlay = overlay as? NameRangeElement {
+            return overlay.renderer()
+        }
+        if let overlay = overlay as? NoteRangeElement {
+            return overlay.renderer()
+        }
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 4.0
@@ -252,23 +280,11 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         return renderer
     }
     
-    @IBAction func updatedMarker(segue: UIStoryboardSegue) {
-        print(">>>>>>>>>ACTUALLY CALLED")
-        selectMarker(marker: (segue.source.contentViewController as? WaypointPopoverViewController)?.waypointToEdit)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let annotationView = sender as? MKAnnotationView
         mapView.deselectAnnotation(annotationView?.annotation!, animated: true)
-        let marker = annotationView?.annotation as? Marker
-        let destination = segue.destination.contentViewController
         
-        if segue.identifier == Identifiers.editMarkerPopoverSegue {
-            if let editableWaypoint = marker, let ewvc = destination as? WaypointPopoverViewController {
-                ewvc.waypointToEdit = editableWaypoint
-                ewvc.deleteWaypointHook = removeAnnotation
-            }
-        } else if segue.identifier == Identifiers.editAdventureScreenShareAdventure {
+        if segue.identifier == Identifiers.editAdventureScreenShareAdventure {
             if let viewController = segue.destination as? AdventureShareViewController {
                 viewController.adventure = adventure
                 viewController.creator = appDelegate.authentication.currentUser
@@ -311,7 +327,399 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        print("are we here<<<<<<<<<<<<")
+
+    }
+    
+    
+    @IBOutlet weak var waypointToolbar: UIView!
+    
+    @IBOutlet weak var navigationToggleButton: ToolbarButton!
+    @IBOutlet weak var beaconToggleButton: ToolbarButton!
+    @IBOutlet weak var nameToggleButton: ToolbarButton!
+    @IBOutlet weak var noteToggleButton: ToolbarButton!
+    @IBOutlet weak var deleteWaypointButton: ToolbarButton!
+    
+    @IBOutlet weak var beaconIndicator: UIImageView!
+    @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var nameInput: UITextField!
+    @IBOutlet weak var noteInput: UITextView!
+    
+    
+    private var toolbarButtons: [ToolbarButton] {
+        get {
+            return [
+                navigationToggleButton,
+                beaconToggleButton,
+                nameToggleButton,
+                noteToggleButton,
+                deleteWaypointButton
+            ]
+        }
+    }
+    
+    private var editingWaypoint: Marker? {
+        didSet {
+            if editingWaypoint != nil {
+                showToolbar()
+            } else {
+                hideToolbar()
+            }
+        }
+    }
+    
+    private func showToolbar() {
+        setAllToolbarButtonsToNotFocused()
+        updateWaypointToolbarUI()
+        setupKeyboards()
+        waypointToolbar.isHidden = false
+        startListening()
+        addDisplayLink()
+    }
+    
+    private func hideToolbar() {
+        stopListening()
+        removeDisplayLink()
+        beaconIndicator.isHidden = true
+        nameView.isHidden = true
+        noteInput.isHidden = true
+        waypointToolbar.isHidden = true
+        removePinchGesture()
+        dismissKeyboard()
+    }
+    
+    @IBAction func navigationToggleTap(_ sender: ToolbarButton) {
+        editingWaypoint!.showDirections = !editingWaypoint!.showDirections
+        setAllToolbarButtonsToNotFocused()
+        updateWaypointToolbarUI()
+    }
+    
+    let defaultRange = 25
+    let defaultNameText = "Dropped"
+    
+    
+    
+    @IBAction func beaconToggleTap(_ sender: ToolbarButton) {
+        if sender.isFocus && sender.isOn {
+            editingWaypoint!.showBeaconWithinMeterRange = nil
+        } else {
+            editingWaypoint!.showBeaconWithinMeterRange = editingWaypoint!.showBeaconWithinMeterRange ?? defaultRange
+        }
+        tapButton(sender)
+        updateWaypointToolbarUI()
+    }
+    
+    @IBAction func nameToggleTap(_ sender: ToolbarButton) {
+        if sender.isFocus && sender.isOn {
+            editingWaypoint!.showNameWithinMeterRange = nil
+        } else {
+            editingWaypoint!.showNameWithinMeterRange = editingWaypoint!.showNameWithinMeterRange ?? defaultRange
+        }
+        tapButton(sender)
+        updateWaypointToolbarUI()
+    }
+
+    @IBAction func noteToggleTap(_ sender: ToolbarButton) {
+        if sender.isFocus && sender.isOn {
+            editingWaypoint!.showDescriptionWithinMeterRange = nil
+            editingWaypoint!.descriptionText = nil
+        } else {
+            editingWaypoint!.showDescriptionWithinMeterRange = editingWaypoint!.showDescriptionWithinMeterRange ?? defaultRange
+        }
+        tapButton(sender)
+        updateWaypointToolbarUI()
+    }
+    
+    @IBAction func deleteWaypointTap(_ sender: ToolbarButton) {
+        setAllToolbarButtonsToNotFocused()
+        removeAnnotation(editingWaypoint!)
+        editingWaypoint = nil
+        drawRanges()
+    }
+    
+    private func tapButton(_ button: ToolbarButton) {
+        setAllToolbarButtonsToNotFocused()
+        button.isFocus = true
+    }
+    
+    private func setAllToolbarButtonsToNotFocused() {
+        toolbarButtons.forEach{button in
+            button.isFocus = false
+        }
+    }
+    
+    private func updateWaypointToolbarUI() {
+        setButtonActivation()
+        setWaypointMetadataVisibility()
+        moveWaypointMetadataViews()
+        establishFirstResponder()
+        injectPinchGesture()
+        drawRanges()
+    }
+    
+    private func setupKeyboards() {
+        noteInput.returnKeyType = .done
+        noteInput.delegate = self
+        nameInput.returnKeyType = .done
+        nameInput.delegate = self
+        nameInput.autocorrectionType = UITextAutocorrectionType.no
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    private func setButtonActivation() {
+        navigationToggleButton.isOn = editingWaypoint!.showDirections
+        beaconToggleButton.isOn = editingWaypoint!.showBeaconWithinMeterRange != nil
+        nameToggleButton.isOn = editingWaypoint!.showNameWithinMeterRange != nil
+        noteToggleButton.isOn = editingWaypoint!.showDescriptionWithinMeterRange != nil
+    }
+    
+    private func setWaypointMetadataVisibility() {
+        beaconIndicator.isHidden = editingWaypoint!.showBeaconWithinMeterRange == nil
+        nameView.isHidden = editingWaypoint!.showNameWithinMeterRange == nil
+        noteInput.isHidden = editingWaypoint!.showDescriptionWithinMeterRange == nil
+        nameInput.text = editingWaypoint!.title
+        noteInput.text = editingWaypoint!.descriptionText
+    }
+    
+    @objc private func moveWaypointMetadataViews() {
+        if editingWaypoint != nil {
+            moveNoteInput()
+            moveNameView()
+            moveBeaconView()
+        }
+    }
+    
+    private let pinHeight = CGFloat(30.0)
+    
+    private func moveNoteInput() {
+        let height = noteInput.frame.height
+        let width = view.frame.maxX
+        let x = view.frame.minX
+        if noteInput.isFirstResponder {
+            noteInput.frame = CGRect(x: x, y: 350, width: width, height: height)
+        } else {
+            noteInput.frame = CGRect(x: x, y: view.frame.maxY - height - 100, width: width, height: height)
+        }
+    }
+    
+    private func moveBeaconView() {
+        let position = mapView.convert(editingWaypoint!.coordinate, toPointTo: view)
+        let beaconHeight = beaconIndicator.layer.frame.height
+        let beaconWidth = beaconIndicator.layer.frame.width
+        
+        let buffer = CGFloat(10.0)
+        
+        var attemptedHeight = position.y - beaconHeight - buffer - pinHeight
+        if !noteInput.isHidden && noteInput.frame.minY < (attemptedHeight + beaconHeight + buffer + pinHeight) {
+            attemptedHeight = noteInput.frame.minY - beaconHeight - buffer - pinHeight
+        }
+        
+        var attemptedWidth = position.x - (beaconWidth / 2)
+        if !nameView.isHidden {
+            if (nameView.layer.frame.maxX + beaconWidth + buffer) < view.frame.maxX {
+                attemptedWidth = nameView.layer.frame.maxX + buffer
+            } else {
+                attemptedWidth = nameView.layer.frame.minX - buffer - beaconWidth
+            }
+        }
+        
+        beaconIndicator.frame = CGRect(x: attemptedWidth, y: attemptedHeight, width: beaconWidth, height: beaconHeight)
+    }
+    
+    private func moveNameView() {
+        let position = mapView.convert(editingWaypoint!.coordinate, toPointTo: view)
+        let nameHeight = nameView.layer.frame.height
+        let nameWidth = nameView.layer.frame.width
+        
+        let buffer = CGFloat(10.0)
+        
+        var attemptedHeight = position.y - nameHeight - buffer - pinHeight
+        if !noteInput.isHidden && noteInput.frame.minY < (attemptedHeight + nameHeight + buffer + pinHeight) {
+            attemptedHeight = noteInput.frame.minY - nameHeight - buffer - pinHeight
+        }
+        
+        nameView.frame = CGRect(x: position.x - (nameWidth / 2), y: attemptedHeight, width: nameWidth, height: nameHeight)
+    }
+    
+    var moveViewsDisplayLink: CADisplayLink?
+    
+    private func addDisplayLink() {
+        let moveViewsDisplayLink = CADisplayLink(target: self, selector: #selector(moveWaypointMetadataViews))
+        moveViewsDisplayLink.add(to: .main, forMode: .commonModes)
+    }
+    
+    private func removeDisplayLink() {
+        if moveViewsDisplayLink != nil {
+            moveViewsDisplayLink!.remove(from: .main, forMode: .commonModes)
+        }
+    }
+    
+    private func establishFirstResponder() {
+        view.endEditing(true)
+        if !nameView.isHidden && editingWaypoint!.title == defaultNameText && nameToggleButton.isFocus {
+            nameInput.becomeFirstResponder()
+        } else if !noteInput.isHidden && editingWaypoint!.descriptionText == nil && noteToggleButton.isFocus {
+            noteInput.becomeFirstResponder()
+        }
+    }
+    
+    private var nameObserver: NSObjectProtocol?
+    private var noteObserver: NSObjectProtocol?
+    
+    private func startListening() {
+        let center = NotificationCenter.default
+        let queue = OperationQueue.main
+        
+        nameObserver = center.addObserver(
+            forName: Notification.Name.UITextFieldTextDidChange,
+            object: nameInput,
+            queue: queue) { [weak weakself = self] notification in
+                if AdventureUtilities.validTitle(title: weakself?.nameInput.text) {
+                    weakself?.editingWaypoint!.title = weakself?.nameInput.text
+                }
+            }
+        
+        noteObserver = center.addObserver(
+            forName: Notification.Name.UITextViewTextDidChange,
+            object: noteInput,
+            queue: queue) { [weak weakself = self] notification in
+                if AdventureUtilities.validTitle(title: weakself?.noteInput.text) {
+                    weakself?.editingWaypoint!.descriptionText = weakself?.noteInput.text
+                } else {
+                    weakself?.editingWaypoint!.descriptionText = nil
+                }
+            }
+    }
+    
+    private func stopListening() {
+        if let observer = nameObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        
+        if let observer = noteObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nameButtonFocusTriggeredByInputTouch()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        noteButtonFocusTriggeredByInputTouch()
+    }
+    
+    private func nameButtonFocusTriggeredByInputTouch() {
+        if nameInput.isFirstResponder {
+                tapButton(nameToggleButton)
+        }
+    }
+    
+    private func noteButtonFocusTriggeredByInputTouch() {
+        if noteInput.isFirstResponder {
+            tapButton(noteToggleButton)
+        }
+    }
+    
+    private var pinchGestureRecognizer: UIPinchGestureRecognizer?
+    
+    private func injectPinchGesture() {
+        if (toolbarButtons.filter{ $0.isOn && $0.isFocus }).count > 0 {
+            addPinchGesture()
+        } else {
+            removePinchGesture()
+        }
+    }
+    
+    private func addPinchGesture() {
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchedView(_:)))
+        pinchGestureRecognizer!.delegate = self
+        mapView.isZoomEnabled = false
+        //mapView.isUserInteractionEnabled = false
+        mapView.addGestureRecognizer(pinchGestureRecognizer!)
+    }
+    
+    private func removePinchGesture() {
+        mapView.isZoomEnabled = true
+        //mapView.isUserInteractionEnabled = true
+        if pinchGestureRecognizer != nil {
+            mapView.removeGestureRecognizer(pinchGestureRecognizer!)
+        }
+    }
+    
+    @objc
+    func pinchedView(_ sender:UIPinchGestureRecognizer){
+        if beaconToggleButton.isFocus && editingWaypoint!.showBeaconWithinMeterRange != nil {
+            editingWaypoint!.showBeaconWithinMeterRange! = Int(round(Double(sender.scale) * Double(editingWaypoint!.showBeaconWithinMeterRange!)))
+        } else if nameToggleButton.isFocus && editingWaypoint!.showNameWithinMeterRange != nil {
+            editingWaypoint!.showNameWithinMeterRange! = Int(round(Double(sender.scale) * Double(editingWaypoint!.showNameWithinMeterRange!)))
+        } else if noteToggleButton.isFocus && editingWaypoint!.showDescriptionWithinMeterRange != nil {
+            editingWaypoint!.showDescriptionWithinMeterRange! = Int(round(Double(sender.scale) * Double(editingWaypoint!.showDescriptionWithinMeterRange!)))
+        }
+        sender.scale = 1.0
+        drawRanges()
+    }
+    
+    private func drawRanges() {
+        drawBeaconRanges()
+        drawNameRanges()
+        drawNoteRanges()
+    }
+    
+    private var beaconRanges = [BeaconRangeElement]()
+    private var nameRanges = [NameRangeElement]()
+    private var noteRanges = [NoteRangeElement]()
+    
+    private func drawBeaconRanges() {
+        mapView.removeOverlays(beaconRanges)
+        beaconRanges = (adventure?.markers ?? []).flatMap{element in
+            if let range = element.showBeaconWithinMeterRange {
+                return BeaconRangeElement(center: element.coordinate, radius: CLLocationDistance(range))
+            } else {
+                return nil
+            }
+        }
+        mapView.addOverlays(beaconRanges)
+    }
+    
+    private func drawNameRanges() {
+        mapView.removeOverlays(nameRanges)
+        nameRanges = (adventure?.markers ?? []).flatMap{element in
+            if let range = element.showNameWithinMeterRange {
+                return NameRangeElement(center: element.coordinate, radius: CLLocationDistance(range))
+            } else {
+                return nil
+            }
+        }
+        mapView.addOverlays(nameRanges)
+    }
+    
+    private func drawNoteRanges() {
+        mapView.removeOverlays(noteRanges)
+        noteRanges = (adventure?.markers ?? []).flatMap{element in
+            if let range = element.showDescriptionWithinMeterRange {
+                return NoteRangeElement(center: element.coordinate, radius: CLLocationDistance(range))
+            } else {
+                return nil
+            }
+        }
+        mapView.addOverlays(noteRanges)
     }
 
 }
