@@ -79,6 +79,12 @@ class Marker: NSObject {
     var showDescriptionWithinMeterRange: Int?
     
     var markerChangeCallback: (() -> Void)?
+    
+    var location: CLLocation {
+        get {
+            return CLLocation(latitude: latitude, longitude: longitude)
+        }
+    }
 }
 
 extension Marker: MKAnnotation {

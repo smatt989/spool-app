@@ -435,7 +435,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sva-0V-rSB">
-                                                    <rect key="frame" x="343.5" y="102.5" width="20.5" height="19"/>
+                                                    <rect key="frame" x="343" y="100.5" width="20.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz4-eV-SgA">
@@ -641,7 +641,7 @@
                                     <action selector="tapCurrentLocation:" destination="toT-bl-NAU" eventType="touchUpInside" id="NXL-4w-A4W"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wx7-Sg-V7h" customClass="WaypointToolbar" customModule="Spool" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wx7-Sg-V7h">
                                 <rect key="frame" x="305" y="205" width="70" height="319"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -650,7 +650,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="navigation-icon"/>
                                         <connections>
-                                            <action selector="showDirectionsButtonTap:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="vzr-EY-eVG"/>
+                                            <action selector="showDirectionsButtonTap:" destination="toT-bl-NAU" eventType="touchUpInside" id="Q7l-na-xMk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2R-c5-2R5">
@@ -658,7 +658,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="star"/>
                                         <connections>
-                                            <action selector="showBeaconButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="89D-sR-WVU"/>
+                                            <action selector="showBeaconButtonPress:" destination="toT-bl-NAU" eventType="touchUpInside" id="S2f-gw-0Tg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myK-UV-n3u">
@@ -666,7 +666,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="callout"/>
                                         <connections>
-                                            <action selector="showNameButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="5Xy-ow-8yj"/>
+                                            <action selector="showNameButtonPress:" destination="toT-bl-NAU" eventType="touchUpInside" id="gFG-JZ-VXZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5D-7G-PWW">
@@ -677,7 +677,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="showNoteButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="Ch9-Sy-3vZ"/>
+                                            <action selector="showNoteButtonPress:" destination="toT-bl-NAU" eventType="touchUpInside" id="653-ci-g62"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYV-Jf-h2W">
@@ -688,18 +688,16 @@
                                             <color key="titleColor" red="0.8904663706" green="0.010458516649999999" blue="0.095270975209999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
-                                            <action selector="deleteWaypointButtonPress:" destination="wx7-Sg-V7h" eventType="touchUpInside" id="RBi-Am-Fc8"/>
+                                            <action selector="deleteWaypointButtonPress:" destination="toT-bl-NAU" eventType="touchUpInside" id="0Uc-it-yV5"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="deleteWaypointButton" destination="fYV-Jf-h2W" id="1gC-G3-csp"/>
-                                    <outlet property="showBeaconButton" destination="x2R-c5-2R5" id="tit-PI-29I"/>
-                                    <outlet property="showDirectionsButton" destination="gOv-1P-ZKb" id="2Sb-h0-D5f"/>
-                                    <outlet property="showNameButton" destination="myK-UV-n3u" id="mGO-hN-W2s"/>
-                                    <outlet property="showNoteButton" destination="Y5D-7G-PWW" id="dhM-5t-ceE"/>
-                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BU7-pc-7Ga">
+                                <rect key="frame" x="67" y="235" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -718,7 +716,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="deleteWaypointButton" destination="fYV-Jf-h2W" id="M5x-1B-ejm"/>
                         <outlet property="mapView" destination="bfO-is-VfA" id="Vh5-yS-msr"/>
+                        <outlet property="showBeaconButton" destination="x2R-c5-2R5" id="vf2-Cg-F60"/>
+                        <outlet property="showDirectionsButton" destination="gOv-1P-ZKb" id="n9M-qR-RUd"/>
+                        <outlet property="showNameButton" destination="myK-UV-n3u" id="TuC-Nd-NIB"/>
+                        <outlet property="showNoteButton" destination="Y5D-7G-PWW" id="LdL-0I-sAC"/>
                         <outlet property="waypointToolbar" destination="wx7-Sg-V7h" id="4wV-37-9GR"/>
                         <segue destination="cAr-OP-LMk" kind="presentation" identifier="Waypoint Modal" id="Rsk-mc-HQX"/>
                     </connections>

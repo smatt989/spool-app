@@ -83,10 +83,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         mapView.addGestureRecognizer(press)
         
         waypointToolbar.isHidden = true
-        waypointToolbar.mapview = mapView
-        waypointToolbar.removeMarkerCallback = removeAnnotation
-        waypointToolbar.addRadiusCircle = addRadiusCircle
-        waypointToolbar.removeCircle = removeCircle
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,20 +114,28 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
     }
     
-    private func removeAnnotation(_ annotation: Marker) {
+    func removeAnnotation(_ annotation: Marker) {
         if let adv = adventure, let index = adv.markers.index(of: annotation) {
+            print("INDEX OF: \(index)")
+            
+            mapView.removeAnnotation(annotation)
             adv.markers.remove(at: index)
-            mapView.removeAnnotation(mapView.annotations[index])
         }
         
     }
     
-    private func drawDirections() {
+    private var directionLines = [MKPolyline]()
+    
+    func drawDirections() {
+        print("DRAW DIRECTIONS BEING CALLED")
         if adventure != nil {
-            mapView?.removeOverlays(mapView.overlays.filter{ overlay in overlay is MKPolyline})
+            mapView?.removeOverlays(directionLines)
+            directionLines = []
             for direction in adventure!.directions {
-                mapView.add(direction.route!.polyline, level: .aboveRoads)
+                directionLines.append(direction.route!.polyline)
+                //mapView.add(direction.route!.polyline, level: .aboveRoads)
             }
+            mapView.addOverlays(directionLines, level: .aboveRoads)
         }
     }
     
@@ -254,14 +258,20 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     // Renders the map route
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
+        print("RENDERING>>>>>>>>>>>>")
         if let overlay = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: overlay)
+            
+            print("CIRCLE FACTS: ")
+            print("RADIUS: \(overlay.radius)")
+            print("LOCATION: \(overlay.coordinate.latitude)")
+            
             circleRenderer.fillColor = UIColor.blue
             circleRenderer.alpha = 0.1
+            print("TRYING CIRCLE>>>>>")
             return circleRenderer
         }
-        
+        print("ACTUALLY A LINE")
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 4.0
@@ -315,14 +325,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
 //        }
 //    }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //performSegue(withIdentifier: Identifiers.editMarkerPopoverSegue, sender: view)
-        //mapView.deselectAnnotation(view.annotation, animated: true)
-        waypointToolbar.isHidden = false
-        let marker = view.annotation as? Marker
-        waypointToolbar.waypointToEdit = marker
-    }
-    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             mapView.deselectAnnotation(view.annotation, animated: true)
@@ -333,67 +335,40 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
     }
     
+    @IBOutlet weak var waypointToolbar: UIView!
     
-    private func dismissToolbar() {
-        waypointToolbar.dismissSelf()
-    }
-    
-    @IBOutlet weak var waypointToolbar: WaypointToolbar!
+    @IBOutlet weak var showDirectionsButton: UIButton!
+    @IBOutlet weak var showBeaconButton: UIButton!
+    @IBOutlet weak var showNameButton: UIButton!
+    @IBOutlet weak var showNoteButton: UIButton!
+    @IBOutlet weak var deleteWaypointButton: UIButton!
     
     var pinchGestureRecognizer: UIPinchGestureRecognizer?
     
-    private func addPinchGesture() {
-        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchedView(_:)))
-        pinchGestureRecognizer!.delegate = self
-        mapView.isZoomEnabled = false
-        //mapView.isUserInteractionEnabled = false
-        mapView.addGestureRecognizer(pinchGestureRecognizer!)
-    }
-    
-    private func removePinchGesture() {
-        mapView.isZoomEnabled = true
-        //mapView.isUserInteractionEnabled = true
-        mapView.removeGestureRecognizer(pinchGestureRecognizer!)
-    }
-    
-    private var circle: MKCircle? {
+    var waypointToEdit: Marker? {
         didSet {
-            if circle != nil {
-                waypointToolbar.updateRange(radius: circle!.radius)
+            if waypointToEdit != nil {
+                updateUI()
             }
         }
     }
     
-    func addRadiusCircle(location: CLLocation, radius: CLLocationDistance){
-        print("ADDING THIS RADIUS: \(radius)")
-        circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
-        mapView.add(circle!)
-        addPinchGesture()
+    let defaultRange = 25
+    
+    var circle: MKCircle?
+    
+    var currentlyEditing: ActionItem = .none
+    
+    enum ActionItem {
+        case directions
+        case beacon
+        case name
+        case note
+        case none
     }
     
-    @objc
-    func pinchedView(_ sender:UIPinchGestureRecognizer){
-        print("PINCHING...")
-        updateCircle(radius: (circle!.radius * Double(sender.scale)) as CLLocationDistance)
-        sender.scale = 1.0
-    }
-    
-    private func updateCircle(radius: CLLocationDistance) {
-        print("radius \(radius)")
-        let newCircle = MKCircle(center: circle!.coordinate, radius: radius)
-        DispatchQueue.main.async { [weak weakself = self] in
-            weakself!.mapView.remove(weakself!.circle!)
-            weakself!.mapView.add(newCircle)
-            weakself!.circle = newCircle
-        }
-    }
-    
-    func removeCircle() {
-        if circle != nil {
-            removePinchGesture()
-            mapView!.remove(circle!)
-        }
-    }
+    var noteView = UITextView()
+    var noteObserver: NSObjectProtocol?
 }
 
 extension UIViewController {
