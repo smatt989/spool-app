@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */; };
-		C91D3C6B1E3EDBD700351853 /* WaypointPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */; };
 		C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */; };
 		C92C9EC61E35D204003047DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EC51E35D204003047DC /* User.swift */; };
 		C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */; };
@@ -29,6 +28,8 @@
 		C96334391E21B77600583CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96334371E21B77600583CE1 /* Main.storyboard */; };
 		C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C963343A1E21B77600583CE1 /* Assets.xcassets */; };
 		C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C963343C1E21B77600583CE1 /* LaunchScreen.storyboard */; };
+		C96AB4EB1E431A1800A5D00C /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96AB4EA1E431A1800A5D00C /* ToolbarButton.swift */; };
+		C96AB4ED1E4348F600A5D00C /* WaypointRangeElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96AB4EC1E4348F600A5D00C /* WaypointRangeElements.swift */; };
 		C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */; };
 		C996D6CD1E26CF2E003E1F36 /* EnterAdventureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */; };
 		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
@@ -65,7 +66,6 @@
 
 /* Begin PBXFileReference section */
 		C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableAdventuresViewController.swift; sourceTree = "<group>"; };
-		C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointPopoverViewController.swift; sourceTree = "<group>"; };
 		C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92C9EC51E35D204003047DC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C92C9ED31E35DBD2003047DC /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -88,6 +88,8 @@
 		C963343A1E21B77600583CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C963343D1E21B77600583CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C963343F1E21B77600583CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C96AB4EA1E431A1800A5D00C /* ToolbarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		C96AB4EC1E4348F600A5D00C /* WaypointRangeElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointRangeElements.swift; sourceTree = "<group>"; };
 		C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadlineTableViewCell.swift; sourceTree = "<group>"; };
 		C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAdventureViewController.swift; sourceTree = "<group>"; };
 		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
@@ -148,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */,
-				C91D3C6A1E3EDBD700351853 /* WaypointPopoverViewController.swift */,
 				C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */,
 				C996D6CC1E26CF2E003E1F36 /* EnterAdventureViewController.swift */,
 				C9B9618C1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift */,
@@ -171,6 +172,7 @@
 				C9B961841E3AF2AF009DFE7E /* UserConnectionRequest.swift */,
 				C9B961861E3C1834009DFE7E /* AdventureProgress.swift */,
 				C9B961881E3C2922009DFE7E /* AdventureHeadlineDetail.swift */,
+				C96AB4EC1E4348F600A5D00C /* WaypointRangeElements.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -201,6 +203,7 @@
 				C94BEBBE1E38909F00381B8C /* Arrow.swift */,
 				C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */,
 				C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */,
+				C96AB4EA1E431A1800A5D00C /* ToolbarButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -318,7 +321,7 @@
 				TargetAttributes = {
 					C963342F1E21B77600583CE1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VGX88LS237;
+						DevelopmentTeam = YA9PU25M2S;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -404,7 +407,6 @@
 				F3E93F1F1E42A7C5008F4E08 /* CustomUIView.swift in Sources */,
 				C92C9ED61E35DBD2003047DC /* Session+CoreDataProperties.swift in Sources */,
 				C996D6CB1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift in Sources */,
-				C91D3C6B1E3EDBD700351853 /* WaypointPopoverViewController.swift in Sources */,
 				C94BEBBA1E3877E200381B8C /* MaxLengthUITextField.swift in Sources */,
 				C92C9EDB1E3675BB003047DC /* SignUpViewController.swift in Sources */,
 				C9B9618D1E3D6612009DFE7E /* AdventureDetailControllerViewController.swift in Sources */,
@@ -412,12 +414,14 @@
 				F303DCE31E375ED20077F1B4 /* UIFormViewController.swift in Sources */,
 				C9B961871E3C1834009DFE7E /* AdventureProgress.swift in Sources */,
 				C9BB52AF1E4009D5006849F3 /* AdventureUtilities.swift in Sources */,
+				C96AB4ED1E4348F600A5D00C /* WaypointRangeElements.swift in Sources */,
 				F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */,
 				C96334341E21B77600583CE1 /* AppDelegate.swift in Sources */,
 				C94BEBC51E3897E500381B8C /* MarkerUIElement.swift in Sources */,
 				C92C9EC61E35D204003047DC /* User.swift in Sources */,
 				C9B9618B1E3C3858009DFE7E /* LocationFinder.swift in Sources */,
 				C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */,
+				C96AB4EB1E431A1800A5D00C /* ToolbarButton.swift in Sources */,
 				C94BEBBF1E38909F00381B8C /* Arrow.swift in Sources */,
 				C9B961891E3C2922009DFE7E /* AdventureHeadlineDetail.swift in Sources */,
 				F3A56C961E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift in Sources */,
@@ -553,14 +557,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = VGX88LS237;
+				DEVELOPMENT_TEAM = YA9PU25M2S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -573,14 +577,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = VGX88LS237;
+				DEVELOPMENT_TEAM = YA9PU25M2S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
