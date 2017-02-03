@@ -100,6 +100,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
                 waypoint.title = defaultNameText
                 appendOrInsertAnnotation(waypoint, gesture: sender)
                 updateMapUI()
+                selectMarker(marker: waypoint)
             }
         }
     }
@@ -154,14 +155,34 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         mapView?.showAnnotations(waypoints, animated: true)
     }
     
+    private let pinHeight = CGFloat(39.0)
+    private var markerImage: UIImage {
+        get {
+            var image = #imageLiteral(resourceName: "marker")
+            let currentSize = image.size
+            image = image.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
+            return image
+        }
+    }
+    private var selectedImage: UIImage {
+        get {
+            var image = #imageLiteral(resourceName: "selected_marker")
+            let currentSize = image.size
+            image = image.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
+            return image
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var view: MKAnnotationView! = mapView.dequeueReusableAnnotationView(withIdentifier: Identifiers.waypoint)
         if view == nil {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Identifiers.waypoint)
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: Identifiers.waypoint)
             view.canShowCallout = false
         } else {
             view.annotation = annotation
         }
+
+        view.image = markerImage
         
         view.isDraggable = true
         view.setSelected(true, animated: true)
@@ -245,21 +266,23 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         editingWaypoint = nil
         view.isSelected = true
-        unhighlightPin(view as! MKPinAnnotationView)
+        unhighlightPin(view)
         //view.tintColor = UIColor.red
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         editingWaypoint = view.annotation as? Marker
-        highlightPin(view as! MKPinAnnotationView)
+        highlightPin(view)
     }
     
-    private func highlightPin(_ view: MKPinAnnotationView){
-        view.pinTintColor = UIColor.green
+    private func highlightPin(_ view: MKAnnotationView){
+        //view.pinTintColor = UIColor.green
+        view.image = selectedImage
     }
     
-    private func unhighlightPin(_ view: MKPinAnnotationView) {
-        view.pinTintColor = UIColor.red
+    private func unhighlightPin(_ view: MKAnnotationView) {
+        //view.pinTintColor = UIColor.red
+        view.image = markerImage
     }
     
     // Renders the map route
@@ -492,8 +515,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
     }
     
-    private let pinHeight = CGFloat(30.0)
-    
     private func moveNoteInput() {
         let height = noteInput.frame.height
         let width = view.frame.maxX
@@ -510,7 +531,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         let beaconHeight = beaconIndicator.layer.frame.height
         let beaconWidth = beaconIndicator.layer.frame.width
         
-        let buffer = CGFloat(10.0)
+        let buffer = CGFloat(5.0)
         
         var attemptedHeight = position.y - beaconHeight - buffer - pinHeight
         if !noteInput.isHidden && noteInput.frame.minY < (attemptedHeight + beaconHeight + buffer + pinHeight) {
@@ -534,7 +555,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         let nameHeight = nameView.layer.frame.height
         let nameWidth = nameView.layer.frame.width
         
-        let buffer = CGFloat(10.0)
+        let buffer = CGFloat(5.0)
         
         var attemptedHeight = position.y - nameHeight - buffer - pinHeight
         if !noteInput.isHidden && noteInput.frame.minY < (attemptedHeight + nameHeight + buffer + pinHeight) {
@@ -680,6 +701,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         drawBeaconRanges()
         drawNameRanges()
         drawNoteRanges()
+        drawDirections()
     }
     
     private var beaconRanges = [BeaconRangeElement]()
@@ -732,4 +754,20 @@ extension UIViewController {
             return self
         }
     }
+}
+
+extension UIImage {
+    
+    func imageResize (sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage!
+    }
+    
 }
