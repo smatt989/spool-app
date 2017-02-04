@@ -12,6 +12,8 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    @IBOutlet public var headerTitleLabel: UILabel!
+    @IBOutlet public var headerSubtitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
@@ -47,6 +49,9 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
         } else {
             progressLabel.isHidden = true
         }
+        
+        // Make label uppercase
+        progressLabel.text = progressLabel.text?.uppercased()
     }
     
     private func setupSharedBy() {

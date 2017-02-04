@@ -297,8 +297,8 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
             return overlay.renderer()
         }
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
-        renderer.lineWidth = 4.0
+        renderer.strokeColor = UIColor(red: 0.48, green: 0.54, blue: 0.92, alpha: 1.0) // #7A89EB
+        renderer.lineWidth = 6.0
         
         return renderer
     }
@@ -353,7 +353,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
 
     }
     
-    
+    @IBOutlet weak var saveAdventureButton: RoundedUIButton!
     @IBOutlet weak var waypointToolbar: UIView!
     
     @IBOutlet weak var navigationToggleButton: ToolbarButton!
@@ -395,6 +395,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         updateWaypointToolbarUI()
         setupKeyboards()
         waypointToolbar.isHidden = false
+        saveAdventureButton.isHidden = true
         startListening()
         addDisplayLink()
     }
@@ -408,6 +409,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         waypointToolbar.isHidden = true
         removePinchGesture()
         dismissKeyboard()
+        saveAdventureButton.isHidden = false
     }
     
     @IBAction func navigationToggleTap(_ sender: ToolbarButton) {
@@ -516,13 +518,16 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     private func moveNoteInput() {
+        
+        let leadingSpace:CGFloat = 20.0
+        let trailingSpace:CGFloat = 20.0
         let height = noteInput.frame.height
-        let width = view.frame.maxX
-        let x = view.frame.minX
+        let width = view.frame.maxX - trailingSpace - leadingSpace
+        
         if noteInput.isFirstResponder {
-            noteInput.frame = CGRect(x: x, y: 350, width: width, height: height)
+            noteInput.frame = CGRect(x: leadingSpace, y: 350, width: width, height: height)
         } else {
-            noteInput.frame = CGRect(x: x, y: view.frame.maxY - height - 100, width: width, height: height)
+            noteInput.frame = CGRect(x: leadingSpace, y: view.frame.maxY - height - 100, width: width, height: height)
         }
     }
     
