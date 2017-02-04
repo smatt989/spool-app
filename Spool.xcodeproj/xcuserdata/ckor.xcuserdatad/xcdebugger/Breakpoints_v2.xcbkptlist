@@ -434,11 +434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spool/AdventureHeadlineTableViewCell.swift"
-            timestampString = "507391264.290165"
+            timestampString = "507915971.406522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "setupSharedBy()"
             landmarkType = "7">
             <Locations>

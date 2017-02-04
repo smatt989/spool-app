@@ -56,6 +56,7 @@
 		F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */; };
 		F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */; };
 		F303DCF01E37C9280077F1B4 /* NavigationBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */; };
+		F30DBDE41E460414009AA19C /* AdventureHeadlineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F30DBDE21E460414009AA19C /* AdventureHeadlineTableViewCell.xib */; };
 		F33174C41E3928950022F28C /* RoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C31E3928950022F28C /* RoundedUIButton.swift */; };
 		F33174C61E393C080022F28C /* AdventuresNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33174C51E393C080022F28C /* AdventuresNavigationController.swift */; };
 		F3A56C961E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A56C951E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift */; };
@@ -116,6 +117,7 @@
 		F303DCE71E379CB60077F1B4 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		F303DCE81E379CB60077F1B4 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		F303DCEF1E37C9280077F1B4 /* NavigationBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarTransparent.swift; sourceTree = "<group>"; };
+		F30DBDE21E460414009AA19C /* AdventureHeadlineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdventureHeadlineTableViewCell.xib; sourceTree = "<group>"; };
 		F33174C31E3928950022F28C /* RoundedUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedUIButton.swift; sourceTree = "<group>"; };
 		F33174C51E393C080022F28C /* AdventuresNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresNavigationController.swift; sourceTree = "<group>"; };
 		F3A56C951E3E147D006FE7D0 /* UIBarButtonItemUppercase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemUppercase.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				C94BEBBB1E38783200381B8C /* AllowableCharactersUITextField.swift */,
 				C94BEBB91E3877E200381B8C /* MaxLengthUITextField.swift */,
 				C996D6CA1E26BBE4003E1F36 /* AdventureHeadlineTableViewCell.swift */,
+				F30DBDE21E460414009AA19C /* AdventureHeadlineTableViewCell.xib */,
 				C94BEBC41E3897E500381B8C /* MarkerUIElement.swift */,
 				C94BEBC01E38951900381B8C /* MarkerNameLabel.swift */,
 				C94BEBC21E3895CF00381B8C /* Beacon.swift */,
@@ -321,7 +324,7 @@
 				TargetAttributes = {
 					C963342F1E21B77600583CE1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = YA9PU25M2S;
+						DevelopmentTeam = VGX88LS237;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F303DCEB1E379CB60077F1B4 /* Nunito-SemiBold.ttf in Resources */,
+				F30DBDE41E460414009AA19C /* AdventureHeadlineTableViewCell.xib in Resources */,
 				F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */,
 				C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */,
 				F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */,
@@ -557,14 +561,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = YA9PU25M2S;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -577,14 +581,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = YA9PU25M2S;
+				DEVELOPMENT_TEAM = VGX88LS237;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spool.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewckor.spool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;

@@ -77,8 +77,8 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         tableView.delegate = self
         tableView.dataSource = self
         //SEEMS LIKE A BAD WAY TO SIZE THESE...
-        tableView.rowHeight = 100.0
         tableView.estimatedRowHeight = 100.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         // Style table
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -117,20 +117,34 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         return lookupArrayBySection(section).count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! AdventureHeadlineTableViewCell
+        
+        var headerTitle: String = "Adventures"
+        let headerSubtitle: String = "A list of adventures"
+        
         let lookupArrayCount = lookupArrayBySection(section).count
         if lookupArrayCount > 0 {
             switch section {
-            case 0: return "New Adventures"
-            case 1: return "Continue Adventures"
-            case 2: return "Nearby Adventures"
-            case 3: return "Adventures You Created"
-            case 4: return "Other Adventures"
-            default: return ""
+                case 0:  headerTitle = "New Adventures"
+                case 1:  headerTitle = "Continue Adventures"
+                case 2:  headerTitle = "Nearby Adventures"
+                case 3:  headerTitle = "Adventures You Created"
+                case 4:  headerTitle = "Other Adventures"
+                default: headerTitle = ""
             }
-        } else {
-            return nil
         }
+        
+        headerView.headerTitleLabel.text = headerTitle.uppercased()
+        headerView.headerSubtitleLabel.text = headerSubtitle
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! UIView
+        
+        return CGFloat(headerView.bounds.height)
     }
     
     private func lookupArrayBySection(_ int: Int) -> [AdventureHeadlineDetail] {
@@ -149,6 +163,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         let lookupArray = lookupArrayBySection(indexPath.section)
         
         cell.adventureHeadlineDetail = lookupArray[indexPath.row]
+        
         return cell
     }
     
