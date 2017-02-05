@@ -27,10 +27,15 @@ class Adventure: NSObject {
         didSet {
             if directionsSet {
                 print("GOT EM ALL")
+                totalDistance = directions.reduce(0){ result, direction in
+                    result + (direction.route?.distance ?? 0)
+                }
                 directionsSetCallback?()
             }
         }
     }
+    
+    var totalDistance: CLLocationDistance?
     
     var directionsSetCallback: (() -> Void)?
     
