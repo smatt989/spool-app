@@ -87,7 +87,9 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         super.viewWillAppear(animated)
         
         // Style Navbar
-        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
+        if let navController = navigationController {
+            TransparentUINavigationController().navBarTransparent(controller: navController)
+        }
     }
     
     @objc private func addAnnotation(_ sender: UILongPressGestureRecognizer){
@@ -117,18 +119,73 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         if let adv = adventure, let index = adv.markers.index(of: annotation) {
             mapView.removeAnnotation(annotation)
             adv.markers.remove(at: index)
-        }
-        
+        }        
     }
     
     private func drawDirections() {
         if adventure != nil {
             mapView?.removeOverlays(mapView.overlays.filter{ overlay in overlay is MKPolyline})
-            for direction in adventure!.directions {
+            
+            let directionsToDraw = adventure!.directions.filter{
+                $0.end.showDirections
+            }
+            
+            for direction in directionsToDraw {
                 mapView.add(direction.route!.polyline, level: .aboveRoads)
             }
         }
     }
+    
+//    private let transformConstant = 1 / 500.0
+//    
+//    private var arrowViews = [UIImageView]()
+//    
+//    private func drawDirectionArrows() {
+//        arrowViews.forEach{
+//            $0.removeFromSuperview()
+//        }
+//        arrowViews = [UIImageView]()
+//        if adventure != nil {
+//            for direction in adventure!.directions {
+//                let route = direction.route!.polyline
+//                let pointCount = route.pointCount
+//                for i in 1 ..< pointCount {
+//                    print(">>>>>>>>>>>>DRAWING<<<<<<<<<<<<")
+//                    let thisPoint = route.points()[i]
+//                    let lastPoint = route.points()[i - 1]
+//                    let img = #imageLiteral(resourceName: "small-arrow")
+//                    
+//                    let width = CGFloat(30)
+//                    let height = CGFloat(20)
+//                    
+//                    let imgView = UIImageView(image: img.imageResize(sizeChange: CGSize(width: width, height: height)))
+//                    
+//                    let currentCoordinate = MKCoordinateForMapPoint(thisPoint)
+//                    let previousCoordinate = MKCoordinateForMapPoint(lastPoint)
+//                    let currentCGPoint = mapView.convert(currentCoordinate, toPointTo: mapView)
+//                    let previousCGPoint = mapView.convert(previousCoordinate, toPointTo: mapView)
+//
+//                    
+//                    let xDiff = currentCGPoint.x - previousCGPoint.x
+//                    let yDiff = -(currentCGPoint.y - previousCGPoint.y)
+//                    let angle = tan(xDiff / yDiff)
+//                    
+//                    var transform = CATransform3DIdentity
+//                    transform.m34 = CGFloat(transformConstant)
+//                    
+//                    imgView.layer.transform = CATransform3DRotate(transform, angle, 0, 0, 1)
+//                    
+//                    imgView.frame = CGRect(x: currentCGPoint.x - (width / 2), y: currentCGPoint.y - (height / 2), width: width, height: height)
+//                    
+//                    arrowViews.append(imgView)
+//                }
+//            }
+//        }
+//        arrowViews.forEach{
+//            view.addSubview($0)
+//        }
+//        
+//    }
     
     @IBAction func saveAdventure(_ sender: UIButton) {
         if let adv = adventure {
@@ -156,21 +213,24 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     private let pinHeight = CGFloat(39.0)
-    private var markerImage: UIImage {
-        get {
-            var image = #imageLiteral(resourceName: "marker")
-            let currentSize = image.size
-            image = image.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
-            return image
-        }
+    
+    enum MarkerState {
+        case normal
+        case highlighted
+        case beacon
     }
-    private var selectedImage: UIImage {
-        get {
-            var image = #imageLiteral(resourceName: "selected_marker")
-            let currentSize = image.size
-            image = image.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
-            return image
+    
+    private func pinViewFromState(_ state: MarkerState) -> UIImage {
+        var image: UIImage?
+        switch state{
+        case .normal: image = #imageLiteral(resourceName: "marker")
+        case .highlighted: image = #imageLiteral(resourceName: "selected_marker")
+        case .beacon: image = #imageLiteral(resourceName: "starshot")
         }
+        
+        let currentSize = image!.size
+        image = image!.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
+        return image!
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -182,13 +242,10 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
             view.annotation = annotation
         }
 
-        view.image = markerImage
+        view.image = pinViewFromState(.normal)
         
         view.isDraggable = true
         view.setSelected(true, animated: true)
-        
-        //view.leftCalloutAccessoryView = nil
-        //view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
         return view
     }
@@ -260,6 +317,14 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        
+        if newState == MKAnnotationViewDragState.starting {
+            view.dragState = MKAnnotationViewDragState.dragging
+        }
+        else if newState == MKAnnotationViewDragState.ending || newState == MKAnnotationViewDragState.canceling {
+            view.dragState = MKAnnotationViewDragState.none;
+        }
+
         view.setSelected(true, animated: true)
     }
     
@@ -267,22 +332,32 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         editingWaypoint = nil
         view.isSelected = true
         unhighlightPin(view)
-        //view.tintColor = UIColor.red
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        editingWaypointView = view
         editingWaypoint = view.annotation as? Marker
-        highlightPin(view)
+        //focusPin(view)
+    }
+    
+    private func focusPin(_ view: MKAnnotationView) {
+        if editingWaypoint?.showBeaconWithinMeterRange != nil {
+            makeBeaconPin(view)
+        } else {
+            highlightPin(view)
+        }
+    }
+    
+    private func makeBeaconPin(_ view: MKAnnotationView) {
+        view.image = pinViewFromState(.beacon)
     }
     
     private func highlightPin(_ view: MKAnnotationView){
-        //view.pinTintColor = UIColor.green
-        view.image = selectedImage
+        view.image = pinViewFromState(.highlighted)
     }
     
     private func unhighlightPin(_ view: MKAnnotationView) {
-        //view.pinTintColor = UIColor.red
-        view.image = markerImage
+        view.image = pinViewFromState(.normal)
     }
     
     // Renders the map route
@@ -317,40 +392,14 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     private func dismissSelf() {
-        dismiss(animated: true, completion: nil)
+        _ = navigationController?.popViewController(animated: true)
     }
-    
-//    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-//        selectMarker(marker: (popoverPresentationController.presentedViewController as? WaypointPopoverViewController)?.waypointToEdit)
-//    }
-    
-//    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
-//        if style == .fullScreen || style == .overFullScreen {
-//            let navcon = UINavigationController(rootViewController: controller.presentedViewController)
-//            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-//            visualEffectView.frame = navcon.view.bounds
-//            visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            navcon.view.insertSubview(visualEffectView, at: 0)
-//            return navcon
-//        } else {
-//            return nil
-//        }
-//    }
-    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        performSegue(withIdentifier: Identifiers.editMarkerPopoverSegue, sender: view)
-//        mapView.deselectAnnotation(view.annotation, animated: true)
-//    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             mapView.deselectAnnotation(view.annotation, animated: true)
             performSegue(withIdentifier: Identifiers.editMarkerPopoverSegue, sender: view)
         }
-    }
-    
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-
     }
     
     @IBOutlet weak var saveAdventureButton: RoundedUIButton!
@@ -361,8 +410,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     @IBOutlet weak var nameToggleButton: ToolbarButton!
     @IBOutlet weak var noteToggleButton: ToolbarButton!
     @IBOutlet weak var deleteWaypointButton: ToolbarButton!
-    
-    @IBOutlet weak var beaconIndicator: UIImageView!
+
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameInput: UITextField!
     @IBOutlet weak var noteInput: UITextView!
@@ -386,9 +434,12 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
                 showToolbar()
             } else {
                 hideToolbar()
+                editingWaypointView = nil
             }
         }
     }
+    
+    private var editingWaypointView: MKAnnotationView?
     
     private func showToolbar() {
         setAllToolbarButtonsToNotFocused()
@@ -403,7 +454,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     private func hideToolbar() {
         stopListening()
         removeDisplayLink()
-        beaconIndicator.isHidden = true
         nameView.isHidden = true
         noteInput.isHidden = true
         waypointToolbar.isHidden = true
@@ -417,17 +467,23 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         setAllToolbarButtonsToNotFocused()
         updateWaypointToolbarUI()
     }
+
+    private let defaultPointRange = 50
+    private let defaultNameText = "Dropped"
     
-    let defaultRange = 25
-    let defaultNameText = "Dropped"
-    
-    
+    private func defaultMeterRange() -> Int {
+        let waypointPoint = mapView.convert((editingWaypoint!.coordinate), toPointTo: mapView)
+        let pointRadiusAway = CGPoint(x: waypointPoint.x + CGFloat(defaultPointRange), y: waypointPoint.y)
+        let newCoordinate = mapView.convert(pointRadiusAway, toCoordinateFrom: mapView)
+        let distance = CLLocation(latitude: editingWaypoint!.latitude, longitude: editingWaypoint!.longitude).distance(from: CLLocation(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude))
+        return Int(round(distance))
+    }
     
     @IBAction func beaconToggleTap(_ sender: ToolbarButton) {
         if sender.isFocus && sender.isOn {
             editingWaypoint!.showBeaconWithinMeterRange = nil
         } else {
-            editingWaypoint!.showBeaconWithinMeterRange = editingWaypoint!.showBeaconWithinMeterRange ?? defaultRange
+            editingWaypoint!.showBeaconWithinMeterRange = editingWaypoint!.showBeaconWithinMeterRange ?? defaultMeterRange()
         }
         tapButton(sender)
         updateWaypointToolbarUI()
@@ -437,7 +493,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         if sender.isFocus && sender.isOn {
             editingWaypoint!.showNameWithinMeterRange = nil
         } else {
-            editingWaypoint!.showNameWithinMeterRange = editingWaypoint!.showNameWithinMeterRange ?? defaultRange
+            editingWaypoint!.showNameWithinMeterRange = editingWaypoint!.showNameWithinMeterRange ?? defaultMeterRange()
         }
         tapButton(sender)
         updateWaypointToolbarUI()
@@ -448,7 +504,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
             editingWaypoint!.showDescriptionWithinMeterRange = nil
             editingWaypoint!.descriptionText = nil
         } else {
-            editingWaypoint!.showDescriptionWithinMeterRange = editingWaypoint!.showDescriptionWithinMeterRange ?? defaultRange
+            editingWaypoint!.showDescriptionWithinMeterRange = editingWaypoint!.showDescriptionWithinMeterRange ?? defaultMeterRange()
         }
         tapButton(sender)
         updateWaypointToolbarUI()
@@ -502,18 +558,17 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     }
     
     private func setWaypointMetadataVisibility() {
-        beaconIndicator.isHidden = editingWaypoint!.showBeaconWithinMeterRange == nil
         nameView.isHidden = editingWaypoint!.showNameWithinMeterRange == nil
         noteInput.isHidden = editingWaypoint!.showDescriptionWithinMeterRange == nil
         nameInput.text = editingWaypoint!.title
         noteInput.text = editingWaypoint!.descriptionText
+        focusPin(editingWaypointView!)
     }
     
     @objc private func moveWaypointMetadataViews() {
         if editingWaypoint != nil {
             moveNoteInput()
             moveNameView()
-            moveBeaconView()
         }
     }
     
@@ -529,30 +584,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         } else {
             noteInput.frame = CGRect(x: leadingSpace, y: view.frame.maxY - height - 100, width: width, height: height)
         }
-    }
-    
-    private func moveBeaconView() {
-        let position = mapView.convert(editingWaypoint!.coordinate, toPointTo: view)
-        let beaconHeight = beaconIndicator.layer.frame.height
-        let beaconWidth = beaconIndicator.layer.frame.width
-        
-        let buffer = CGFloat(5.0)
-        
-        var attemptedHeight = position.y - beaconHeight - buffer - pinHeight
-        if !noteInput.isHidden && noteInput.frame.minY < (attemptedHeight + beaconHeight + buffer + pinHeight) {
-            attemptedHeight = noteInput.frame.minY - beaconHeight - buffer - pinHeight
-        }
-        
-        var attemptedWidth = position.x - (beaconWidth / 2)
-        if !nameView.isHidden {
-            if (nameView.layer.frame.maxX + beaconWidth + buffer) < view.frame.maxX {
-                attemptedWidth = nameView.layer.frame.maxX + buffer
-            } else {
-                attemptedWidth = nameView.layer.frame.minX - buffer - beaconWidth
-            }
-        }
-        
-        beaconIndicator.frame = CGRect(x: attemptedWidth, y: attemptedHeight, width: beaconWidth, height: beaconHeight)
     }
     
     private func moveNameView() {

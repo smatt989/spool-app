@@ -93,9 +93,12 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     
     private struct Constants {
+        static let rightWayRadianTolerance = M_PI * 5 / 8
         static let horizontalAccuracy = 10.0
         static let verticalAccuracy = 10.0
         static let distanceBetweenPointsAccuracy = 15.0
+        static let headingAstrayDistance = 30.0
+        static let tooMuchGpsVariation = 50.0
     }
     
     private var deviceMotion = CMMotionManager()
@@ -260,6 +263,17 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
+    private func headingRightWay() -> Bool? {
+        if motionIsReady {
+            if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
+                let orientation = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+                
+                return orientation.roll < Constants.rightWayRadianTolerance && orientation.roll > -Constants.rightWayRadianTolerance
+            }
+        }
+        return nil
+    }
+    
     private func rotateLabel(element: MarkerUIElement) {
         if let waypoint = element.waypoint, motionIsReady {
             var transform = CATransform3DIdentity
@@ -278,51 +292,78 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         latestHeading = newHeading.trueHeading
+//        if let h = headingRightWay() {
+//            print("ON TRACK: \(h)")
+//        }
     }
     
-    private var locationUpdates = 0
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let previousLocation = latestLocation
         latestLocation = locations.last
         printToScreen(str: "UPDATING LOCATION")
-        if currentDirections != nil && currentDestinationStep != nil {
-            locationUpdates += 1
-//            if locationUpdates % 10 == 0 {
-//                //refreshMarker()
-//            }
+        var onTrack = true
+        if let mostRecentLocation = latestLocation, currentDirections != nil && currentDestinationStep != nil {
             
-            let mostRecentLocation = locations.last!
-            let targetLocation = CLLocation(coordinate: currentDestinationStep!, altitude: mostRecentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
+            //checks to see if there was a big GPS change, and if so refetches directions
+            if previousLocation != nil {
+                if mostRecentLocation.distance(from: previousLocation!) > Constants.tooMuchGpsVariation {
+                    refreshMarker()
+                    onTrack = false
+                }
+            }
             
-            let distanceFromStep = mostRecentLocation.distance(from: targetLocation)
-            printToScreen(str: "distance: \(distanceFromStep)")
+            //checks to see if getting further away from next step, and if so refetches directions
+            if let originalStepDistance = distanceToStep, onTrack {
+                let distanceToStep = distanceFromCoordinate(mostRecentLocation, coordinate: currentDestinationStep!)
+                if distanceToStep > originalStepDistance + Constants.headingAstrayDistance && !currentDirections!.finished {
+                    refreshMarker()
+                    onTrack = false
+                }
+            }
 
-            if distanceFromStep < Constants.distanceBetweenPointsAccuracy {
-                currentDirections!.nextStep()
-                if currentDirections!.finished {
-                    let targetMarker = CLLocation(coordinate: currentDestination!.coordinate, altitude: mostRecentLocation.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
-                    if mostRecentLocation.distance(from: targetMarker) < Constants.distanceBetweenPointsAccuracy {
-                        printToScreen(str: "NEXT MARKER")
-                        nextMarker()
-                    } else {
-                        printToScreen(str: "NOT QUITE THERE")
+            if onTrack {
+                if closeEnoughToCoordinate(mostRecentLocation, coordinate: currentDestinationStep!) {
+                    currentDirections!.nextStep()
+                    if currentDirections!.finished {
                         currentDestinationStep = currentDestination?.coordinate
+                    } else {
+                        printToScreen(str: "NEXT STEP")
+                        currentDestinationStep = currentDirections!.currentStep
                     }
-                } else {
-                    printToScreen(str: "NEXT STEP")
-                    currentDestinationStep = currentDirections!.currentStep
+                }
+                
+                if closeEnoughToCoordinate(mostRecentLocation, coordinate: currentDestination!.coordinate) {
+                    printToScreen(str: "NEXT MARKER")
+                    nextMarker()
                 }
             }
         }
     }
     
+    private func closeEnoughToCoordinate(_ location: CLLocation, coordinate: CLLocationCoordinate2D) -> Bool {
+        let distance = distanceFromCoordinate(location, coordinate: coordinate)
+        return distance < Constants.distanceBetweenPointsAccuracy
+    }
+    
+    private func distanceFromCoordinate(_ location: CLLocation, coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
+        let targetMarker = CLLocation(coordinate: coordinate, altitude: location.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
+        return location.distance(from: targetMarker)
+    }
+    
+    private var distanceToStep: CLLocationDistance?
+    
     private var currentDestinationStep: CLLocationCoordinate2D? {
         didSet {
+            distanceToStep = nil
             if currentDestinationStep != nil {
                 let lat = currentDestinationStep!.latitude
                 let lng = currentDestinationStep!.longitude
                 let str = "heading to \(lat), \(lng)"
                 printToScreen(str: str)
+                
+                if let mostRecentLocation = latestLocation {
+                    distanceToStep = distanceFromCoordinate(mostRecentLocation, coordinate: currentDestinationStep!)
+                }
             }
         }
     }
