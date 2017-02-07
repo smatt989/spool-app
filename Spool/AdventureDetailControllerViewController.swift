@@ -70,7 +70,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         distanceAwayLabel.isHidden = true
         progressLabel.isHidden = true
         startAdventureButton.isHidden = true
-        continueAdventureButton.isHidden = true
+        restartButtonsStack.isHidden = true
     }
     
     private func updateTitleLabel(adventure: AdventureHeadlineDetail) {
@@ -118,19 +118,18 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
                 startAdventureButton.setTitle("Restart", for: .normal)
             
             startAdventureButton.isHidden = false
-            continueAdventureButton.isHidden = true
+            restartButtonsStack.isHidden = true
             progressLabel.isHidden = false
         } else if adventure.started {
             print("STARTED")
             progressLabel.text = "You already started this adventure"
-            startAdventureButton.setTitle("Restart", for: .normal)
             
-            startAdventureButton.isHidden = false
-            continueAdventureButton.isHidden = false
+            restartButtonsStack.isHidden = false
+            startAdventureButton.isHidden = true
             progressLabel.isHidden = false
         } else {
             startAdventureButton.isHidden = false
-            continueAdventureButton.isHidden = true
+            restartButtonsStack.isHidden = true
             progressLabel.isHidden = true
         }
     }
@@ -149,6 +148,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     
     @IBOutlet weak var continueAdventureButton: UIButton!
     @IBOutlet weak var startAdventureButton: UIButton!
+    @IBOutlet weak var restartButtonsStack: UIStackView!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.startAdventureSegue {
