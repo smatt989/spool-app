@@ -87,25 +87,6 @@
                                 <color key="textColor" red="0.60784313729999995" green="0.66274509800000003" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elo-uL-SlX" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
-                                <rect key="frame" x="20" y="597" width="335" height="50"/>
-                                <color key="backgroundColor" red="0.039215686274509803" green="0.78823529411764703" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="8zM-vb-Tec"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                <state key="normal" title="Continue">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="NMs-db-Lcf" kind="show" identifier="Continue Adventure Segue" id="f1Z-JA-53F"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mg-ZV-DgR" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
                                 <rect key="frame" x="20" y="597" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.2470588235" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -156,7 +137,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9x-xF-xuP">
-                                <rect key="frame" x="16" y="358" width="148" height="20.5"/>
+                                <rect key="frame" x="16" y="358" width="144" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shared with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-d7-nEn">
                                         <rect key="frame" x="0.0" y="0.0" width="81.5" height="20.5"/>
@@ -171,8 +152,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jina, ckor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4T-bL-JgX">
-                                        <rect key="frame" x="86" y="0.0" width="62" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="15"/>
+                                        <rect key="frame" x="86" y="0.0" width="58" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="14"/>
                                         <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -205,25 +186,75 @@
                                     <segue destination="ISb-N5-p9z" kind="presentation" identifier="Adventure Screen Share" id="pG4-3d-oE2"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rX4-6F-gxO" userLabel="Continue - Restart Stack">
+                                <rect key="frame" x="20" y="597" width="335" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBm-xE-RuX" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="pRA-MH-Sfb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <state key="normal" title="Restart">
+                                            <color key="titleColor" red="0.8980392157" green="0.2470588235" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.8980392157" green="0.2470588235" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elo-uL-SlX" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
+                                        <rect key="frame" x="172.5" y="0.0" width="162.5" height="50"/>
+                                        <color key="backgroundColor" red="0.039215686270000001" green="0.78823529410000004" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="8zM-vb-Tec"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="NMs-db-Lcf" kind="show" identifier="Continue Adventure Segue" id="f1Z-JA-53F"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Elo-uL-SlX" secondAttribute="trailing" id="5Qj-k3-3ws"/>
+                                    <constraint firstAttribute="bottom" secondItem="oBm-xE-RuX" secondAttribute="bottom" id="LOh-HG-EAt"/>
+                                    <constraint firstItem="oBm-xE-RuX" firstAttribute="leading" secondItem="rX4-6F-gxO" secondAttribute="leading" id="Waw-dx-Bo6"/>
+                                    <constraint firstItem="oBm-xE-RuX" firstAttribute="top" secondItem="rX4-6F-gxO" secondAttribute="top" id="aF6-pb-VDp"/>
+                                    <constraint firstAttribute="height" constant="50" id="ale-5i-8aw"/>
+                                    <constraint firstItem="Elo-uL-SlX" firstAttribute="top" secondItem="rX4-6F-gxO" secondAttribute="top" id="v9S-bu-ut9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Elo-uL-SlX" secondAttribute="bottom" id="vN7-4c-dZx"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Elo-uL-SlX" secondAttribute="trailing" constant="20" id="072-wx-u1O"/>
                             <constraint firstItem="2yV-uE-i5Z" firstAttribute="top" secondItem="5qf-cD-nkj" secondAttribute="bottom" id="35X-gO-wha"/>
                             <constraint firstAttribute="trailing" secondItem="2yV-uE-i5Z" secondAttribute="trailing" id="4F8-AC-hya"/>
                             <constraint firstItem="t9x-xF-xuP" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leadingMargin" id="4pN-17-Bl3"/>
                             <constraint firstAttribute="trailing" secondItem="hOB-CC-BUt" secondAttribute="trailing" id="5Gw-4K-vUa"/>
                             <constraint firstItem="2yV-uE-i5Z" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" id="6Oj-Ge-RgD"/>
                             <constraint firstItem="Uj8-r4-4X3" firstAttribute="top" secondItem="2yV-uE-i5Z" secondAttribute="bottom" id="953-cY-c4E"/>
-                            <constraint firstItem="XbI-xa-sM5" firstAttribute="top" secondItem="Elo-uL-SlX" secondAttribute="bottom" constant="20" id="9yd-FA-gKK"/>
                             <constraint firstItem="XzF-lL-IUt" firstAttribute="top" secondItem="hOB-CC-BUt" secondAttribute="bottom" constant="20" id="GnJ-9U-rbT"/>
                             <constraint firstItem="Uj8-r4-4X3" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" id="Hrg-uR-qvv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XzF-lL-IUt" secondAttribute="trailing" id="I02-Tp-KLE"/>
                             <constraint firstAttribute="trailing" secondItem="0mg-ZV-DgR" secondAttribute="trailing" constant="20" id="LP5-eB-Fxp"/>
                             <constraint firstItem="ojJ-Ds-KFH" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leadingMargin" id="TER-gX-zMt"/>
-                            <constraint firstItem="XbI-xa-sM5" firstAttribute="top" secondItem="Elo-uL-SlX" secondAttribute="bottom" constant="20" id="UKE-Tk-7G9"/>
                             <constraint firstItem="0mg-ZV-DgR" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" constant="20" id="V6c-ec-BL0"/>
-                            <constraint firstItem="Elo-uL-SlX" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" constant="20" id="YIz-id-fFv"/>
                             <constraint firstItem="T5U-wu-L15" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" constant="20" id="YJn-h3-uFE"/>
                             <constraint firstItem="XzF-lL-IUt" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leadingMargin" id="Z1r-Oh-3Kl"/>
                             <constraint firstItem="hOB-CC-BUt" firstAttribute="top" secondItem="t9x-xF-xuP" secondAttribute="bottom" constant="20" id="Z3E-Fe-d1k"/>
@@ -233,21 +264,24 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ojJ-Ds-KFH" secondAttribute="trailing" id="fKy-Fh-sfK"/>
                             <constraint firstItem="ojJ-Ds-KFH" firstAttribute="top" secondItem="XzF-lL-IUt" secondAttribute="bottom" id="g15-6F-mb3"/>
                             <constraint firstItem="i8r-FH-rHf" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leadingMargin" id="gAd-7v-YfM"/>
+                            <constraint firstItem="rX4-6F-gxO" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" constant="20" id="gH6-5K-JyG"/>
                             <constraint firstItem="hOB-CC-BUt" firstAttribute="leading" secondItem="NQd-l0-zR0" secondAttribute="leading" id="hEH-p9-sWk"/>
                             <constraint firstAttribute="trailing" secondItem="T5U-wu-L15" secondAttribute="trailing" constant="20" id="hmN-Pv-tdI"/>
                             <constraint firstItem="i8r-FH-rHf" firstAttribute="top" secondItem="Uj8-r4-4X3" secondAttribute="bottom" constant="20" id="j4p-SR-6ce"/>
                             <constraint firstItem="XbI-xa-sM5" firstAttribute="top" secondItem="0mg-ZV-DgR" secondAttribute="bottom" constant="20" id="jhX-Fu-VYb"/>
                             <constraint firstItem="0mg-ZV-DgR" firstAttribute="top" secondItem="T5U-wu-L15" secondAttribute="bottom" constant="8" id="nii-kv-zel"/>
                             <constraint firstItem="0xl-zA-f3m" firstAttribute="top" secondItem="Uj8-r4-4X3" secondAttribute="bottom" constant="24" id="pSQ-BB-UOe"/>
+                            <constraint firstItem="XbI-xa-sM5" firstAttribute="top" secondItem="rX4-6F-gxO" secondAttribute="bottom" constant="20" id="xTE-25-3nR"/>
+                            <constraint firstAttribute="trailing" secondItem="rX4-6F-gxO" secondAttribute="trailing" constant="20" id="yng-LP-dSf"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="continueAdventureButton" destination="Elo-uL-SlX" id="Pnh-8N-2B1"/>
                         <outlet property="createdByLabel" destination="Vbf-ad-LXL" id="M1r-3U-bWO"/>
                         <outlet property="createdByLabelPrepend" destination="nuR-nj-woL" id="Hga-l8-WXc"/>
                         <outlet property="descriptionLabel" destination="iXw-N6-Kee" id="l5q-1w-kNd"/>
                         <outlet property="distanceAwayLabel" destination="ojJ-Ds-KFH" id="rH4-ZD-zeK"/>
                         <outlet property="progressLabel" destination="T5U-wu-L15" id="aka-gl-XaK"/>
+                        <outlet property="restartButtonsStack" destination="rX4-6F-gxO" id="83h-rv-iz0"/>
                         <outlet property="sharedByLabel" destination="k4T-bL-JgX" id="c4E-Wk-lrh"/>
                         <outlet property="sharedByLabelPrepend" destination="7PR-d7-nEn" id="gXA-5w-zsj"/>
                         <outlet property="sharedByStack" destination="t9x-xF-xuP" id="km0-0E-7jZ"/>
@@ -326,7 +360,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="343" height="58"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S1y-65-gBP" id="GBh-oC-igV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="57.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="57"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui8-MJ-E6y">
@@ -617,7 +651,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="meB-6k-CXR" id="cSQ-bc-ko0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="igv-3h-KOt" userLabel="Border">
@@ -1066,7 +1100,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qWo-IP-Txi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EHy-wb-UdS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EHy-wb-UdS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1091,7 +1125,7 @@
         <image name="Toolbar - Trash" width="14" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SVd-Kz-b3H"/>
+        <segue reference="pG4-3d-oE2"/>
         <segue reference="f1Z-JA-53F"/>
     </inferredMetricsTieBreakers>
 </document>
