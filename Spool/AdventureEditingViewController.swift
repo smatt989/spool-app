@@ -222,14 +222,25 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     private func pinViewFromState(_ state: MarkerState) -> UIImage {
         var image: UIImage?
+        var width: CGFloat
+        var height: CGFloat
+        
         switch state{
-        case .normal: image = #imageLiteral(resourceName: "marker")
-        case .highlighted: image = #imageLiteral(resourceName: "selected_marker")
-        case .beacon: image = #imageLiteral(resourceName: "starshot")
+        case .normal:
+            image = #imageLiteral(resourceName: "marker")
+            width = 39.0
+            height = 40.0
+        case .highlighted:
+            image = #imageLiteral(resourceName: "selected_marker")
+            width = 50.0
+            height = 52.0
+        case .beacon:
+            image = #imageLiteral(resourceName: "starshot")
+            width = 50.0
+            height = 52.0
         }
         
-        let currentSize = image!.size
-        image = image!.imageResize(sizeChange: CGSize(width: pinHeight * currentSize.width / currentSize.height, height: pinHeight))
+        image = image!.imageResize(sizeChange: CGSize(width: width, height: height))
         return image!
     }
     

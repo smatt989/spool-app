@@ -17,9 +17,8 @@ class Beacon: UIView, MarkerUIElement {
     func setupBeacon(frame: CGRect) {
         self.frame = frame
         
-        let imageWidth = frame.width / 3
-        let imageRatio = imageWidth / starView.frame.width
-        let imageHeight = starView.frame.height * imageRatio
+        let imageWidth:CGFloat    =   75.0
+        let imageHeight:CGFloat   =   80.0
         
         starView.frame = CGRect(x: (frame.width - imageWidth) / 2, y: (frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
         
