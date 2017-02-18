@@ -254,6 +254,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         }
 
         view.image = pinViewFromState(.normal)
+        view.centerOffset = CGPoint(x: 0, y: view.image!.size.height / -2.0)
         
         view.isDraggable = true
         view.setSelected(true, animated: true)
@@ -629,6 +630,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         view.endEditing(true)
         if !nameView.isHidden && editingWaypoint!.title == defaultNameText && nameToggleButton.isFocus {
             nameInput.becomeFirstResponder()
+            nameInput.text = ""
         } else if !noteInput.isHidden && editingWaypoint!.descriptionText == nil && noteToggleButton.isFocus {
             noteInput.becomeFirstResponder()
         }

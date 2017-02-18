@@ -23,21 +23,19 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
             previouslyStartedAdventures = [AdventureHeadlineDetail]()
             nearbyAdventures = [AdventureHeadlineDetail]()
             yourAdventures = [AdventureHeadlineDetail]()
-            otherAdventures = [AdventureHeadlineDetail]()
             
             
             adventures.forEach{ adventure in
                 switch adventure {
-                case let a where a.sharers.count > 0 && !a.started:
-                    newReceivedAdventures.append(a)
-                case let a where a.started:
-                    previouslyStartedAdventures.append(a)
-                case let a where a.distance <= 5000:
-                    nearbyAdventures.append(a)
                 case let a where a.creator.id == appDelegate.authentication.currentUser?.id:
                     yourAdventures.append(a)
-                default:
-                    otherAdventures.append(adventure)
+                case let a where a.started && !a.finished && a.distance <= 10000:
+                    previouslyStartedAdventures.append(a)
+                case let a where a.sharers.count > 0 && !a.started && !a.finished:
+                    newReceivedAdventures.append(a)
+                case let a where a.distance <= 5000 && !a.finished:
+                    nearbyAdventures.append(a)
+                default: break
                 }
             }
             
@@ -53,7 +51,6 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     private var previouslyStartedAdventures = [AdventureHeadlineDetail]()
     private var nearbyAdventures = [AdventureHeadlineDetail]()
     private var yourAdventures = [AdventureHeadlineDetail]()
-    private var otherAdventures = [AdventureHeadlineDetail]()
     
     private func newReceivedAdventuresa() -> [AdventureHeadlineDetail] {
         return adventures.filter{$0.sharers.count > 0 && !$0.started}
@@ -67,16 +64,14 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         return adventures.filter{$0.sharers.count == 0 && $0.distance < 5000}
     }
     
-    private func otherAdventuresa() {
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
         //SEEMS LIKE A BAD WAY TO SIZE THESE...
+        setupHiddenHeaders()
+        
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         // Style table
@@ -109,51 +104,95 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         }
     }
     
+    private let sectionCount = 4
+    private var hidden = [Bool]()
+    
+    @objc private func tapFunction(sender:UITapGestureRecognizer) {
+        let section = sender.view!.tag
+        let indexPaths = (0..<lookupArrayBySection(section).count).map { i in return IndexPath(item: i, section: section)  }
+        
+        hidden[section] = !hidden[section]
+        
+        tableView?.beginUpdates()
+        if hidden[section] {
+            tableView?.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView?.insertRows(at: indexPaths, with: .fade)
+        }
+        tableView?.endUpdates()
+    }
+    
+    private func setupHiddenHeaders() {
+        (0..<sectionCount).forEach{ _ in
+            hidden.append(true)
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return sectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lookupArrayBySection(section).count
+        if hidden[section] {
+            return 0
+        } else {
+            return lookupArrayBySection(section).count
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! AdventureHeadlineTableViewCell
         
-        var headerTitle: String = "Adventures"
+        var headerTitle: String?
         let headerSubtitle: String = "A list of adventures"
+        
+        let arrayCount = UILabel()
+        arrayCount.text = "(\(lookupArrayBySection(section).count))"
+        arrayCount.frame = CGRect(x: 200, y: 10, width: 40, height: 20)
         
         let lookupArrayCount = lookupArrayBySection(section).count
         if lookupArrayCount > 0 {
             switch section {
-                case 0:  headerTitle = "New Adventures"
-                case 1:  headerTitle = "Continue Adventures"
+                case 0:  headerTitle = "Continue Adventures"
+                case 1:  headerTitle = "Received Adventures"
                 case 2:  headerTitle = "Nearby Adventures"
                 case 3:  headerTitle = "Adventures You Created"
-                case 4:  headerTitle = "Other Adventures"
-                default: headerTitle = ""
+                default: break
             }
         }
         
-        headerView.headerTitleLabel.text = headerTitle.uppercased()
+        headerView.headerTitleLabel.text = headerTitle?.uppercased()
         headerView.headerSubtitleLabel.text = headerSubtitle
+        headerView.contentView.insertSubview(arrayCount, at: 5)
         
-        return headerView
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
+        headerView.contentView.isUserInteractionEnabled = true
+        headerView.contentView.addGestureRecognizer(tap)
+        headerView.contentView.tag = section
+        
+        return headerView.contentView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! UIView
+        
+        if section == 0 && lookupArrayBySection(0).count == 0 {
+            return 0.0
+        }
+        if section == 1 && lookupArrayBySection(1).count == 0 {
+            return 0.0
+        }
         
         return CGFloat(headerView.bounds.height)
     }
     
     private func lookupArrayBySection(_ int: Int) -> [AdventureHeadlineDetail] {
         switch int {
-        case 0: return newReceivedAdventures
-        case 1: return previouslyStartedAdventures
+        case 0: return previouslyStartedAdventures
+        case 1: return newReceivedAdventures
         case 2: return nearbyAdventures
         case 3: return yourAdventures
-        default: return otherAdventures
+        default: return [AdventureHeadlineDetail]()
         }
     }
     

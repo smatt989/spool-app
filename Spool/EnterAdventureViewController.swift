@@ -192,8 +192,9 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         if let loc = latestLocation {
             beacons.forEach{ beacon in
                 if let waypoint = beacon.waypoint, let range = beacon.waypoint?.showBeaconWithinMeterRange {
-                    if loc.distance(from: CLLocation(latitude: waypoint.latitude, longitude: waypoint.longitude)) <= Double(range) {
-                    rotateLabel(element: beacon)
+                    let dist = loc.distance(from: CLLocation(latitude: waypoint.latitude, longitude: waypoint.longitude))
+                    if dist <= Double(range) {
+                        rotateLabel(element: beacon)
                     } else {
                         beacon.layer.isHidden = true
                     }
@@ -201,7 +202,8 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             }
             nameLabels.forEach{ nameLabel in
                 if let waypoint = nameLabel.waypoint, let range = nameLabel.waypoint?.showNameWithinMeterRange {
-                    if loc.distance(from: CLLocation(latitude: waypoint.coordinate.latitude, longitude: waypoint.coordinate.longitude)) <= Double(range) {
+                    let dist = loc.distance(from: CLLocation(latitude: waypoint.coordinate.latitude, longitude: waypoint.coordinate.longitude))
+                    if dist <= Double(range) {
                         rotateLabel(element: nameLabel)
                     } else {
                         nameLabel.isHidden = true
@@ -253,10 +255,10 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 transform.m34 = CGFloat(transformConstant)
                 let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
                 let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
-                let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
-                let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
-                let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
-                arrow.arrowView.layer.transform = transformer
+                //let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
+                //let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
+                //let transformer = CATransform3DConcat(yawTransform, CATransform3DConcat(rollTransform, pitchTransform))
+                arrow.arrowView.layer.transform = rollTransform
             }  else {
                 arrow.layer.isHidden = true
             }
