@@ -122,8 +122,29 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             //rotateLabel()
         }
     }
-    private var latestLocation: CLLocation?
+    private var latestLocation: CLLocation? {
+        didSet {
+            if distanceToNextCheckpoint != nil {
+                DispatchQueue.main.async { [weak weakself = self] in
+                    weakself?.doSomethingWithDistance(distance: distanceToNextCheckpoint!)
+                }
+            }
+        }
+    }
     private var latestHeading: CLLocationDirection?
+    
+    private func doSomethingWithDistance(distance: CLLocationDistance) {
+        //PUT YOUR DISTANCE CODE HERE
+    }
+    
+    private var distanceToNextCheckpoint: CLLocationDistance? {
+        get {
+            if latestLocation != nil && currentDestinationStep != nil {
+                return distanceFromCoordinate(latestLocation!, coordinate: currentDestinationStep!)
+            }
+            return nil
+        }
+    }
 
     let arrow = Arrow()
     
