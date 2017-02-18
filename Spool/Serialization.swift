@@ -258,9 +258,13 @@ extension Marker {
         if let showDescription = showDescriptionWithinMeterRange {
             dict["showDescriptionWithinMeterRange"] = showDescription
         }
-        dict["latlng"] = ["lat": latitude, "lng": longitude]
+        dict["latlng"] = Marker.latLng(lat: latitude, lng: longitude)
         dict["id"] = id ?? 0
         return dict
+    }
+    
+    static func latLng(lat: Double, lng: Double) -> [String: Double] {
+        return ["lat": lat, "lng": lng]
     }
     
     static func parseMarker(json: Any) -> Marker? {

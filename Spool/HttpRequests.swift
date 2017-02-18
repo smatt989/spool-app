@@ -341,8 +341,10 @@ extension AdventureHeadlineDetail {
     
     static func fetchAdventures(location: CLLocationCoordinate2D, callback: @escaping ([AdventureHeadlineDetail]) -> Void) {
         var request = URLRequest(url: URL(string: Adventure.Urls.fetchDetailedAvailableAdventures)!)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.authenticate()
+        request.jsonRequest()
+        request.httpBody = try! JSONSerialization.data(withJSONObject: Marker.latLng(lat: location.latitude, lng: location.longitude))
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, err in
             if let d = data {
