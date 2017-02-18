@@ -15,9 +15,8 @@ class Arrow: UIView {
         //subview = UIView(frame: view.frame)
         self.frame = frame
         
-        let imageWidth = frame.width / 3
-        let imageRatio = imageWidth / arrowView.frame.width
-        let imageHeight = arrowView.frame.height * imageRatio
+        let imageWidth:CGFloat     =   98.0
+        let imageHeight:CGFloat    =   104.0
         
         arrowView.frame = CGRect(x: (frame.width - imageWidth) / 2, y: (frame.height - imageHeight) / 2, width: imageWidth, height: imageHeight)
         
