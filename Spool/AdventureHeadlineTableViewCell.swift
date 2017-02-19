@@ -12,8 +12,10 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    @IBOutlet weak var borderTop: UIView!
+    @IBOutlet weak var borderBottom: UIView!
     @IBOutlet public var headerTitleLabel: UILabel!
-    @IBOutlet public var headerSubtitleLabel: UILabel!
+    @IBOutlet weak var headerCounter: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
@@ -80,6 +82,12 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    var noBorderBottom: Bool = false {
+        didSet {
+            self.borderBottom.isHidden = noBorderBottom
+        }
     }
 
 }

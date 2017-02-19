@@ -85,7 +85,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         super.viewWillAppear(animated)
         
         // Style Navbar
-        TransparentUINavigationController().navBarDefault(controller: self.navigationController!)
+        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,12 +114,16 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         hidden[section] = !hidden[section]
         
         tableView?.beginUpdates()
+        
         if hidden[section] {
             tableView?.deleteRows(at: indexPaths, with: .fade)
         } else {
             tableView?.insertRows(at: indexPaths, with: .fade)
         }
+        
         tableView?.endUpdates()
+        
+        tableView.reloadSections([section], with: .none)
     }
     
     private func setupHiddenHeaders() {
@@ -141,36 +145,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! AdventureHeadlineTableViewCell
-        
-        var headerTitle: String?
-        let headerSubtitle: String = "A list of adventures"
-        
-        let arrayCount = UILabel()
-        arrayCount.text = "(\(lookupArrayBySection(section).count))"
-        arrayCount.frame = CGRect(x: 200, y: 10, width: 40, height: 20)
-        
-        let lookupArrayCount = lookupArrayBySection(section).count
-        if lookupArrayCount > 0 {
-            switch section {
-                case 0:  headerTitle = "Continue Adventures"
-                case 1:  headerTitle = "Received Adventures"
-                case 2:  headerTitle = "Nearby Adventures"
-                case 3:  headerTitle = "Adventures You Created"
-                default: break
-            }
-        }
-        
-        headerView.headerTitleLabel.text = headerTitle?.uppercased()
-        headerView.headerSubtitleLabel.text = headerSubtitle
-        headerView.contentView.insertSubview(arrayCount, at: 5)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
-        headerView.contentView.isUserInteractionEnabled = true
-        headerView.contentView.addGestureRecognizer(tap)
-        headerView.contentView.tag = section
-        
-        return headerView.contentView
+        return drawTableViewHeader(section: section).contentView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -194,6 +169,39 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         case 3: return yourAdventures
         default: return [AdventureHeadlineDetail]()
         }
+    }
+    
+    private func drawTableViewHeader(section: Int) -> AdventureHeadlineTableViewCell {
+        let headerView = Bundle.main.loadNibNamed("AdventureHeadlineTableViewCell", owner: self, options: nil)?.first as! AdventureHeadlineTableViewCell
+        var headerTitle: String?
+        
+        let lookupArrayCount = lookupArrayBySection(section).count
+        if lookupArrayCount > 0 {
+            switch section {
+            case 0:  headerTitle = "Continue Adventures"
+            case 1:  headerTitle = "Received Adventures"
+            case 2:  headerTitle = "Nearby Adventures"
+            case 3:  headerTitle = "Adventures You Created"
+            default: break
+            }
+        }
+        
+        headerView.headerTitleLabel.text = headerTitle?.uppercased()
+        headerView.headerCounter.text = "\(lookupArrayBySection(section).count) Adventures"
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
+        headerView.contentView.isUserInteractionEnabled = true
+        headerView.contentView.addGestureRecognizer(tap)
+        headerView.contentView.tag = section
+        
+        // Style custom headers
+        if section == sectionCount - 1 {
+            headerView.borderBottom.isHidden = !hidden[section]
+        } else {
+            headerView.borderBottom.isHidden = true
+        }
+        
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

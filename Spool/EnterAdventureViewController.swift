@@ -126,7 +126,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         didSet {
             if distanceToNextCheckpoint != nil {
                 DispatchQueue.main.async { [weak weakself = self] in
-                    weakself?.doSomethingWithDistance(distance: distanceToNextCheckpoint!)
+                    weakself?.doSomethingWithDistance(distance: self.distanceToNextCheckpoint!)
                 }
             }
         }

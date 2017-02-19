@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,48 +26,66 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIw-Sy-plG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EhP-mz-4Hl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.54406726360321045" green="0.50664240121841431" blue="0.91322624683380127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                        </accessibility>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R11-vK-4D3">
-                        <rect key="frame" x="18" y="14" width="284" height="18"/>
-                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="13"/>
-                        <color key="textColor" red="0.8980392157" green="0.2470588235" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header's subtitle, usually description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-oa-1RS">
-                        <rect key="frame" x="18" y="30" width="304" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Adventures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BZ-DA-ep9">
+                        <rect key="frame" x="68" y="19" width="87" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="mLH-K3-aRa"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="13"/>
-                        <color key="textColor" red="0.60784313729999995" green="0.66274509800000003" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-1o-Ehg" userLabel="Border">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R11-vK-4D3">
+                        <rect key="frame" x="20" y="19" width="38" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="7yK-pm-G8e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIw-Sy-plG" userLabel="Border top">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="oIX-9Y-a1Q"/>
+                        </constraints>
+                    </view>
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-1o-Ehg" userLabel="Border">
                         <rect key="frame" x="0.0" y="57" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.60784313729999995" green="0.66274509800000003" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="mdu-I1-ZEe"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="pV7-oa-1RS" secondAttribute="bottom" constant="2" id="3FN-iR-IKE"/>
+                    <constraint firstItem="R11-vK-4D3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3ib-iH-nU8"/>
                     <constraint firstAttribute="bottom" secondItem="hh2-1o-Ehg" secondAttribute="bottom" id="7v6-Lu-l5Y"/>
                     <constraint firstItem="pIw-Sy-plG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9hX-YV-Fv3"/>
                     <constraint firstItem="pIw-Sy-plG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AII-Yf-zN6"/>
-                    <constraint firstItem="pV7-oa-1RS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="BAR-BT-Sxk"/>
+                    <constraint firstItem="R11-vK-4D3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Aae-ZW-gW3"/>
                     <constraint firstAttribute="trailing" secondItem="pIw-Sy-plG" secondAttribute="trailing" id="Cgo-2J-1pO"/>
                     <constraint firstAttribute="trailing" secondItem="hh2-1o-Ehg" secondAttribute="trailing" id="Exb-Xb-frE"/>
-                    <constraint firstItem="pV7-oa-1RS" firstAttribute="top" secondItem="R11-vK-4D3" secondAttribute="bottom" constant="-2" id="F5v-d3-0E1"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="R11-vK-4D3" secondAttribute="trailing" constant="10" id="Lwd-fH-ntL"/>
+                    <constraint firstItem="6BZ-DA-ep9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GWy-Ox-KwA"/>
                     <constraint firstItem="hh2-1o-Ehg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZW7-6P-Lxk"/>
-                    <constraint firstItem="pV7-oa-1RS" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="10" id="sjH-PX-2sO"/>
-                    <constraint firstAttribute="bottom" secondItem="pIw-Sy-plG" secondAttribute="bottom" constant="1" id="tDN-Zd-BwS"/>
-                    <constraint firstItem="R11-vK-4D3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="uT2-SC-zaG"/>
+                    <constraint firstItem="6BZ-DA-ep9" firstAttribute="leading" secondItem="R11-vK-4D3" secondAttribute="trailing" constant="10" id="gMt-TW-6fD"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="headerSubtitleLabel" destination="pV7-oa-1RS" id="C7W-8o-0xh"/>
+                <outlet property="borderBottom" destination="hh2-1o-Ehg" id="2tq-9r-Wce"/>
+                <outlet property="borderTop" destination="pIw-Sy-plG" id="Gtl-kE-W56"/>
+                <outlet property="headerCounter" destination="6BZ-DA-ep9" id="1Lv-qy-twU"/>
                 <outlet property="headerTitleLabel" destination="R11-vK-4D3" id="JGJ-6Q-mtV"/>
             </connections>
             <point key="canvasLocation" x="32" y="182.5"/>
@@ -77,5 +94,9 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
         </stackView>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="25V-s0-7oJ">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
     </objects>
 </document>
