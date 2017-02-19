@@ -90,6 +90,8 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Style Navbar
+        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
         loadTable()
     }
     

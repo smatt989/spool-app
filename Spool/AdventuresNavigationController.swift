@@ -25,11 +25,11 @@ class AdventuresNavigationController: UINavigationController {
             NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
             NSForegroundColorAttributeName : UIColor.white ] //#32325d
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
-            NSForegroundColorAttributeName : UIColor(red:0.20, green:0.20, blue:0.36, alpha:1.0) ], for: UIControlState.normal)
+            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 17)! ,
+            NSForegroundColorAttributeName : UIColor.white ], for: UIControlState.normal)
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
-            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
-            NSForegroundColorAttributeName : UIColor(red:0.20, green:0.20, blue:0.36, alpha:1.0) ], for: UIControlState.normal)
+            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 17)! ,
+            NSForegroundColorAttributeName : UIColor.white ], for: UIControlState.normal)
     }
 
 }
