@@ -255,6 +255,11 @@ class AdventureShareViewController: UIFormViewController, UITableViewDelegate, U
 
     override func viewWillDisappear(_ animated: Bool) {
         stopListeningToSearch()
+        
+        // Style Navbar
+        if let navController = navigationController {
+            TransparentUINavigationController().navBarTransparent(controller: navController)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

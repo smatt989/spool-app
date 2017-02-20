@@ -13,6 +13,9 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     
     var adventureId: Int?
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    @IBOutlet weak var editButton: UIButton!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if adventureHeadline == nil {
@@ -21,6 +24,8 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         if adventureId != nil {
             setupLocationFinder()
         }
+        
+        showEditButton()
         
         // Transparent Navigation
         TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
@@ -108,6 +113,14 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
         distanceAwayLabel.text = AdventureUtilities.distanceToString(distance: adventure.distance)
         
         distanceAwayLabel.isHidden = false
+    }
+    
+    private func showEditButton() {
+//        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = adventureHeadlineDetail?.creator {
+//            editButton.isHidden = currentUser.id != adventureCreator.id
+//        } else {
+//            editButton.isHidden = true
+//        }
     }
     
     private func updateProgress(adventure: AdventureHeadlineDetail) {

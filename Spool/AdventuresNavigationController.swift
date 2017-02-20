@@ -20,16 +20,16 @@ class AdventuresNavigationController: UINavigationController {
         super.viewWillAppear(true)
         
         // Style the navbar
-        self.navigationBar.tintColor = UIColor.white //#6772e5
+        self.navigationBar.tintColor = UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) //#6772e5
         self.navigationBar.titleTextAttributes = [
             NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 19)! ,
             NSForegroundColorAttributeName : UIColor.white ] //#32325d
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
             NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 17)! ,
-            NSForegroundColorAttributeName : UIColor.white ], for: UIControlState.normal)
+            NSForegroundColorAttributeName : UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) ], for: UIControlState.normal)
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
             NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 17)! ,
-            NSForegroundColorAttributeName : UIColor.white ], for: UIControlState.normal)
+            NSForegroundColorAttributeName : UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) ], for: UIControlState.normal)
     }
 
 }

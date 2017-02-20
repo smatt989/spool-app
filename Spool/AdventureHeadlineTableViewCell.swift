@@ -21,7 +21,6 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     @IBOutlet var creatorLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet weak var sharedByLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -39,7 +38,6 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
             creatorLabel.text = adv.creator.username
             setupProgress()
             setupSharedBy()
-            showEditButton()
         }
     }
     
@@ -68,14 +66,6 @@ class AdventureHeadlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    
-    private func showEditButton() {
-        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = adventureHeadlineDetail?.creator {
-            editButton.isHidden = currentUser.id != adventureCreator.id
-        } else {
-            editButton.isHidden = true
-        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
