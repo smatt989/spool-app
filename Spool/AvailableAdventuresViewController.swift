@@ -111,6 +111,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     private func fetchAdventuresPlease(location: CLLocation) -> Void {
         AdventureHeadlineDetail.fetchAdventures(location: location.coordinate){ [weak weakself = self] advs in
             weakself?.adventures = advs
+            weakself?.openMenuOnInit()
         }
     }
     
@@ -119,6 +120,10 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     
     @objc private func tapFunction(sender:UITapGestureRecognizer) {
         let section = sender.view!.tag
+        tapSectionFunction(section: section)
+    }
+    
+    private func tapSectionFunction(section: Int) {
         let indexPaths = (0..<lookupArrayBySection(section).count).map { i in return IndexPath(item: i, section: section)  }
         
         hidden[section] = !hidden[section]
@@ -132,8 +137,22 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         }
         
         tableView?.endUpdates()
+    }
+    
+    private func openMenuOnInit() {
+        var searching = true
+        var section = 0
         
-        tableView.reloadSections([section], with: .none)
+        while searching && section < sectionCount {
+            if lookupArrayBySection(section).count > 0 {
+                DispatchQueue.main.async{ [weak weakself = self] in
+                    weakself?.tapSectionFunction(section: section)
+                }
+                searching = false
+            } else {
+                section = section + 1
+            }
+        }
     }
     
     private func setupHiddenHeaders() {
