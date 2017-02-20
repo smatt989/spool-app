@@ -192,6 +192,7 @@ class AdventureShareViewController: UIFormViewController, UITableViewDelegate, U
             if AdventureUtilities.validTitle(title: adventureTitleInput.text) {
                 adventure?.name = adventureTitleInput.text!
                 adventure?.info = adventureDescriptionInput.text
+                print("SAVING WITH ID: \(adventure!.id)")
                 Adventure.postAdventure(adv: adventure!) { [weak weakself = self] in
                     weakself?.adventure = $0
                     weakself?.shareWithUsers()

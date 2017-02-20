@@ -233,6 +233,16 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             }
         }
     }
+    
+    private let minScale = 0.5
+    
+    private func scaleSize(dist: CLLocationDistance) -> Double{
+        return 1 / (dist / 100.0 + 1) + minScale
+    }
+    
+    private func scaleOffset(dist: CLLocationDistance) -> Double {
+        return sqrt(dist)
+    }
 
     let transformConstant = 1 / 500.0
     let pitchAdjust = M_PI / 9
@@ -302,11 +312,16 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             var transform = CATransform3DIdentity
             transform.m34 = CGFloat(transformConstant)
             let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: waypoint.coordinate)
+            
+            let distance = distanceFromCoordinate(latestLocation!, coordinate: waypoint.coordinate)
             if result.zPosition > 0 {
                 element.layer.isHidden = false
+                let translate = CATransform3DTranslate(transform, 0, -(CGFloat)(scaleOffset(dist: distance)), 0)
                 let translation3d = CATransform3DMakeTranslation(CGFloat(result.x), CGFloat(result.y), 0)
                 let rotation3d = CATransform3DRotate(transform, CGFloat(result.rotation), 0, 0, 1)
-                element.layer.transform = CATransform3DConcat(translation3d, rotation3d)
+                let scalar = CATransform3DScale(transform, CGFloat(scaleSize(dist: distance)), CGFloat(scaleSize(dist: distance)), 1)
+                element.layer.transform = CATransform3DConcat(CATransform3DConcat(CATransform3DConcat(translate, translation3d), rotation3d), scalar)
+                element.layer.zPosition = CGFloat(1000000000.0 - (distance))
             } else {
                 element.layer.isHidden = true
             }

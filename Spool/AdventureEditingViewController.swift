@@ -187,18 +187,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
 //        
 //    }
     
-    @IBAction func saveAdventure(_ sender: UIButton) {
-        if let adv = adventure {
-            if adv.markers.count > 0 {
-                Adventure.postAdventure(adv: adv) { [weak weakself = self] adv in
-                    weakself?.adventure = adv
-                }
-            } else {
-                print("HAVEN'T MADE ANYTHING YET")
-            }
-        }
-    }
-    
     @IBAction func tapCurrentLocation(_ sender: UIButton) {
         moveToCurrentLocation()
     }

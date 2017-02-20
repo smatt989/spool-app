@@ -11,6 +11,7 @@ import CoreLocation
 
 class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    private var interacted = false
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItemUppercase!
@@ -111,7 +112,9 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     private func fetchAdventuresPlease(location: CLLocation) -> Void {
         AdventureHeadlineDetail.fetchAdventures(location: location.coordinate){ [weak weakself = self] advs in
             weakself?.adventures = advs
-            weakself?.openMenuOnInit()
+            if !weakself!.interacted {
+                weakself?.openMenuOnInit()
+            }
         }
     }
     
@@ -124,6 +127,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
     }
     
     private func tapSectionFunction(section: Int) {
+        interacted = true
         let indexPaths = (0..<lookupArrayBySection(section).count).map { i in return IndexPath(item: i, section: section)  }
         
         hidden[section] = !hidden[section]
