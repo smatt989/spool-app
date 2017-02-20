@@ -13,6 +13,7 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
 
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItemUppercase!
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
    
@@ -85,13 +86,19 @@ class AvailableAdventuresViewController: UIViewController, UITableViewDelegate, 
         super.viewWillAppear(animated)
         
         // Style Navbar
-        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
+        if let navController = navigationController {
+            TransparentUINavigationController().navBarTransparent(controller: navController)
+        }
+        
+        // Style logout button
+        logoutButton.setTitleTextAttributes([
+            NSFontAttributeName : UIFont(name: "Nunito-Bold", size: 12)! ,
+            NSForegroundColorAttributeName : UIColor(red:0.20, green:0.20, blue:0.36, alpha:1.0) ], for: UIControlState.normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Style Navbar
-        TransparentUINavigationController().navBarTransparent(controller: self.navigationController!)
         loadTable()
     }
     

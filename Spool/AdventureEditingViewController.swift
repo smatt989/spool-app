@@ -89,6 +89,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         // Style Navbar
         if let navController = navigationController {
             TransparentUINavigationController().navBarTransparent(controller: navController)
+            navController.navigationBar.tintColor = UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) //#6772e5
         }
     }
     
