@@ -89,7 +89,6 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         // Style Navbar
         if let navController = navigationController {
             TransparentUINavigationController().navBarTransparent(controller: navController)
-            navController.navigationBar.tintColor = UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) //#6772e5
         }
     }
     
@@ -459,7 +458,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         updateWaypointToolbarUI()
         setupKeyboards()
         waypointToolbar.isHidden = false
-        saveAdventureButton.isHidden = true
+        saveAdventureButton.isHidden = false
         startListening()
         addDisplayLink()
     }
@@ -595,7 +594,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         if noteInput.isFirstResponder {
             noteInput.frame = CGRect(x: leadingSpace, y: 350, width: width, height: height)
         } else {
-            noteInput.frame = CGRect(x: leadingSpace, y: view.frame.maxY - height - 100, width: width, height: height)
+            noteInput.frame = CGRect(x: leadingSpace, y: view.frame.maxY - height - 155, width: width, height: height)
         }
     }
     

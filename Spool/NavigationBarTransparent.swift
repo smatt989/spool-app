@@ -21,7 +21,7 @@ class TransparentUINavigationController: UINavigationController {
         controller.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         controller.navigationBar.shadowImage = UIImage()
         controller.navigationBar.isTranslucent = true
-        controller.navigationBar.tintColor = UIColor.white //#6772e5
+        controller.navigationBar.tintColor = UIColor(red:0.40, green:0.45, blue:0.90, alpha:1.0) //#6772e5
         controller.view.backgroundColor = UIColor.clear
     }
     

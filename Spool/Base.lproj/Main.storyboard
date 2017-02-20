@@ -1133,7 +1133,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qWo-IP-Txi" customClass="AdventuresNavigationController" customModule="Spool" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EHy-wb-UdS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EHy-wb-UdS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
