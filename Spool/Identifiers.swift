@@ -32,6 +32,8 @@ struct Identifiers {
     static let signUp = "Sign Up"
     static let navigationController = "NavigationController"
     static let logInController = "Log In Navigation Controller"
+    
+    static let editAdventureSegue = "editAdventureSegue"
     struct StoryBoards {
         static let mainStoryboard = "Main"
         static let loginStoryboard = "Login"

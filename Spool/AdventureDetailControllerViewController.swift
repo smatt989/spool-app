@@ -14,6 +14,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     var adventureId: Int?
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     @IBOutlet weak var editButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,11 +117,11 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
     }
     
     private func showEditButton() {
-//        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = adventureHeadlineDetail?.creator {
-//            editButton.isHidden = currentUser.id != adventureCreator.id
-//        } else {
-//            editButton.isHidden = true
-//        }
+        if let currentUser = appDelegate.authentication.currentUser, let adventureCreator = adventureHeadline?.creator {
+            editButton.isHidden = currentUser.id != adventureCreator.id
+        } else {
+            editButton.isHidden = true
+        }
     }
     
     private func updateProgress(adventure: AdventureHeadlineDetail) {
@@ -177,6 +178,10 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
             if let viewController = segue.destination as? AdventureShareViewController {
                 viewController.adventureId = adventureId
                 viewController.creator = adventureHeadline?.creator
+            }
+        } else if segue.identifier == Identifiers.editAdventureSegue {
+            if let viewController = segue.destination as? AdventureEditingViewController {
+                viewController.adventureId = adventureId
             }
         }
     }

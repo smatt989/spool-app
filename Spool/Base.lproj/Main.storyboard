@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="255"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="nJK-fv-Mxx">
-                                        <rect key="frame" x="8" y="90" width="359" height="74"/>
+                                        <rect key="frame" x="8" y="90.5" width="359" height="74"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best bars + 1 secret 👀" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFp-fw-3q7">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="30.5"/>
@@ -246,6 +246,9 @@
                                 <state key="normal" title="EDIT">
                                     <color key="titleColor" red="0.4039215686" green="0.44705882349999998" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="toT-bl-NAU" kind="show" identifier="editAdventureSegue" id="mSV-3B-eIs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -289,6 +292,7 @@
                         <outlet property="createdByLabelPrepend" destination="nuR-nj-woL" id="Hga-l8-WXc"/>
                         <outlet property="descriptionLabel" destination="iXw-N6-Kee" id="l5q-1w-kNd"/>
                         <outlet property="distanceAwayLabel" destination="ojJ-Ds-KFH" id="rH4-ZD-zeK"/>
+                        <outlet property="editButton" destination="GYZ-zS-nrh" id="scs-qq-q2I"/>
                         <outlet property="progressLabel" destination="T5U-wu-L15" id="aka-gl-XaK"/>
                         <outlet property="restartButtonsStack" destination="rX4-6F-gxO" id="83h-rv-iz0"/>
                         <outlet property="sharedByLabel" destination="k4T-bL-JgX" id="c4E-Wk-lrh"/>
@@ -373,7 +377,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui8-MJ-E6y">
-                                                            <rect key="frame" x="20" y="17" width="79" height="23.5"/>
+                                                            <rect key="frame" x="20" y="17.5" width="79" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1128,7 +1132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89R-9m-dgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2544.8000000000002" y="-770.46476761619192"/>
+            <point key="canvasLocation" x="2441" y="-322"/>
         </scene>
         <!--Adventures Navigation Controller-->
         <scene sceneID="vF6-JG-fct">
@@ -1162,7 +1166,8 @@
         <image name="Toolbar - Trash" width="14" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pG4-3d-oE2"/>
         <segue reference="f1Z-JA-53F"/>
+        <segue reference="pG4-3d-oE2"/>
+        <segue reference="mSV-3B-eIs"/>
     </inferredMetricsTieBreakers>
 </document>
