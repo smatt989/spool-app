@@ -39,6 +39,26 @@ extension User {
         }.resume()
     }
     
+    static func saveDeviceToken(_ token: String, success: @escaping (Void) -> Void, failure: @escaping (Error) -> Void){
+        var request = URLRequest(url: URL(string: Adventure.Urls.deviceToken+"?device_token="+token)!)
+        request.httpMethod = "POST"
+        request.authenticate()
+        request.addValue("application/json",forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json",forHTTPHeaderField: "Accept")
+        let session = URLSession.shared
+        session.dataTask(with: request) {data, response, err in
+            if let d = data {
+                DispatchQueue.main.async {
+                    success()
+                }
+            } else if err != nil {
+                DispatchQueue.main.async {
+                    failure(err!)
+                }
+            }
+        }.resume()
+    }
+    
     static func checkSession(managedObjectContext: NSManagedObjectContext, success: @escaping (User) -> Void, failure: @escaping (Error) -> Void) {
         var request = URLRequest(url: URL(string: Adventure.Urls.login)!)
         request.httpMethod = "GET"
@@ -212,6 +232,7 @@ extension Adventure {
         static let receivedAdventures = domain+"/adventures/received"
         static let createAdventureProgress = domain+"/adventures/"
         static let getCurrentProgress = domain+"/adventures/"
+        static let deviceToken = domain+"/users/tokens"
     }
     
     static func fetchAdventure(id: Int, callback: @escaping (Adventure) -> Void) {
