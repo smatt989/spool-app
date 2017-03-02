@@ -12,6 +12,7 @@ import CoreImage
 import CoreMotion
 import AVKit
 import AVFoundation
+import SpriteKit
 
 class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate{
 
@@ -265,7 +266,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func moveArrow() {
-        if motionIsReady {
+        if motionIsReady && !finished{
             if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
                 arrow.layer.isHidden = false
                 var transform = CATransform3DIdentity
@@ -411,8 +412,17 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func endAdventure() {
+//        let firework = SKSpriteNode(fileNamed: "MyParticle")
+//        firework?.position = CGPoint(x: 100, y: 200)
+//        let skview = SKView(frame: CGRect(x: 100, y: 200, width: 200, height: 200))
+//        let scene = SKScene(size: CGSize(width: 500, height: 500))
+//        scene.addChild(firework!)
+//        scene.backgroundColor = UIColor.clear
+//        skview.presentScene(scene)
+//        skview.allowsTransparency = true
+//        view.insertSubview(skview, at: 5)
         printToScreen(str: "FINISHED ADVENTURE!")
-        turnOffLocationManager()
+        //turnOffLocationManager()
         removeArrow()
         setupAdventureEndedLabel()
     }

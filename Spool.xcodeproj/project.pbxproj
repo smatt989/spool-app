@@ -37,6 +37,7 @@
 		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
 		C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99A4FD51E369A6D0022AA5E /* Login.storyboard */; };
 		C99D82B61E6820EE0000EF9A /* GeoARElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99D82B51E6820EE0000EF9A /* GeoARElement.swift */; };
+		C9AD68E11E682FC000489D22 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = C9AD68E01E682FC000489D22 /* MyParticle.sks */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
@@ -101,6 +102,7 @@
 		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
 		C99A4FD51E369A6D0022AA5E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C99D82B51E6820EE0000EF9A /* GeoARElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoARElement.swift; sourceTree = "<group>"; };
+		C9AD68E01E682FC000489D22 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */,
 				C96AB4EA1E431A1800A5D00C /* ToolbarButton.swift */,
 				C99D82B51E6820EE0000EF9A /* GeoARElement.swift */,
+				C9AD68E01E682FC000489D22 /* MyParticle.sks */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				F30DBDE41E460414009AA19C /* AdventureHeadlineTableViewCell.xib in Resources */,
 				F303DCEA1E379CB60077F1B4 /* Nunito-Regular.ttf in Resources */,
 				C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */,
+				C9AD68E11E682FC000489D22 /* MyParticle.sks in Resources */,
 				F303DCE91E379CB60077F1B4 /* Nunito-Bold.ttf in Resources */,
 				C963343E1E21B77600583CE1 /* LaunchScreen.storyboard in Resources */,
 				C963343B1E21B77600583CE1 /* Assets.xcassets in Resources */,
