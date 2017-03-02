@@ -190,7 +190,9 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 beacon.waypoint = marker
                 beacon.setupBeacon(frame: view.frame)
                 beacon.isHidden = true
+                beacon.setupIndicator(frame: view.frame)
                 view.insertSubview(beacon, at: 2)
+                view.insertSubview(beacon.indicator, at: 2)
                 return beacon
             })
     }
@@ -203,7 +205,9 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 nameLabel.waypoint = marker
                 nameLabel.setupLabel(outerFrame: view.frame)
                 nameLabel.isHidden = true
+                nameLabel.setupIndicator(frame: view.frame)
                 view.insertSubview(nameLabel, at: 3)
+                view.insertSubview(nameLabel.indicator, at: 2)
                 return nameLabel
             })
     }
@@ -318,12 +322,45 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                 let translate = CATransform3DTranslate(transform, 0, -(CGFloat)(scaleOffset(dist: distance)), 0)
                 let translation3d = CATransform3DMakeTranslation(CGFloat(result.x), CGFloat(result.y), 0)
                 let rotation3d = CATransform3DRotate(transform, CGFloat(result.rotation), 0, 0, 1)
+                let positionTransform = CATransform3DConcat(CATransform3DConcat(translate, translation3d), rotation3d)
                 let scalar = CATransform3DScale(transform, CGFloat(scaleSize(dist: distance)), CGFloat(scaleSize(dist: distance)), 1)
-                element.layer.transform = CATransform3DConcat(CATransform3DConcat(CATransform3DConcat(translate, translation3d), rotation3d), scalar)
+                element.layer.transform = CATransform3DConcat(positionTransform, scalar)
                 element.layer.zPosition = CGFloat(1000000000.0 - (distance))
+                
+                moveIndicator(element)
             } else {
                 element.layer.isHidden = true
+                element.indicator.isHidden = true
             }
+        }
+    }
+    
+    private func inFrame(_ element: MarkerUIElement) -> Bool {
+        return element.layer.frame.maxX < view.frame.maxX && element.layer.frame.minX > view.frame.minX && element.layer.frame.maxY < view.frame.maxY && element.layer.frame.minY > view.frame.minY
+    }
+    
+    private let indicatorBuffer: CGFloat = 10
+    
+    private func moveIndicator(_ element: MarkerUIElement) {
+        if !inFrame(element) {
+            var xPosition = element.layer.frame.minX + (element.layer.frame.maxX - element.layer.frame.minX ) / 2 - element.indicatorSize / 2
+            var yPosition = element.layer.frame.minY + (element.layer.frame.maxY - element.layer.frame.minY) / 2 - element.indicatorSize / 2
+            
+            if element.layer.frame.minX < view.frame.minX {
+                xPosition = view.frame.minX + indicatorBuffer
+            } else if element.layer.frame.maxX > view.frame.maxX {
+                xPosition = view.frame.maxX - element.indicatorSize - indicatorBuffer
+            }
+            if element.layer.frame.minY < view.frame.minY {
+                yPosition = view.frame.minY + indicatorBuffer
+            } else if element.layer.frame.maxY > view.frame.maxY {
+                yPosition = view.frame.maxY - element.indicatorSize - indicatorBuffer
+            }
+            
+            element.indicator.frame = CGRect(x: xPosition, y: yPosition, width: element.indicatorSize, height: element.indicatorSize)
+            element.indicator.isHidden = false
+        } else {
+            element.indicator.isHidden = true
         }
     }
     

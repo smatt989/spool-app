@@ -530,8 +530,8 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     
     private func updateWaypointToolbarUI() {
         setButtonActivation()
-        setWaypointMetadataVisibility()
         moveWaypointMetadataViews()
+        setWaypointMetadataVisibility()
         establishFirstResponder()
         injectPinchGesture()
         drawRanges()

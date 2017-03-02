@@ -12,4 +12,6 @@ import UIKit
 protocol MarkerUIElement {
     var waypoint: Marker? { get set }
     var layer: CALayer { get }
+    var indicator: CustomUIView { get }
+    var indicatorSize: CGFloat { get }
 }
