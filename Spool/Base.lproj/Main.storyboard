@@ -56,6 +56,9 @@
                                                 <color key="value" red="0.8980392157" green="0.2470588235" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="NMs-db-Lcf" kind="show" identifier="Start Adventure Segue" id="n1B-Xw-cso"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elo-uL-SlX" customClass="RoundedUIButton" customModule="Spool" customModuleProvider="target">
                                         <rect key="frame" x="172.5" y="0.0" width="162.5" height="50"/>
@@ -1169,7 +1172,7 @@
         <image name="Toolbar - Trash" width="14" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f1Z-JA-53F"/>
+        <segue reference="n1B-Xw-cso"/>
         <segue reference="mSV-3B-eIs"/>
         <segue reference="pG4-3d-oE2"/>
     </inferredMetricsTieBreakers>

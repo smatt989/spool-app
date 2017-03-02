@@ -20,7 +20,7 @@ struct Identifiers {
     
     static let adventureDetailSegue = "Adventure Detail Segue"
     static let startAdventureSegue = "Start Adventure Segue"
-    static let continueAdventureSeguge = "Continue Adventure Segue"
+    static let continueAdventureSegue = "Continue Adventure Segue"
     
     static let adventureScreenShareAdventure = "Adventure Screen Share"
     static let editAdventureScreenShareAdventure = "Edit Screen Share"

@@ -169,7 +169,7 @@ class AdventureDetailControllerViewController: UIViewController, UIAdaptivePrese
             if let viewController = segue.destination as? EnterAdventureViewController {
                 viewController.adventureId = adventureId!
             }
-        } else if segue.identifier == Identifiers.continueAdventureSeguge {
+        } else if segue.identifier == Identifiers.continueAdventureSegue {
             if let viewController = segue.destination as? EnterAdventureViewController {
                 viewController.adventureId = adventureId!
                 viewController.continueAdventure = true

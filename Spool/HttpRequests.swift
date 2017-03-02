@@ -47,7 +47,7 @@ extension User {
         request.addValue("application/json",forHTTPHeaderField: "Accept")
         let session = URLSession.shared
         session.dataTask(with: request) {data, response, err in
-            if let d = data {
+            if data != nil {
                 DispatchQueue.main.async {
                     success()
                 }

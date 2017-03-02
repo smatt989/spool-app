@@ -88,7 +88,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         deviceMotion.stopDeviceMotionUpdates()
-        captureSession?.stopRunning()
     }
     
     
@@ -436,7 +435,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private func endAdventure() {
         printToScreen(str: "FINISHED ADVENTURE!")
-        //turnOffLocationManager()
+        turnOffLocationManager()
         removeArrow()
         setupAdventureEndedLabel()
     }
@@ -490,6 +489,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         turnOffLocationManager()
+        captureSession?.stopRunning()
     }
     
     private var toPrint = ""
