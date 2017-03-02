@@ -36,6 +36,7 @@
 		C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D01E27FFE9003E1F36 /* Serialization.swift */; };
 		C996D6D31E28009B003E1F36 /* HttpRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996D6D21E28009B003E1F36 /* HttpRequests.swift */; };
 		C99A4FD61E369A6D0022AA5E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99A4FD51E369A6D0022AA5E /* Login.storyboard */; };
+		C99D82B61E6820EE0000EF9A /* GeoARElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99D82B51E6820EE0000EF9A /* GeoARElement.swift */; };
 		C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */; };
 		C9AE740D1E245EB100DEF45B /* AdventureEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */; };
 		C9AE740F1E24A06800DEF45B /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE740E1E24A06800DEF45B /* Adventure.swift */; };
@@ -99,6 +100,7 @@
 		C996D6D01E27FFE9003E1F36 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		C996D6D21E28009B003E1F36 /* HttpRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequests.swift; sourceTree = "<group>"; };
 		C99A4FD51E369A6D0022AA5E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		C99D82B51E6820EE0000EF9A /* GeoARElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoARElement.swift; sourceTree = "<group>"; };
 		C9AE740A1E2447CC00DEF45B /* AdventureHeadline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureHeadline.swift; sourceTree = "<group>"; };
 		C9AE740C1E245EB100DEF45B /* AdventureEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureEditingViewController.swift; sourceTree = "<group>"; };
 		C9AE740E1E24A06800DEF45B /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				C9ECF0F41E38A59D00ED4B91 /* NoteTextView.swift */,
 				C9BB52A81E3FE5AF006849F3 /* UserShareTableViewCell.swift */,
 				C96AB4EA1E431A1800A5D00C /* ToolbarButton.swift */,
+				C99D82B51E6820EE0000EF9A /* GeoARElement.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				C9BB52A91E3FE5AF006849F3 /* UserShareTableViewCell.swift in Sources */,
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
+				C99D82B61E6820EE0000EF9A /* GeoARElement.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
 				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,

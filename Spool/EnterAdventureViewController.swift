@@ -147,8 +147,8 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
 
     let arrow = Arrow()
     
-    var beacons = [Beacon]()
-    var nameLabels = [MarkerNameLabel]()
+    var beacons = [GeoARElement]()
+    var nameLabels = [GeoARElement]()
     
     var markerNoteView = NoteTextView()
 
@@ -186,14 +186,11 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         beacons = (adventure?.markers
             .filter({ $0.showBeaconWithinMeterRange != nil}) ?? [])
             .map({marker in
-                let beacon = Beacon()
-                beacon.waypoint = marker
-                beacon.setupBeacon(frame: view.frame)
-                beacon.isHidden = true
-                beacon.setupIndicator(frame: view.frame)
-                view.insertSubview(beacon, at: 2)
-                view.insertSubview(beacon.indicator, at: 2)
-                return beacon
+                let arElement = GeoARElement()
+                arElement.waypoint = marker
+                arElement.uiElement = Beacon()
+                arElement.setup(view: view)
+                return arElement
             })
     }
     
@@ -201,14 +198,11 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         nameLabels = (adventure?.markers
             .filter({ $0.showNameWithinMeterRange != nil}) ?? [])
             .map({marker in
-                let nameLabel = MarkerNameLabel()
-                nameLabel.waypoint = marker
-                nameLabel.setupLabel(outerFrame: view.frame)
-                nameLabel.isHidden = true
-                nameLabel.setupIndicator(frame: view.frame)
-                view.insertSubview(nameLabel, at: 3)
-                view.insertSubview(nameLabel.indicator, at: 2)
-                return nameLabel
+                let arElement = GeoARElement()
+                arElement.waypoint = marker
+                arElement.uiElement = MarkerNameLabel()
+                arElement.setup(view: view)
+                return arElement
             })
     }
     
@@ -220,7 +214,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                     if dist <= Double(range) {
                         rotateLabel(element: beacon)
                     } else {
-                        beacon.layer.isHidden = true
+                        beacon.uiElement!.layer.isHidden = true
                     }
                 }
             }
@@ -230,24 +224,13 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
                     if dist <= Double(range) {
                         rotateLabel(element: nameLabel)
                     } else {
-                        nameLabel.isHidden = true
+                        nameLabel.uiElement!.layer.isHidden = true
                     }
                 }
             }
         }
     }
-    
-    private let minScale = 0.5
-    
-    private func scaleSize(dist: CLLocationDistance) -> Double{
-        return 1 / (dist / 100.0 + 1) + minScale
-    }
-    
-    private func scaleOffset(dist: CLLocationDistance) -> Double {
-        return sqrt(dist)
-    }
 
-    let transformConstant = 1 / 500.0
     let pitchAdjust = M_PI / 9
     
     var adventureEndedLabel: UILabel?
@@ -286,7 +269,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
                 arrow.layer.isHidden = false
                 var transform = CATransform3DIdentity
-                transform.m34 = CGFloat(transformConstant)
+                transform.m34 = CGFloat(AdventureUtilities.transformConstant)
                 let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
                 let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
                 //let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
@@ -310,59 +293,16 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         return nil
     }
     
-    private func rotateLabel(element: MarkerUIElement) {
+    private func rotateLabel(element: GeoARElement) {
         if let waypoint = element.waypoint, motionIsReady {
-            var transform = CATransform3DIdentity
-            transform.m34 = CGFloat(transformConstant)
             let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: waypoint.coordinate)
             
             let distance = distanceFromCoordinate(latestLocation!, coordinate: waypoint.coordinate)
-            if result.zPosition > 0 {
-                element.layer.isHidden = false
-                let translate = CATransform3DTranslate(transform, 0, -(CGFloat)(scaleOffset(dist: distance)), 0)
-                let translation3d = CATransform3DMakeTranslation(CGFloat(result.x), CGFloat(result.y), 0)
-                let rotation3d = CATransform3DRotate(transform, CGFloat(result.rotation), 0, 0, 1)
-                let positionTransform = CATransform3DConcat(CATransform3DConcat(translate, translation3d), rotation3d)
-                let scalar = CATransform3DScale(transform, CGFloat(scaleSize(dist: distance)), CGFloat(scaleSize(dist: distance)), 1)
-                element.layer.transform = CATransform3DConcat(positionTransform, scalar)
-                element.layer.zPosition = CGFloat(1000000000.0 - (distance))
-                
-                moveIndicator(element)
-            } else {
-                element.layer.isHidden = true
-                element.indicator.isHidden = true
-            }
+            element.rotate(rotation: result, distance: distance, view: view)
         }
     }
     
-    private func inFrame(_ element: MarkerUIElement) -> Bool {
-        return element.layer.frame.maxX < view.frame.maxX && element.layer.frame.minX > view.frame.minX && element.layer.frame.maxY < view.frame.maxY && element.layer.frame.minY > view.frame.minY
-    }
-    
-    private let indicatorBuffer: CGFloat = 10
-    
-    private func moveIndicator(_ element: MarkerUIElement) {
-        if !inFrame(element) {
-            var xPosition = element.layer.frame.minX + (element.layer.frame.maxX - element.layer.frame.minX ) / 2 - element.indicatorSize / 2
-            var yPosition = element.layer.frame.minY + (element.layer.frame.maxY - element.layer.frame.minY) / 2 - element.indicatorSize / 2
-            
-            if element.layer.frame.minX < view.frame.minX {
-                xPosition = view.frame.minX + indicatorBuffer
-            } else if element.layer.frame.maxX > view.frame.maxX {
-                xPosition = view.frame.maxX - element.indicatorSize - indicatorBuffer
-            }
-            if element.layer.frame.minY < view.frame.minY {
-                yPosition = view.frame.minY + indicatorBuffer
-            } else if element.layer.frame.maxY > view.frame.maxY {
-                yPosition = view.frame.maxY - element.indicatorSize - indicatorBuffer
-            }
-            
-            element.indicator.frame = CGRect(x: xPosition, y: yPosition, width: element.indicatorSize, height: element.indicatorSize)
-            element.indicator.isHidden = false
-        } else {
-            element.indicator.isHidden = true
-        }
-    }
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         latestHeading = newHeading.trueHeading

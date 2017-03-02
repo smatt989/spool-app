@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol MarkerUIElement {
-    var waypoint: Marker? { get set }
     var layer: CALayer { get }
-    var indicator: CustomUIView { get }
-    var indicatorSize: CGFloat { get }
+    var indicatorIcon: UIImage { get }
+    
+    func setup(outerFrame: CGRect, waypoint: Marker) -> Void
 }

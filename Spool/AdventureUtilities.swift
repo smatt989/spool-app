@@ -22,4 +22,6 @@ class AdventureUtilities {
             return String(Int(round(distance / 1000))) + "km away"
         }
     }
+    
+    static let transformConstant = 1 / 500.0
 }
