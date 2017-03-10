@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C90243B01E7347BD00B4D2DF /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90243AF1E7347BD00B4D2DF /* LocationSearchController.swift */; };
 		C91D3C691E3ED3A600351853 /* AvailableAdventuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */; };
 		C92C9EA31E35D0D5003047DC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EA11E35D0D5003047DC /* DataModel.xcdatamodeld */; };
 		C92C9EC61E35D204003047DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C9EC51E35D204003047DC /* User.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C90243AF1E7347BD00B4D2DF /* LocationSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		C91D3C681E3ED3A600351853 /* AvailableAdventuresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableAdventuresViewController.swift; sourceTree = "<group>"; };
 		C92C9EA21E35D0D5003047DC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92C9EC51E35D204003047DC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				C933A87F1E2D92D1007E24B9 /* DebugViewController.swift */,
 				F33174C51E393C080022F28C /* AdventuresNavigationController.swift */,
 				C9BB52AA1E3FE5EA006849F3 /* AdventureShareViewController.swift */,
+				C90243AF1E7347BD00B4D2DF /* LocationSearchController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				C9C35C621E2584D600C57A57 /* Identifiers.swift in Sources */,
 				C9ECF0F51E38A59D00ED4B91 /* NoteTextView.swift in Sources */,
 				C99D82B61E6820EE0000EF9A /* GeoARElement.swift in Sources */,
+				C90243B01E7347BD00B4D2DF /* LocationSearchController.swift in Sources */,
 				C996D6D11E27FFE9003E1F36 /* Serialization.swift in Sources */,
 				C92C9ED51E35DBD2003047DC /* Session+CoreDataClass.swift in Sources */,
 				C9AE740B1E2447CC00DEF45B /* AdventureHeadline.swift in Sources */,

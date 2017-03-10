@@ -46,6 +46,30 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         locationFinder!.findLocation()
     }
     
+    var resultSearchController:UISearchController? = nil
+    
+    private func setupLocationSearch() {
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchController") as! LocationSearchController
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
+        
+        
+        
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        
+        locationSearchTable.mapView = mapView
+        locationSearchTable.selectLocationCallback = { [weak weakself = self] placemark in
+            weakself?.addMarker(coordinate: placemark.coordinate, title: placemark.title, gesture: nil)
+        }
+    }
+    
     @IBOutlet weak var mapView: MKMapView!{
         didSet {
             mapView.mapType = .standard
@@ -81,6 +105,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         press.delegate = self
         mapView.addGestureRecognizer(press)
         editingWaypoint = nil
+        setupLocationSearch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,15 +121,23 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
         if adventure != nil {
             if sender.state == .began {
                 let coordinate = mapView.convert(sender.location(in: mapView), toCoordinateFrom: mapView)
-                let waypoint = Marker()
-                waypoint.latitude = coordinate.latitude
-                waypoint.longitude = coordinate.longitude
-                waypoint.title = defaultNameText
-                appendOrInsertAnnotation(waypoint, gesture: sender)
-                updateMapUI()
-                selectMarker(marker: waypoint)
+                addMarker(coordinate: coordinate, title: nil, gesture: sender)
             }
         }
+    }
+    
+    func addMarker(coordinate: CLLocationCoordinate2D, title: String?, gesture: UILongPressGestureRecognizer?) {
+        let waypoint = Marker()
+        waypoint.latitude = coordinate.latitude
+        waypoint.longitude = coordinate.longitude
+        waypoint.title = title ?? defaultNameText
+        if gesture != nil {
+            appendOrInsertAnnotation(waypoint, gesture: gesture!)
+        } else {
+            adventure?.markers.append(waypoint)
+        }
+        updateMapUI()
+        selectMarker(marker: waypoint)
     }
     
     private func appendOrInsertAnnotation(_ annotation: Marker, gesture: UILongPressGestureRecognizer) {
