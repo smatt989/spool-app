@@ -34,6 +34,10 @@ struct Identifiers {
     static let logInController = "Log In Navigation Controller"
     
     static let editAdventureSegue = "editAdventureSegue"
+    
+    static let locationSearchController = "LocationSearchController"
+    static let locationSearchCell = "location search cell"
+    
     struct StoryBoards {
         static let mainStoryboard = "Main"
         static let loginStoryboard = "Login"

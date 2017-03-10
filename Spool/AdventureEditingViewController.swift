@@ -49,7 +49,7 @@ class AdventureEditingViewController: UIViewController, MKMapViewDelegate, UIGes
     var resultSearchController:UISearchController? = nil
     
     private func setupLocationSearch() {
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchController") as! LocationSearchController
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: Identifiers.locationSearchController) as! LocationSearchController
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
         
