@@ -37,6 +37,35 @@ class Adventure: NSObject {
     
     var totalDistance: CLLocationDistance?
     
+    func distanceLeft(_ location: CLLocationCoordinate2D, onStep: Int) -> CLLocationDistance {
+        var distanceToStep = 0.0
+        let start = Marker()
+        start.coordinate = location
+        Direction.makeDirections(start: start, end: markers[onStep]) { direction in
+            distanceToStep = (direction.route?.distance)!
+        }
+        let markersLeft = markers[onStep...markers.endIndex]
+        let directionsLeft = directions.filter{ d in
+            markersLeft.contains(d.start)
+        }
+        return directionsLeft.reduce(0){ result, direction in
+            result + (direction.route?.distance ?? 0)
+        } + distanceToStep
+    }
+    
+    func percentComplete(location: CLLocationCoordinate2D, onStep: Int, startingTotalDistance: CLLocationDistance?) -> Double {
+        let numerator = distanceLeft(location, onStep: onStep)
+        var denominator = startingTotalDistance ?? totalDistance!
+        if startingTotalDistance != nil && startingTotalDistance! > totalDistance! {
+            denominator = startingTotalDistance!
+        }
+        if numerator > denominator {
+            return Double(onStep) / Double(markers.count)
+        } else {
+            return numerator / denominator
+        }
+    }
+    
     var directionsSetCallback: (() -> Void)?
     
     var directionsSet: Bool {

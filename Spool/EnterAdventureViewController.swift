@@ -15,10 +15,10 @@ import AVFoundation
 import SpriteKit
 
 class EnterAdventureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate{
-
-    var initialStepIndex = 0
     
     var continueAdventure = false
+    
+    let adventureInstance = AdventureInstance()
     
     private var captureSession: AVCaptureSession?
     
@@ -40,40 +40,27 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         captureSession = avCaptureSession
     }
     
-    var userLocation: MKUserLocation?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let id = adventureId {
             Adventure.fetchAdventure(id: id) { [weak weakself = self] adv in
-                weakself?.adventure = adv
+                weakself?.adventureInstance.endAdventure = weakself?.endAdventure
+                weakself?.adventureInstance.continueAdventure = weakself!.continueAdventure
+                weakself?.adventureInstance.startAdventureAddons = weakself?.setupARElements
+                weakself?.adventureInstance.adventure = adv
             }
+        }
+    }
+    
+    private func setupARElements() {
+        DispatchQueue.main.async { [weak weakself = self] in
+            weakself!.setupBeacons()
+            weakself!.setupNameLabels()
+            weakself!.setupNoteView()
         }
     }
     
     var adventureId: Int?
-    
-    var adventure: Adventure? {
-        didSet {
-            if adventure != nil {
-                DispatchQueue.main.async { [weak weakself = self] in
-                    weakself!.setupBeacons()
-                    weakself!.setupNameLabels()
-                    weakself!.setupNoteView()
-                    if weakself!.continueAdventure {
-                        AdventureProgress.get(adventureId: weakself!.adventureId!, success: { [weak weakweakself = self] in
-                            weakweakself!.initialStepIndex = $0.step
-                            weakweakself!.startDirections()
-                            }, failure: {_ in 
-                                print("SOMETHING BAD HAPPENED")
-                        })
-                    } else {
-                        weakself?.startDirections()
-                    }
-                }
-            }
-        }
-    }
     
     private let locationManager = CLLocationManager()
     
@@ -89,16 +76,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         deviceMotion.stopDeviceMotionUpdates()
-    }
-    
-    
-    private struct Constants {
-        static let rightWayRadianTolerance = M_PI * 5 / 8
-        static let horizontalAccuracy = 10.0
-        static let verticalAccuracy = 10.0
-        static let distanceBetweenPointsAccuracy = 15.0
-        static let headingAstrayDistance = 30.0
-        static let tooMuchGpsVariation = 50.0
     }
     
     private var deviceMotion = CMMotionManager()
@@ -122,29 +99,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
             //rotateLabel()
         }
     }
-    private var latestLocation: CLLocation? {
-        didSet {
-            if distanceToNextCheckpoint != nil {
-                DispatchQueue.main.async { [weak weakself = self] in
-                    weakself?.doSomethingWithDistance(distance: self.distanceToNextCheckpoint!)
-                }
-            }
-        }
-    }
-    private var latestHeading: CLLocationDirection?
-    
-    private func doSomethingWithDistance(distance: CLLocationDistance) {
-        //PUT YOUR DISTANCE CODE HERE
-    }
-    
-    private var distanceToNextCheckpoint: CLLocationDistance? {
-        get {
-            if latestLocation != nil && currentDestinationStep != nil {
-                return distanceFromCoordinate(latestLocation!, coordinate: currentDestinationStep!)
-            }
-            return nil
-        }
-    }
 
     let arrow = Arrow()
     
@@ -163,9 +117,9 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func showNoteView() {
-        if let loc = latestLocation, let adv = adventure, !finished {
+        if let loc = adventureInstance.latestLocation, let adv = adventureInstance.adventure, !adventureInstance.finished {
             var looking = true
-            var lookingAt = destinationMarkerIndex
+            var lookingAt = adventureInstance.step
             while looking && lookingAt >= 0 {
                 let lookingAtMarker = adv.markers[lookingAt]
                 if let range = lookingAtMarker.showDescriptionWithinMeterRange {
@@ -184,7 +138,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func setupBeacons() {
-        beacons = (adventure?.markers
+        beacons = (adventureInstance.adventure?.markers
             .filter({ $0.showBeaconWithinMeterRange != nil}) ?? [])
             .map({marker in
                 let arElement = GeoARElement()
@@ -196,7 +150,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func setupNameLabels() {
-        nameLabels = (adventure?.markers
+        nameLabels = (adventureInstance.adventure?.markers
             .filter({ $0.showNameWithinMeterRange != nil}) ?? [])
             .map({marker in
                 let arElement = GeoARElement()
@@ -208,7 +162,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func moveMarkerElements() {
-        if let loc = latestLocation {
+        if let loc = adventureInstance.latestLocation {
             beacons.forEach{ beacon in
                 if let waypoint = beacon.waypoint, let range = beacon.waypoint?.showBeaconWithinMeterRange {
                     let dist = loc.distance(from: CLLocation(latitude: waypoint.latitude, longitude: waypoint.longitude))
@@ -261,17 +215,23 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private var motionIsReady: Bool {
         get {
-            return latestGravity != nil && latestLocation != nil && latestHeading != nil && currentDestinationStep != nil
+            
+//            print("gravity is not nil: \(latestGravity != nil)")
+//            print("location is not nil: \(adventureInstance.latestLocation != nil)")
+//            print("heading is not nil: \(adventureInstance.latestHeading != nil)")
+//            print("destination is not nil: \(adventureInstance.currentDestinationStep != nil)")
+            
+            return latestGravity != nil && adventureInstance.latestLocation != nil && adventureInstance.latestHeading != nil && adventureInstance.currentDestinationStep != nil
         }
     }
     
     private func moveArrow() {
-        if motionIsReady && !finished{
-            if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
+        if motionIsReady && !adventureInstance.finished{
+            if adventureInstance.adventure?.markers[adventureInstance.step].showDirections ?? true {
                 arrow.layer.isHidden = false
                 var transform = CATransform3DIdentity
                 transform.m34 = CGFloat(AdventureUtilities.transformConstant)
-                let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
+                let result = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: adventureInstance.latestHeading!) , at: adventureInstance.latestLocation!.coordinate, to: adventureInstance.currentDestinationStep!)
                 let rollTransform = CATransform3DRotate(transform, CGFloat(-result.roll - result.yaw), 0, 0, 1)
                 //let pitchTransform = CATransform3DRotate(transform, CGFloat(-result.pitch + pitchAdjust), 1, 0, 0)
                 //let yawTransform = CATransform3DRotate(transform, CGFloat(-result.yaw), 0, 1, 0)
@@ -285,130 +245,73 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
     
     private func headingRightWay() -> Bool? {
         if motionIsReady {
-            if adventure?.markers[destinationMarkerIndex].showDirections ?? true {
-                let orientation = ARMath.relativeOrientationOf(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!) , at: latestLocation!.coordinate, to: currentDestinationStep!)
-                
-                return orientation.roll < Constants.rightWayRadianTolerance && orientation.roll > -Constants.rightWayRadianTolerance
-            }
+            let deviceOrientation = DeviceOrientation(gravity: latestGravity!, heading: adventureInstance.latestHeading!)
+            return adventureInstance.headingRightWay(deviceOrientation: deviceOrientation)
+        } else {
+            return nil
         }
-        return nil
     }
     
     private func rotateLabel(element: GeoARElement) {
         if let waypoint = element.waypoint, motionIsReady {
-            let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: latestHeading!), at: latestLocation!.coordinate, to: waypoint.coordinate)
+            let result = ARMath.screenCoordinatesGivenOrientation(deviceOrientation: DeviceOrientation(gravity: latestGravity!, heading: adventureInstance.latestHeading!), at: adventureInstance.latestLocation!.coordinate, to: waypoint.coordinate)
             
-            let distance = distanceFromCoordinate(latestLocation!, coordinate: waypoint.coordinate)
+            let distance = adventureInstance.distanceFromCoordinate(adventureInstance.latestLocation!, coordinate: waypoint.coordinate)
             element.rotate(rotation: result, distance: distance, view: view)
         }
     }
-    
-
-    
+        
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        latestHeading = newHeading.trueHeading
-//        if let h = headingRightWay() {
-//            print("ON TRACK: \(h)")
-//        }
+        adventureInstance.latestHeading = newHeading.trueHeading
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let previousLocation = latestLocation
-        latestLocation = locations.last
+        let previousLocation = adventureInstance.latestLocation
+        adventureInstance.latestLocation = locations.last
+        adventureInstance.startDirections()
         printToScreen(str: "UPDATING LOCATION")
         var onTrack = true
-        if let mostRecentLocation = latestLocation, currentDirections != nil && currentDestinationStep != nil {
+        if let mostRecentLocation = adventureInstance.latestLocation, adventureInstance.currentDirections != nil && adventureInstance.currentDestinationStep != nil {
             
             //checks to see if there was a big GPS change, and if so refetches directions
             if previousLocation != nil {
-                if mostRecentLocation.distance(from: previousLocation!) > Constants.tooMuchGpsVariation {
-                    refreshMarker()
+                if mostRecentLocation.distance(from: previousLocation!) > AdventureInstance.Constants.tooMuchGpsVariation {
+                    adventureInstance.refreshMarker()
                     onTrack = false
                 }
             }
             
             //checks to see if getting further away from next step, and if so refetches directions
-            if let originalStepDistance = distanceToStep, onTrack {
-                let distanceToStep = distanceFromCoordinate(mostRecentLocation, coordinate: currentDestinationStep!)
-                if distanceToStep > originalStepDistance + Constants.headingAstrayDistance && !currentDirections!.finished {
-                    refreshMarker()
+            if let originalStepDistance = adventureInstance.distanceToStep, onTrack {
+                let distanceToStep = adventureInstance.distanceFromCoordinate(mostRecentLocation, coordinate: adventureInstance.currentDestinationStep!)
+                if distanceToStep > originalStepDistance + AdventureInstance.Constants.headingAstrayDistance && !adventureInstance.currentDirections!.finished {
+                    adventureInstance.refreshMarker()
                     onTrack = false
                 }
             }
 
             if onTrack {
-                if closeEnoughToCoordinate(mostRecentLocation, coordinate: currentDestinationStep!) {
-                    currentDirections!.nextStep()
-                    if currentDirections!.finished {
-                        currentDestinationStep = currentDestination?.coordinate
+                if closeEnoughToCoordinate(mostRecentLocation, coordinate: adventureInstance.currentDestinationStep!) {
+                    adventureInstance.currentDirections!.nextStep()
+                    if adventureInstance.currentDirections!.finished {
+                        adventureInstance.currentDestinationStep = adventureInstance.currentDestination?.coordinate
                     } else {
                         printToScreen(str: "NEXT STEP")
-                        currentDestinationStep = currentDirections!.currentStep
+                        adventureInstance.currentDestinationStep = adventureInstance.currentDirections!.currentStep
                     }
                 }
                 
-                if closeEnoughToCoordinate(mostRecentLocation, coordinate: currentDestination!.coordinate) {
+                if closeEnoughToCoordinate(mostRecentLocation, coordinate: adventureInstance.currentDestination!.coordinate) {
                     printToScreen(str: "NEXT MARKER")
-                    nextMarker()
+                    adventureInstance.nextMarker()
                 }
             }
         }
     }
     
     private func closeEnoughToCoordinate(_ location: CLLocation, coordinate: CLLocationCoordinate2D) -> Bool {
-        let distance = distanceFromCoordinate(location, coordinate: coordinate)
-        return distance < Constants.distanceBetweenPointsAccuracy
-    }
-    
-    private func distanceFromCoordinate(_ location: CLLocation, coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
-        let targetMarker = CLLocation(coordinate: coordinate, altitude: location.altitude, horizontalAccuracy: CLLocationAccuracy(Constants.horizontalAccuracy), verticalAccuracy: CLLocationAccuracy(Constants.verticalAccuracy), timestamp: Date())
-        return location.distance(from: targetMarker)
-    }
-    
-    private var distanceToStep: CLLocationDistance?
-    
-    private var currentDestinationStep: CLLocationCoordinate2D? {
-        didSet {
-            distanceToStep = nil
-            if currentDestinationStep != nil {
-                let lat = currentDestinationStep!.latitude
-                let lng = currentDestinationStep!.longitude
-                let str = "heading to \(lat), \(lng)"
-                printToScreen(str: str)
-                
-                if let mostRecentLocation = latestLocation {
-                    distanceToStep = distanceFromCoordinate(mostRecentLocation, coordinate: currentDestinationStep!)
-                }
-            }
-        }
-    }
-    
-    private var currentDirections: Direction? {
-        didSet {
-            if currentDirections != nil {
-                currentDestinationStep = currentDirections?.currentStep
-            }
-        }
-    }
-    
-    private var currentDestination: Marker? {
-        didSet {
-            if currentDestination != nil {
-                if let currentLocation = locationManager.location?.coordinate {
-                    let currentLocationMarker = Marker()
-                    currentLocationMarker.coordinate = currentLocation
-                    Direction.makeDirections(start: currentLocationMarker, end: currentDestination!) { [weak weakself = self] directions in
-                        weakself?.currentDirections = directions
-                    }
-                }
-            }
-        }
-    }
-    
-    private var finished: Bool {
-        get {
-            return destinationMarkerIndex >= adventure?.markers.count ?? 0
-        }
+        let distance = adventureInstance.distanceFromCoordinate(location, coordinate: coordinate)
+        return distance < AdventureInstance.Constants.distanceBetweenPointsAccuracy
     }
     
     private func endAdventure() {
@@ -425,40 +328,6 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         //turnOffLocationManager()
         removeArrow()
         setupAdventureEndedLabel()
-    }
-    
-    private func nextMarker() {
-        destinationMarkerIndex += 1
-    }
-    
-    private func updateProgress(isFinished: Bool) {
-        let progress = AdventureProgress(adventureId: adventureId!, step: destinationMarkerIndex, finished: isFinished, updated: NSDate())
-        AdventureProgress.create(progress, success: {}, failure: {_ in print("Did not update")})
-    }
-    
-    private func refreshMarker() {
-        printToScreen(str: "REFRESHING")
-        updateCurrentDestination()
-    }
-    
-    private var destinationMarkerIndex: Int = -1 {
-        didSet {
-            updateCurrentDestination()
-        }
-    }
-    
-    private func updateCurrentDestination() {
-        if !finished {
-            currentDestination = adventure?.markers[destinationMarkerIndex]
-        } else {
-            endAdventure()
-        }
-        updateProgress(isFinished: finished)
-    }
-    
-    private func startDirections() {
-        printToScreen(str: "STARTING DIRECTIONS")
-        destinationMarkerIndex = initialStepIndex
     }
     
     override func viewDidAppear(_ animated: Bool) {
