@@ -38,13 +38,15 @@ class Adventure: NSObject {
     var totalDistance: CLLocationDistance?
     
     func distanceLeft(_ location: CLLocationCoordinate2D, onStep: Int) -> CLLocationDistance {
+        print("onstep: \(onStep)")
+        print("endIndex: \(markers.endIndex)")
         var distanceToStep = 0.0
         let start = Marker()
         start.coordinate = location
         Direction.makeDirections(start: start, end: markers[onStep]) { direction in
             distanceToStep = (direction.route?.distance)!
         }
-        let markersLeft = markers[onStep...markers.endIndex]
+        let markersLeft = markers[onStep...markers.endIndex - 1]
         let directionsLeft = directions.filter{ d in
             markersLeft.contains(d.start)
         }

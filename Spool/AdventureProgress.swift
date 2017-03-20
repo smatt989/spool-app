@@ -27,6 +27,34 @@ class AdventureInstance {
     
     private var initialStepIndex = 0
     
+    var initialTotalDistance: CLLocationDistance = 0
+    var totalPercentComplete: Double = 0
+    
+    private func setInitialTotalDistance() {
+        if adventure != nil && latestLocation != nil {
+            initialTotalDistance = adventure!.totalDistance!
+            let distanceFromHere = adventure!.distanceLeft(latestLocation!.coordinate, onStep: step)
+            if distanceFromHere > initialTotalDistance {
+                initialTotalDistance = distanceFromHere
+            }
+        }
+    }
+    
+    private var readyForPercentCompleteCall = true
+    
+    func updatePercentComplete() {
+        if adventure != nil && latestLocation != nil && readyForPercentCompleteCall {
+            readyForPercentCompleteCall = false
+            let newPercentComplete = adventure!.percentComplete(location: latestLocation!.coordinate, onStep: step, startingTotalDistance: initialTotalDistance)
+            if newPercentComplete > totalPercentComplete {
+                totalPercentComplete = newPercentComplete
+            }
+            Timer(timeInterval: 10, repeats: false) { [weak weakself = self] timer in
+                weakself?.readyForPercentCompleteCall = true
+            }.fire()
+        }
+    }
+    
     var step = -1 {
         didSet {
             updateCurrentDestination()
@@ -60,10 +88,9 @@ class AdventureInstance {
     func startDirections(){
         if !setupCorrectly {
             step = initialStepIndex
+            setInitialTotalDistance()
         }
     }
-    
-    var user: User?
     
     var currentDestinationStep: CLLocationCoordinate2D? {
         didSet {
@@ -114,6 +141,7 @@ class AdventureInstance {
     var latestLocation: CLLocation? {
         didSet {
             if distanceToNextCheckpoint != nil {
+                updatePercentComplete()
                 DispatchQueue.main.async { [weak weakself = self] in
                     weakself?.doSomethingWithDistance(distance: self.distanceToNextCheckpoint!)
                 }
