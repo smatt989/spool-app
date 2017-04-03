@@ -38,8 +38,6 @@ class Adventure: NSObject {
     var totalDistance: CLLocationDistance?
     
     func distanceLeft(_ location: CLLocationCoordinate2D, onStep: Int) -> CLLocationDistance {
-        print("onstep: \(onStep)")
-        print("endIndex: \(markers.endIndex)")
         var distanceToStep = 0.0
         let start = Marker()
         start.coordinate = location
@@ -56,15 +54,18 @@ class Adventure: NSObject {
     }
     
     func percentComplete(location: CLLocationCoordinate2D, onStep: Int, startingTotalDistance: CLLocationDistance?) -> Double {
+       
         let numerator = distanceLeft(location, onStep: onStep)
-        var denominator = startingTotalDistance ?? totalDistance!
+
+        var denominator = totalDistance!
+
         if startingTotalDistance != nil && startingTotalDistance! > totalDistance! {
             denominator = startingTotalDistance!
         }
         if numerator > denominator {
             return Double(onStep) / Double(markers.count)
         } else {
-            return numerator / denominator
+            return 1 - (numerator / (denominator + 0.000001))
         }
     }
     
