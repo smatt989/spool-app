@@ -79,19 +79,19 @@ class ARMath {
     }
     
     static func radiansFromDegrees(_ degrees: Double) -> Double {
-        return degrees * M_PI / 180
+        return degrees * Double.pi / 180
     }
     
     static func degreesFromRadians(_ radians: Double) -> Double {
-        return radians * 180 / M_PI
+        return radians * 180 / Double.pi
     }
     
     static func radiansAdjustmentToNegPiToPiSpace(radians: Double) -> Double {
-        let scaledCorrectly = radians.truncatingRemainder(dividingBy: 2 * M_PI)
-        if scaledCorrectly < -M_PI {
-            return scaledCorrectly + 2 * M_PI
-        } else if scaledCorrectly > M_PI {
-            return scaledCorrectly - 2 * M_PI
+        let scaledCorrectly = radians.truncatingRemainder(dividingBy: 2 * Double.pi)
+        if scaledCorrectly < -Double.pi {
+            return scaledCorrectly + 2 * Double.pi
+        } else if scaledCorrectly > Double.pi {
+            return scaledCorrectly - 2 * Double.pi
         } else {
             return scaledCorrectly
         }

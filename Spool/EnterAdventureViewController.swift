@@ -186,7 +186,7 @@ class EnterAdventureViewController: UIViewController, UIImagePickerControllerDel
         }
     }
 
-    let pitchAdjust = M_PI / 9
+    let pitchAdjust = Double.pi / 9
     
     var adventureEndedLabel: UILabel?
     

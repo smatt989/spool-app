@@ -209,7 +209,7 @@ class AdventureInstance {
 
 extension AdventureInstance {
     struct Constants {
-        static let rightWayRadianTolerance = M_PI * 5 / 8
+        static let rightWayRadianTolerance = Double.pi * 5 / 8
         static let horizontalAccuracy = 10.0
         static let verticalAccuracy = 10.0
         static let distanceBetweenPointsAccuracy = 15.0
