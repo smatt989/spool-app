@@ -28,7 +28,7 @@ class AdventureInstance {
     private var initialStepIndex = 0
     
     var initialTotalDistance: CLLocationDistance = 0
-    var totalPercentComplete: Double = 0 
+    var totalPercentComplete: Double = 0
     
     private func setInitialTotalDistance() {
         if adventure != nil && latestLocation != nil {
@@ -73,7 +73,7 @@ class AdventureInstance {
     private func startAdventure() {
         DispatchQueue.main.async { [weak weakself = self] in
             weakself?.startAdventureAddons?()
-            weakself?.adventure?.directionsSetCallback = weakself?.setInitialTotalDistance
+            //weakself?.adventure?.directionsSetCallback = weakself?.setInitialTotalDistance
             if weakself!.continueAdventure {
                 AdventureProgress.get(adventureId: weakself!.adventure!.id!, success: { [weak weakself = self] in
                     weakself!.initialStepIndex = $0.step
@@ -143,7 +143,7 @@ class AdventureInstance {
     var latestLocation: CLLocation? {
         didSet {
             if distanceToNextCheckpoint != nil {
-                updatePercentComplete()
+                //updatePercentComplete()
                 DispatchQueue.main.async { [weak weakself = self] in
                     weakself?.doSomethingWithDistance(distance: self.distanceToNextCheckpoint!)
                 }
